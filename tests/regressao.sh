@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Regressão por mock (sem PLAXIS). Compara o log de comandos / a saída dos scripts com tests/baselines/.
+#   ./tests/regressao.sh            -> confere (retorna erro se algo mudou)
+#   ./tests/regressao.sh --gravar   -> grava/atualiza as linhas de base (só depois de revisar a mudança!)
+set -u
+RAIZ="$(cd "$(dirname "$0")/.." && pwd)"
+T="$RAIZ/tests"
+GRAVAR=0; [ "${1:-}" = "--gravar" ] && GRAVAR=1
+FALHAS=0
+FILTRO='^(>>>|   (CALL|SET|SETITEM|\[))|^    \(|^    -'
+
+normaliza() { sed "s#$1#<DIR>#g"; }
+
+compara() {  # nome  arquivo_novo
+  local base="$T/baselines/$1"
+  if [ $GRAVAR -eq 1 ]; then cp "$2" "$base"; echo "gravado: $1"; return; fi
+  if diff -q "$base" "$2" >/dev/null 2>&1; then echo "OK        $1"; else echo "DIFERE    $1"; diff "$base" "$2" | head -20; FALHAS=$((FALHAS+1)); fi
+}
+
+interativo() {  # nome  script  entradas
+  local d; d="$(mktemp -d)"
+  ( cd "$d" && python3 "$T/mock/rodar_interativo.py" "$RAIZ/$2" < "$T/entradas/$3" 2>&1 \
+      | grep -E "$FILTRO" | grep -v "g_i.echo()" | normaliza "$d" > "$d/saida.log" )
+  compara "$1.log" "$d/saida.log"; rm -rf "$d"
+}
+
+resultados() {  # nome  script  fake  json
+  local d; d="$(mktemp -d)"
+  ( cd "$d" && python3 "$T/mock/rodar_resultados.py" "$RAIZ/$2" "$3" "$T/dados/$4" 2>&1 | normaliza "$d" > "$d/saida.log"
+    [ -f sapata_curva.csv ] && cat sapata_curva.csv >> "$d/saida.log"
+    [ -f sapata_peso_proprio.csv ] && cat sapata_peso_proprio.csv >> "$d/saida.log"
+    [ -f subsolo_piso.csv ] && cat subsolo_piso.csv >> "$d/saida.log" )
+  compara "$1.log" "$d/saida.log"; rm -rf "$d"
+}
+
+# --- sapata (ESTÁVEL): módulos 1, 2, 3 (sequência e simultâneo) + opções novas
+interativo sapata_int_carga sapata/plaxis_sapata_interativo.py sapata_carga.txt
+interativo sapata_int_desl sapata/plaxis_sapata_interativo.py sapata_desl.txt
+interativo sapata_int_seq sapata/plaxis_sapata_interativo.py sapata_seq.txt
+interativo sapata_int_sim sapata/plaxis_sapata_interativo.py sapata_sim.txt
+interativo sapata_int_volume_sem_acao sapata/plaxis_sapata_interativo.py sapata_volume_sem_acao.txt
+interativo sapata_int_duas_cargas sapata/plaxis_sapata_interativo.py sapata_duas_cargas.txt
+for m in carga desl seq sim duas_cargas sem_acao; do
+  resultados sapata_res_$m sapata/plaxis_sapata_resultados.py sapata_resultados sapata_$m.json
+done
+# --- subsolo (EM DESENVOLVIMENTO)
+interativo subsolo_int_padrao subsolo/plaxis_subsolo_interativo.py subsolo_padrao.txt
+resultados subsolo_res_padrao subsolo/plaxis_subsolo_resultados.py subsolo_resultados subsolo.json
+
+[ $GRAVAR -eq 1 ] && exit 0
+[ $FALHAS -eq 0 ] && echo "Tudo igual às linhas de base." || { echo "$FALHAS caso(s) mudaram."; exit 1; }

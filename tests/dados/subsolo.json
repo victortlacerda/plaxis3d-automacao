@@ -1,0 +1,54 @@
+{
+  "versao": 1,
+  "projeto": "/tmp/claude-0/-home-claude/432f1848-a882-5960-b9f4-23d2ece035e6/scratchpad/teste2/Subsolo_radier.p3d",
+  "subsolo": {
+    "x0": 0.0,
+    "y0": 0.0,
+    "L": 18.0,
+    "W": 18.0,
+    "Hb": 2.0
+  },
+  "pontos": [
+    {
+      "rotulo": "topo da coluna",
+      "x": 6.0,
+      "y": 6.0,
+      "z": 0.0
+    },
+    {
+      "rotulo": "base da coluna (piso)",
+      "x": 6.0,
+      "y": 6.0,
+      "z": -2.0
+    },
+    {
+      "rotulo": "centro do piso",
+      "x": 9.0,
+      "y": 9.0,
+      "z": -2.0
+    },
+    {
+      "rotulo": "canto do piso (simetria)",
+      "x": 0.0,
+      "y": 0.0,
+      "z": -2.0
+    }
+  ],
+  "fases": [
+    "Excavation",
+    "Construction",
+    "Loading"
+  ],
+  "piso": {
+    "nome": null
+  },
+  "coluna": {
+    "x": 6.0,
+    "y": 6.0
+  },
+  "cargas": {
+    "superficie": 5.3,
+    "linha": 385.0,
+    "pontual": 11650.0
+  }
+}

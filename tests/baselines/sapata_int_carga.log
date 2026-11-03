@@ -1,0 +1,65 @@
+>>> Novo projeto
+   CALL s_i.new()
+   CALL g_i.setproperties('Title', 'PLAXIS 3D: Sapata (modelo interativo)', 'UnitForce', 'kN', 'UnitLength', 'm', 'UnitTime', 'day', 'WaterWeight', 10.0)
+   CALL g_i.SoilContour.initializerectangular(-5.0, -5.0, 5.0, 5.0)
+>>> Borehole em (-5, -5), N.A. z = -6
+   CALL g_i.borehole(-5.0, -5.0)
+   SET g_i.borehole().Head = -6.0
+   CALL g_i.soillayer(10.0,)
+>>> Materiais do solo (Mohr-Coulomb, drenado)
+   CALL g_i.soilmat()
+   CALL g_i.soilmat().setproperties('Identification', 'Soil')
+   CALL g_i.soilmat().setproperties('SoilModel', 2)
+   CALL g_i.soilmat().setproperties('DrainageType', 'Drained')
+   CALL g_i.soilmat().setproperties('gammaUnsat', 18.0)
+   CALL g_i.soilmat().setproperties('gammaSat', 20.0)
+   CALL g_i.soilmat().setproperties('Eref', 40000.0)
+   CALL g_i.soilmat().setproperties('nu', 0.3)
+   CALL g_i.soilmat().setproperties('cref', 30.0)
+   CALL g_i.soilmat().setproperties('phi', 20.0)
+   CALL g_i.soilmat().setproperties('psi', 0.0)
+>>> Atribuindo materiais às camadas
+   SET g_i.Soillayers[0].Soil.Material = <g_i.soilmat()>
+>>> Material da sapata (placa elástica isotrópica)
+   CALL g_i.platemat()
+   CALL g_i.platemat().setproperties('Identification', 'Footing')
+   CALL g_i.platemat().setproperties('MaterialType', 'Elastic')
+   CALL g_i.platemat().setproperties('Isotropic', True)
+   CALL g_i.platemat().setproperties('gamma', 24.0)
+   CALL g_i.platemat().setproperties('d', 0.5)
+   CALL g_i.platemat().setproperties('E1', 23500000.0)
+   CALL g_i.platemat().setproperties('StructNu12', 0.2)
+>>> Modo Structures: superfície 1 x 1 m em z = 0
+   CALL g_i.gotostructures()
+   CALL surface ((-0.5, 0.5, 0.0), (0.5, 0.5, 0.0), (0.5, -0.5, 0.0), (-0.5, -0.5, 0.0))
+>>> Convertendo a superfície em placa
+   CALL g_i.plate(<Polygon_1>,)
+   SET g_i.plate().Material = <g_i.platemat()>
+>>> Carga distribuída (surface load)
+   CALL g_i.surfload(<Polygon_1>,)
+   SET g_i.surfload().sigz = -1000.0
+>>> Modo Mesh: preset 'fine' (fator 0.035)
+   CALL g_i.gotomesh()
+   SET Polygon_1_1.CoarsenessFactor = 0.1
+   CALL g_i.mesh(0.035,)
+>>> Nó para a curva carga x deslocamento em (0, 0, 0)
+   CALL selectmeshpoints
+   [new_server] localhost 10001
+   [O] addcurvepoint ('node', 0.0, 0.0, 0.0)
+   [O] update
+>>> Modo Staged construction: Initial (K0) -> Footing -> Load
+   CALL g_i.gotostages()
+   SET g_i.InitialPhase.DeformCalcType = 'K0 procedure'
+   CALL g_i.phase(<g_i.InitialPhase>,)
+   SET g_i.phase().Identification = 'Footing'
+   SET g_i.phase().Deform.ResetDisplacementsToZero = True
+   CALL g_i.activate(<g_i.Plate_1>, <g_i.phase()>)
+   CALL g_i.phase(<g_i.phase()>,)
+   SET g_i.phase().Identification = 'Load'
+   SET g_i.phase().Deform.ResetDisplacementsToZero = True
+   CALL g_i.activate(<g_i.SurfaceLoad_1>, <g_i.phase()>)
+>>> Salvando em <DIR>/Sapata_modelo.p3d
+   CALL g_i.save('<DIR>/Sapata_modelo.p3d',)
+>>> Calculando (a fase Load deve parar por falha de convergência perto da ruptura)
+   CALL g_i.calculate()
+   CALL g_i.save('<DIR>/Sapata_modelo.p3d',)

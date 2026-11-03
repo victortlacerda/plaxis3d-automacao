@@ -1,0 +1,89 @@
+>>> Parâmetros lidos de <DIR>/ultimo_modelo.json
+    Módulo: combinado | deslocamento prescrito 25 mm | componente Uz | B = 1 m | A = 1 m²
+    Combinação: na mesma fase | carga 100 kN/m2
+>>> Abrindo o Output da última fase
+    Fase: Settlement
+>>> Procurando a reação ReactionForceZ do deslocamento prescrito
+    usando PrescribedDisplacements / ReactionForceZ: -1500.0 kN no último passo
+>>> Lendo passos de cálculo
+    Reached.ForceZ no último passo: -1500.0 kN | reação: -1500.0 kN -> usando Reached por passo
+    Reação lida em 50 de 50 passos
+    51 pontos salvos em <DIR>/sapata_curva.csv
+
+======================================================================
+RESUMO DOS CRITÉRIOS (B = 1.00 m, FS = 3.0)
+======================================================================
+Carga máxima atingida no cálculo : 1500.0 kN/m² (deslocamento 25.0 mm)
+Deslocamento final              : 25.0 mm -> força 1500.0 kN, tensão média 1500.0 kN/m² (15.30 kgf/cm²)
+   (com deslocamento imposto, a tensão no último passo já é a tensão para esse recalque)
+   (curva pela reação do eixo prescrito; a carga simultânea em outro eixo não entra na força)
+
+1) Interseção das tangentes
+   (só faz sentido se o deslocamento prescrito foi grande o bastante para a curva formar patamar)
+   qu = 1441 kN/m²  (deslocamento na interseção ~ 12.5 mm)
+   qa = qu/FS = 480.4 kN/m²  (deslocamento em qa ~ 4.4 mm)
+
+2) Recalque = 10% de B = 100 mm
+   A curva só chegou a 25.00 mm; não atinge 100 mm.
+
+3) Recalque de 25 mm (Terzaghi e Peck, 1948)
+   carga que causa 25 mm = 1500.0 kN/m²  (já é admissível por recalque, sem FS)
+======================================================================
+
+>>> Gerando gráficos
+    gráfico salvo em <DIR>/sapata_grafico_curva.png
+    gráfico salvo em <DIR>/sapata_grafico_tangentes.png
+    gráfico salvo em <DIR>/sapata_grafico_10pctB.png
+    gráfico salvo em <DIR>/sapata_grafico_25mm.png
+SumMstage;Tensao_kN_m2;Forca_kN;Deslocamento_Uz_mm
+0,000000;0,0000;0,000;0,0000
+0,020000;59,4000;59,400;0,5000
+0,040000;117,6000;117,600;1,0000
+0,060000;174,6000;174,600;1,5000
+0,080000;230,4000;230,400;2,0000
+0,100000;285,0000;285,000;2,5000
+0,120000;338,4000;338,400;3,0000
+0,140000;390,6000;390,600;3,5000
+0,160000;441,6000;441,600;4,0000
+0,180000;491,4000;491,400;4,5000
+0,200000;540,0000;540,000;5,0000
+0,220000;587,4000;587,400;5,5000
+0,240000;633,6000;633,600;6,0000
+0,260000;678,6000;678,600;6,4999
+0,280000;722,4000;722,400;6,9999
+0,300000;765,0000;765,000;7,4999
+0,320000;806,4000;806,400;7,9999
+0,340000;846,6000;846,600;8,4999
+0,360000;885,6000;885,600;8,9999
+0,380000;923,4000;923,400;9,4999
+0,400000;960,0000;960,000;9,9999
+0,420000;995,4000;995,400;10,4999
+0,440000;1029,6000;1029,600;10,9999
+0,460000;1062,6000;1062,600;11,4999
+0,480000;1094,4000;1094,400;11,9999
+0,500000;1125,0000;1125,000;12,4999
+0,520000;1154,4000;1154,400;12,9999
+0,540000;1182,6000;1182,600;13,4999
+0,560000;1209,6000;1209,600;13,9999
+0,580000;1235,4000;1235,400;14,4999
+0,600000;1260,0000;1260,000;14,9999
+0,620000;1283,4000;1283,400;15,4999
+0,640000;1305,6000;1305,600;15,9999
+0,660000;1326,6000;1326,600;16,4999
+0,680000;1346,4000;1346,400;16,9999
+0,700000;1365,0000;1365,000;17,4999
+0,720000;1382,4000;1382,400;17,9999
+0,740000;1398,6000;1398,600;18,4999
+0,760000;1413,6000;1413,600;18,9998
+0,780000;1427,4000;1427,400;19,4998
+0,800000;1440,0000;1440,000;19,9998
+0,820000;1451,4000;1451,400;20,4998
+0,840000;1461,6000;1461,600;20,9998
+0,860000;1470,6000;1470,600;21,4998
+0,880000;1478,4000;1478,400;21,9998
+0,900000;1485,0000;1485,000;22,4998
+0,920000;1490,4000;1490,400;22,9998
+0,940000;1494,6000;1494,600;23,4998
+0,960000;1497,6000;1497,600;23,9998
+0,980000;1499,4000;1499,400;24,4998
+1,000000;1500,0000;1500,000;24,9998

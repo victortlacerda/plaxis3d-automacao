@@ -1,0 +1,28 @@
+{
+  "versao": 2,
+  "projeto": "/tmp/claude-0/-home-claude/432f1848-a882-5960-b9f4-23d2ece035e6/scratchpad/teste2/Sapata_modelo.p3d",
+  "carga": {
+    "modo": "combinado",
+    "valor": 0.025,
+    "unidade": "m",
+    "direcao": 1,
+    "tipo": 1,
+    "componente": "Uz",
+    "sinal": -1.0,
+    "reacao": "ReactionForceZ",
+    "sub": "simultaneo",
+    "carga_kN": 100.0,
+    "carga_direcao": 3,
+    "carga_tipo": 1,
+    "carga_valor": 100.0,
+    "carga_unidade": "kN/m2"
+  },
+  "sapata": {
+    "cx": 0.0,
+    "cy": 0.0,
+    "cz": 0.0,
+    "L": 1.0,
+    "W": 1.0,
+    "B": 1.0
+  }
+}

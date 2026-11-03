@@ -1,0 +1,14 @@
+>>> Parâmetros lidos de <DIR>/ultimo_modelo.json
+    Módulo: sem ação (só o peso próprio da sapata) | componente Uz | B = 1 m
+>>> Abrindo o Output da última fase (peso próprio da sapata)
+    Fase: Settlement
+
+======================================================================
+PESO PRÓPRIO DA SAPATA (sem carga e sem deslocamento prescrito)
+======================================================================
+Recalque do nó sob a sapata (Uz no fim da fase Settlement): 25.000 mm
+Peso próprio da sapata: 12.00 kN (12.00 kN/m² em 1 m²)
+======================================================================
+    resultado salvo em <DIR>/sapata_peso_proprio.csv
+Fase;Deslocamento_Uz_mm;Peso_proprio_kN
+Settlement;24,9998;12,000
