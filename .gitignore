@@ -5,6 +5,8 @@ ultimo_modelo_subsolo.json
 *.p3dlog
 *.p3d.*
 *.png
+!docs/img/*.png
+!soiltest/imagens/*.png
 sapata_curva.csv
 sapata_peso_proprio.csv
 subsolo_*.csv
