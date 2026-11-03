@@ -324,7 +324,7 @@ def perguntar_tudo():
     modelo_i = perguntar_opcao("Como modelar a sapata?", [
         "PLACA elástica (plate)  - Exemplos 1 e 2",
         "VOLUME sólido, material Linear Elástico NÃO POROSO (como o 'Building' do manual da Bentley)"
-        "  [não testado]"], 1)
+        "  - Caso A"], 1)
     print("\n  Material da sapata:")
     nomes_solo = set(cam["nome"] for cam in camadas)
     while True:
@@ -346,7 +346,7 @@ def perguntar_tudo():
         "Só CARGA (força)  - Exemplo 1",
         "Só DESLOCAMENTO PRESCRITO (o PLAXIS calcula a força necessária)  - Exemplo 2",
         "COMBINADO: carga + deslocamento prescrito  [não testado]",
-        "SEM AÇÃO: nenhuma carga nem deslocamento, só o peso próprio da sapata  [não testado]"], 1)
+        "SEM AÇÃO: nenhuma carga nem deslocamento, só o peso próprio da sapata  - Caso A"], 1)
     if modo_i == 4:
         P["carga"] = dict(modo="nenhuma", tipo=1, direcao=1, eixo=None, valor=0.0, unidade="kN/m2")
     elif modo_i == 1:
@@ -764,7 +764,7 @@ def construir(P):
             (("StructNu12", "nu12", "nu", "Nu12"), f["nu"]),
         ])
     else:
-        etapa("Material da sapata (volume Linear Elástico, não poroso) (não testado)")
+        etapa("Material da sapata (volume Linear Elástico, não poroso) (validado no Caso A)")
         mat_sapata = g_i.soilmat()
         definir_props(mat_sapata, "sapata (volume linear elástico não poroso)", [
             (("Identification", "MaterialName"), f.get("nome_material", "Footing")),
@@ -803,7 +803,7 @@ def construir(P):
 
     vol_objs = []
     if volume:
-        etapa("Extrudando a superfície em volume: z de {} até {} (não testado)".format(
+        etapa("Extrudando a superfície em volume: z de {} até {} (validado no Caso A)".format(
             fmt(z0), fmt(z0 - f["d"])))
         res_ext = tentar("extrude",
                          lambda: g_i.extrude(poly, 0, 0, -f["d"]),
@@ -942,7 +942,7 @@ def construir(P):
     fase_sapata.Identification = "Footing"
     fase_sapata.Deform.ResetDisplacementsToZero = True
     if volume:
-        etapa("Atribuindo o material '{}' ao volume da sapata na fase Footing (não testado)".format(
+        etapa("Atribuindo o material '{}' ao volume da sapata na fase Footing (validado no Caso A)".format(
             f.get("nome_material", "Footing")))
         # O extrude devolve vários objetos (ex.: Volume_1 e Soil_2). No PLAXIS real o comando que funcionou
         # foi 'setmaterial Volume_1 Phase_1 Building'; os demais objetos podem falhar sem problema.

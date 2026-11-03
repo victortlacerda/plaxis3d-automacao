@@ -20,7 +20,7 @@
    CALL g_i.soilmat().setproperties('psi', 0.0)
 >>> Atribuindo materiais às camadas
    SET g_i.Soillayers[0].Soil.Material = <g_i.soilmat()>
->>> Material da sapata (volume Linear Elástico, não poroso) (não testado)
+>>> Material da sapata (volume Linear Elástico, não poroso) (validado no Caso A)
    CALL g_i.soilmat()
    CALL g_i.soilmat().setproperties('Identification', 'Building')
    CALL g_i.soilmat().setproperties('SoilModel', 1)
@@ -31,7 +31,7 @@
 >>> Modo Structures: superfície 1 x 1 m em z = 0
    CALL g_i.gotostructures()
    CALL surface ((-0.5, 0.5, 0.0), (0.5, 0.5, 0.0), (0.5, -0.5, 0.0), (-0.5, -0.5, 0.0))
->>> Extrudando a superfície em volume: z de 0 até -0.5 (não testado)
+>>> Extrudando a superfície em volume: z de 0 até -0.5 (validado no Caso A)
    CALL g_i.extrude(<Polygon_1>, 0, 0, -0.5)
 >>> Sem carga e sem deslocamento: só o peso próprio da sapata
    CALL g_i.delete(<Polygon_1>,)
@@ -50,7 +50,7 @@
    CALL g_i.phase(<g_i.InitialPhase>,)
    SET g_i.phase().Identification = 'Footing'
    SET g_i.phase().Deform.ResetDisplacementsToZero = True
->>> Atribuindo o material 'Building' ao volume da sapata na fase Footing (não testado)
+>>> Atribuindo o material 'Building' ao volume da sapata na fase Footing (validado no Caso A)
    CALL g_i.setmaterial(<g_i.extrude()>, <g_i.phase()>, <g_i.soilmat()>)
 >>> Salvando em <DIR>/Sapata_modelo.p3d
    CALL g_i.save('<DIR>/Sapata_modelo.p3d',)
