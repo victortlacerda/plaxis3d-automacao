@@ -28,12 +28,21 @@ Todas as imagens de resultado vêm de rodadas **reais** no PLAXIS 3D 2024.2 (Exe
 
 ![Caso A](docs/img/term_casoA.png)
 
+**SoilTest automático** (ensaios de laboratório virtuais; veja [`soiltest/`](soiltest/)):
+
+![SoilTest automático](soiltest/imagens/capa.png)
+
+| Rodada real: HS com K0 = 0,5 e OCR = 2 | Deformação volumétrica com corte de dilatância |
+|---|---|
+| ![Console](soiltest/imagens/term_hs_k0_ocr.png) | ![eps_v](soiltest/imagens/hs_k0_ocr_ev_x_eps_a.png) |
+
 ## Organização: do simples ao avançado
 
 | Pasta | O que é | Status |
 |---|---|---|
 | [`sapata/`](sapata/) | **Sapata isolada** (placa ou volume), com carga, deslocamento prescrito, combinado ou só peso próprio. Curva carga × recalque e critérios de capacidade de carga. | **Estável**: módulos 1 e 2 validados no PLAXIS real |
 | [`subsolo/`](subsolo/) | **Subsolo com radier** (Caso B do manual): escavação por fases, piso e paredes (plates), coluna e vigas (beams), cargas de superfície, de linha e pontual. | **Em desenvolvimento**: escrito pela documentação, ainda sem validação no PLAXIS real |
+| [`soiltest/`](soiltest/) | **SoilTest automático**: cria o material no Input, abre o SoilTest e roda triaxial, edômetro, CRS, DSS, CDSS e triaxial cíclico em 6 modelos, com consolidação K0, OCR, CSV, gráficos e conferência com a teoria. | **Estável** (validado no PLAXIS real); cíclicos não drenados e controle por tensão em `soiltest/em_desenvolvimento/` |
 | [`ferramentas/`](ferramentas/) | Scripts de diagnóstico (somente leitura) para descobrir nomes de propriedades e inspecionar projetos. | Auxiliar |
 | [`tests/`](tests/) | Teste de regressão por *mock* (roda **sem** o PLAXIS). | Ativo |
 | [`docs/`](docs/) | Notas de desenvolvimento e a skill do Claude para novos projetos. | — |

@@ -1,6 +1,11 @@
 # Histórico de versões
 
 ## Não lançado
+- `soiltest/`: SoilTest automático. `plaxis_soiltest_auto.py` (estável) cria o material no Input, abre o SoilTest
+  e roda triaxial, edômetro, CRS, DSS, CDSS e triaxial cíclico para MC, LE, HS, HS small, MCC e Soft Soil, com
+  consolidação K0, pré-adensamento (σ'p ou OCR), corte de dilatância, um PNG por gráfico, glossário e conferência
+  teórica. Validado no PLAXIS real (MC drenado; HS com K0 e OCR; LE em todos os ensaios).
+  `em_desenvolvimento/`: cíclicos não drenados, controle por tensão e comparação com laboratório (base da calibração).
 - README com galeria: telas do script e gráficos de rodadas reais.
 - `sapata/`: textos do menu e das etapas indicam que a sapata em volume e o módulo sem ação foram validados no Caso A.
 - `subsolo/`: Caso B do manual (radier, paredes, coluna e vigas, três fases de construção). Em desenvolvimento.
