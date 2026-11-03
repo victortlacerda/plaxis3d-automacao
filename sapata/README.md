@@ -1,5 +1,7 @@
 # Sapata isolada (estável)
 
+![Interseção das tangentes, Exemplo 1](../docs/img/exemplo1_grafico_tangentes.png)
+
 ## Scripts
 - `plaxis_sapata_interativo.py`: cria o modelo, salva e (opcional) calcula.
 - `plaxis_sapata_resultados.py`: lê o Output e gera curva, critérios, CSV e gráficos.

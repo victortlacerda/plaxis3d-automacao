@@ -1,6 +1,8 @@
 # Histórico de versões
 
 ## Não lançado
+- README com galeria: telas do script e gráficos de rodadas reais.
+- `sapata/`: textos do menu e das etapas indicam que a sapata em volume e o módulo sem ação foram validados no Caso A.
 - `subsolo/`: Caso B do manual (radier, paredes, coluna e vigas, três fases de construção). Em desenvolvimento.
 
 ## sapata-v1.0.0

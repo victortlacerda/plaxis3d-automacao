@@ -2,6 +2,10 @@
 
 Reproduz o **Caso B** do Tutorial 1 do manual da Bentley (PLAXIS 3D): prédio com subsolo, um quarto do modelo.
 
+![Resumo do script do subsolo](../docs/img/term_subsolo_resumo.png)
+
+*Tela do script interativo com os valores padrão do Caso B. Ainda sem rodada real.*
+
 ## Scripts
 - `plaxis_subsolo_interativo.py`: cria o modelo e as fases Excavation, Construction e Loading.
 - `plaxis_subsolo_resultados.py`: Uz dos pontos por fase, M11/M22 e Uz do piso, perfil de Uz do solo, CSV e gráficos.

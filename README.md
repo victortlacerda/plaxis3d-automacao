@@ -1,10 +1,32 @@
 # plaxis3d-automacao
 
+![PLAXIS 3D · automação em Python](docs/img/hero.png)
+
 Automação do **PLAXIS 3D 2024.2** por Python: cria o modelo, calcula e extrai os resultados por scripts
 **interativos** (o script pergunta os dados no terminal; Enter aceita o padrão).
 
 O projeto nasceu de exercícios de capacidade de carga de sapatas (notas de aula) e cresceu para os
 exemplos do Tutorial 1 do manual da Bentley (prédio com subsolo e radier).
+
+## Galeria
+
+Todas as imagens de resultado vêm de rodadas **reais** no PLAXIS 3D 2024.2 (Exemplo 1 das notas de aula e Caso A do manual da Bentley).
+
+| Script interativo (perguntas) | Resumo antes de criar o modelo |
+|---|---|
+| ![Perguntas](docs/img/term_sapata_perguntas.png) | ![Resumo](docs/img/term_sapata_resumo.png) |
+
+| Curva carga × recalque | Interseção das tangentes |
+|---|---|
+| ![Curva](docs/img/exemplo1_grafico_curva.png) | ![Tangentes](docs/img/exemplo1_grafico_tangentes.png) |
+
+| Recalque = 10% de B | 25 mm (Terzaghi e Peck, 1948) |
+|---|---|
+| ![10% de B](docs/img/exemplo1_grafico_10pctB.png) | ![25 mm](docs/img/exemplo1_grafico_25mm.png) |
+
+**Caso A do manual da Bentley** (prédio como volume linear elástico não poroso, só peso próprio):
+
+![Caso A](docs/img/term_casoA.png)
 
 ## Organização: do simples ao avançado
 
