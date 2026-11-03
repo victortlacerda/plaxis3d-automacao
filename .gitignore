@@ -1,0 +1,16 @@
+# Saídas geradas pelos scripts (ficam na pasta de onde o script roda)
+ultimo_modelo.json
+ultimo_modelo_subsolo.json
+*.p3d
+*.p3dlog
+*.p3d.*
+*.png
+sapata_curva.csv
+sapata_peso_proprio.csv
+subsolo_*.csv
+resumo_projeto.txt
+
+# Python
+__pycache__/
+*.pyc
+.venv/
