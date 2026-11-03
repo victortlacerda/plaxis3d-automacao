@@ -33,6 +33,13 @@ resultados() {  # nome  script  fake  json
   compara "$1.log" "$d/saida.log"; rm -rf "$d"
 }
 
+soiltest() {  # nome  script  modelo  drenagem  json_config
+  local d; d="$(mktemp -d)"
+  ( cd "$d" && python3 "$T/mock/rodar_soiltest.py" "$RAIZ/$2" "$3" "$4" "$5" 2>&1 \
+      | normaliza "$d" | sed -E 's/\(20[0-9]{2}-[0-9-]+T[0-9:]+\)/(<DATA>)/; s/_20[0-9]{6}_[0-9]{6}/_<DATA>/g; s/ at 0x[0-9a-f]+/ at 0x<END>/g' > "$d/saida.log" )
+  compara "$1.log" "$d/saida.log"; rm -rf "$d"
+}
+
 # --- sapata (ESTÁVEL): módulos 1, 2, 3 (sequência e simultâneo) + opções novas
 interativo sapata_int_carga sapata/plaxis_sapata_interativo.py sapata_carga.txt
 interativo sapata_int_desl sapata/plaxis_sapata_interativo.py sapata_desl.txt
@@ -46,6 +53,12 @@ done
 # --- subsolo (EM DESENVOLVIMENTO)
 interativo subsolo_int_padrao subsolo/plaxis_subsolo_interativo.py subsolo_padrao.txt
 resultados subsolo_res_padrao subsolo/plaxis_subsolo_resultados.py subsolo_resultados subsolo.json
+
+# --- soiltest: versao estavel (mesmo fluxo das rodadas reais) e versao em desenvolvimento
+soiltest soiltest_le_todos soiltest/plaxis_soiltest_auto.py LE D '{"crs":{"rodar":true},"dss":{"rodar":true,"pressoes_kPa":[50]},"cdss":{"rodar":true},"triaxial_ciclico":{"rodar":true},"triaxial":{"pressoes_kPa":[50]}}'
+soiltest soiltest_hs_k0_ocr soiltest/plaxis_soiltest_auto.py HS D '{"consolidacao":{"tipo":"K0","K0":0.5},"preadensamento":{"modo":"OCR","valor":2},"dilatancy_cutoff":{"ligar":true},"oedometer":{"rodar":false}}'
+soiltest soiltest_estavel_limita_ciclico soiltest/plaxis_soiltest_auto.py MC D '{"triaxial":{"rodar":false},"oedometer":{"rodar":false},"cdss":{"rodar":true,"comportamentos":["Undrained"],"controle":"Stress","amplitude":20}}'
+soiltest soiltest_dev_ciclico_nao_drenado soiltest/em_desenvolvimento/plaxis_soiltest_auto_dev.py MC D '{"triaxial":{"rodar":false},"oedometer":{"rodar":false},"cdss":{"rodar":true,"comportamentos":["Undrained"],"controle":"Stress","amplitude":20},"triaxial_ciclico":{"rodar":true,"comportamentos":["Undrained"]}}'
 
 [ $GRAVAR -eq 1 ] && exit 0
 [ $FALHAS -eq 0 ] && echo "Tudo igual às linhas de base." || { echo "$FALHAS caso(s) mudaram."; exit 1; }

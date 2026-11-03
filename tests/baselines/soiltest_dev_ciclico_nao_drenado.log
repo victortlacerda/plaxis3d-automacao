@@ -1,0 +1,51 @@
+PLAXIS SoilTest auto - Mohr-Coulomb / Drained (<DATA>)
+[OK ] g_i.soilmat() -> <__main__.Mat object at 0x<END>>
+[OK ] Identification -> 'OK'
+[OK ] SoilModel = 2 -> Mohr-Coulomb (2)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+[OK ] cRef (cRef) = 5 -> 'OK'
+[OK ] phi (phi) = 30 -> 'OK'
+[OK ] psi (psi) = 0 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+================ CDSS (cisalhamento simples ciclico) ================
+
+-- CDSS (cisalhamento simples ciclico) CU_100kPa --
+[OK ] CDSS CU_100kPa: Behaviour=Undrained, Consolidation=Isotropic, AbsSigyyinit=100, InitialStaticShear=0, TestControlType=Stress, ShearStressAmplitude=20, NumberOfCycles=3, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS CU_100kPa -> 'OK'
+   Ultimo ciclo: G_sec = 11538.5 kPa; amplitude = 0.5000 % / 57.69 kPa; amortecimento = 0.50 %
+   du max = 52.00 kPa; du min = 0.00 kPa
+
+================ Triaxial ciclico ================
+
+-- Triaxial ciclico CU_100kPa --
+[OK ] CycTriaxial CU_100kPa: Behaviour=Undrained, Consolidation=Isotropic, CellPressure=100, InitialAxialStressinc=0, TestControlType=Strain, AxialStrainAmplitude=0.5, NumberOfCycles=3, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CycTriaxial CU_100kPa -> 'OK'
+   Ultimo ciclo: E_sec = 34615.4 kPa; amplitude = 0.5000 % / 173.08 kPa; amortecimento = 0.00 %
+   du max = 26.00 kPa; du min = 0.00 kPa
+
+10 grafico(s) em <DIR>/soiltest_saida/auto_MC_D_<DATA>/graficos
+   cdss_tau_x_gamma.png
+   cdss_gamma_x_tempo.png
+   cdss_tau_x_tempo.png
+   cdss_du_x_tempo.png
+   cdss_trajetoria_sigv_tau.png
+   cyctriaxial_q_x_eps_a.png
+   cyctriaxial_eps_a_x_tempo.png
+   cyctriaxial_q_x_tempo.png
+   cyctriaxial_du_x_tempo.png
+   cyctriaxial_trajetoria_p_q.png
+
+Saida: <DIR>/soiltest_saida/auto_MC_D_<DATA>
+RC 0
