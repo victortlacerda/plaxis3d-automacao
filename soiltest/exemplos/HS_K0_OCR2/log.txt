@@ -1,0 +1,67 @@
+PLAXIS SoilTest auto - Hardening Soil / Drained (2026-10-30T02:28:18)
+Consolidacao K0 com K0 = 0.5 (informado).
+Pre-adensamento: OCR = 2.0.
+[OK ] g_i.soilmat() -> <SoilMat {B2362743-91BC-43D4-9AB4-DD0DCEA77442}>
+[OK ] Identification -> 'SoilMat_1 renamed to HS_D_teste'
+[OK ] SoilModel = 3 -> Hardening Soil (3)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] E50ref (E50Ref) = 40000.0 -> 'OK'
+[OK ] Eoedref (EOedRef) = 40000.0 -> 'OK'
+[OK ] Eurref (EURRef) = 120000.0 -> 'OK'
+[OK ] m (PowerM) = 0.5 -> 'OK'
+[OK ] nuur (nuUR) = 0.2 -> 'OK'
+[OK ] pref (pRef) = 100.0 -> 'OK'
+[OK ] cref (cRef) = 1.0 -> 'OK'
+[OK ] phi (phi) = 35.0 -> 'OK'
+[OK ] psi (psi) = 5.0 -> 'OK'
+[OK ] DilatancyCutOff (DilatancyCutOff) = True -> 'OK'
+[OK ] eInit (eInit) = 0.5 -> 'OK'
+[OK ] eMax (eMax) = 0.52 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 3
+Atributos do Material no SoilTest: Colour, Comments, E50Ref, EOedRef, EURRef, Identification, K0NC, Metadata, Name, PowerM, RF, SoilModel, TensileStrength, TensionCutOff, TypeName, UserFeatures, attr_cache, cRef, commands, dump, echo, get_cmd_line_repr, get_equivalent, getmetadata, info, materialcommand, multiply, nuUR, observers, pRef, phi, psi, rename, reset_cache, save, setcolour, setmetadata, setproperties
+Corte de dilatancia no SoilTest: {'DilatancyCutOff': 'nao exposto no Material do SoilTest', 'eInit': 'nao exposto no Material do SoilTest', 'eMax': 'nao exposto no Material do SoilTest'} (confira a dilatacao maxima dos ensaios drenados).
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=K0, Direction=Compression, CellPressure=50.0, MaximumStrain=15.0, Steps=100
+[OK ] K0: K0=0.5
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 50.00 kPa (K = 0.500)
+[OK ] PreconsolidationPressure = 200.000 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 138.359 kPa; dilatacao volumetrica maxima = 1.357 %
+   Esperado (q_f Mohr-Coulomb): 138.351 kPa
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=K0, Direction=Compression, CellPressure=100.0, MaximumStrain=15.0, Steps=100
+[OK ] K0: K0=0.5
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 100.00 kPa (K = 0.500)
+[OK ] PreconsolidationPressure = 400.000 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 272.877 kPa; dilatacao volumetrica maxima = 1.340 %
+   Esperado (q_f Mohr-Coulomb): 272.859 kPa
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=K0, Direction=Compression, CellPressure=200.0, MaximumStrain=15.0, Steps=100
+[OK ] K0: K0=0.5
+   Tensoes iniciais efetivas: sigma_y = 400.00 kPa, sigma_x = 200.00 kPa (K = 0.500)
+[OK ] PreconsolidationPressure = 800.000 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   q_max simulado = 541.913 kPa; dilatacao volumetrica maxima = 1.334 %
+   Esperado (q_f Mohr-Coulomb): 541.876 kPa
+[OK ] restaurar Triaxial.PreconsolidationPressure = 0 -> 'OK'
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+
+3 grafico(s) em C:\Users\User\Downloads\soiltest_saida\auto_HS_D_20261030_022834\graficos
+   triaxial_q_x_eps_a.png
+   triaxial_ev_x_eps_a.png
+   triaxial_trajetoria_p_q.png
+
+Saida: C:\Users\User\Downloads\soiltest_saida\auto_HS_D_20261030_022834

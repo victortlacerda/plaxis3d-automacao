@@ -1,0 +1,101 @@
+{
+  "modelo": "HS",
+  "drenagem": "D",
+  "parametros": {
+    "E50ref": 40000.0,
+    "Eoedref": 40000.0,
+    "Eurref": 120000.0,
+    "m": 0.5,
+    "nuur": 0.2,
+    "pref": 100.0,
+    "cref": 1.0,
+    "phi": 35.0,
+    "psi": 5.0,
+    "K0nc": null,
+    "Rf": null
+  },
+  "porta_soiltest": 10001,
+  "consolidacao": {
+    "tipo": "K0",
+    "K0": 0.5,
+    "K0_usado": 0.5
+  },
+  "preadensamento": {
+    "modo": "OCR",
+    "valor": 2.0
+  },
+  "dilatancy_cutoff": {
+    "ligar": true,
+    "eInit": 0.5,
+    "eMax": 0.52,
+    "SoilTest": {
+      "DilatancyCutOff": "nao exposto no Material do SoilTest",
+      "eInit": "nao exposto no Material do SoilTest",
+      "eMax": "nao exposto no Material do SoilTest"
+    }
+  },
+  "triaxial": {
+    "CD_50kPa": {
+      "q_max_kPa": 138.358994,
+      "dilatacao_max_pct": 1.357473,
+      "qf_teorico_kPa": 138.3505808610755,
+      "esperado": {
+        "descricao": "q_f Mohr-Coulomb",
+        "kPa": 138.3505808610755
+      },
+      "consolidacao": "K0",
+      "K0": 0.5,
+      "sigma0_kPa": {
+        "sxx": 50.0,
+        "syy": 100.0
+      },
+      "sigma_v0_kPa": 100.0,
+      "OCR_pedido": 2.0,
+      "OCR_aplicado": 2.0,
+      "pc_kPa": 200.0
+    },
+    "CD_100kPa": {
+      "q_max_kPa": 272.87733,
+      "dilatacao_max_pct": 1.339507,
+      "qf_teorico_kPa": 272.8591974682087,
+      "esperado": {
+        "descricao": "q_f Mohr-Coulomb",
+        "kPa": 272.8591974682087
+      },
+      "consolidacao": "K0",
+      "K0": 0.5,
+      "sigma0_kPa": {
+        "sxx": 100.0,
+        "syy": 200.0
+      },
+      "sigma_v0_kPa": 200.0,
+      "OCR_pedido": 2.0,
+      "OCR_aplicado": 2.0,
+      "pc_kPa": 400.0
+    },
+    "CD_200kPa": {
+      "q_max_kPa": 541.91309,
+      "dilatacao_max_pct": 1.334367,
+      "qf_teorico_kPa": 541.8764306824751,
+      "esperado": {
+        "descricao": "q_f Mohr-Coulomb",
+        "kPa": 541.8764306824751
+      },
+      "consolidacao": "K0",
+      "K0": 0.5,
+      "sigma0_kPa": {
+        "sxx": 200.0,
+        "syy": 400.0
+      },
+      "sigma_v0_kPa": 400.0,
+      "OCR_pedido": 2.0,
+      "OCR_aplicado": 2.0,
+      "pc_kPa": 800.0
+    }
+  },
+  "graficos": [
+    "graficos\\triaxial_q_x_eps_a.png",
+    "graficos\\triaxial_ev_x_eps_a.png",
+    "graficos\\triaxial_trajetoria_p_q.png"
+  ]
+}

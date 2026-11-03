@@ -1,0 +1,137 @@
+{
+  "modelo": "LE",
+  "drenagem": "D",
+  "parametros": {
+    "ERef": 30000.0,
+    "nu": 0.3
+  },
+  "porta_soiltest": 10001,
+  "consolidacao": {
+    "tipo": "Isotropic",
+    "K0": null,
+    "K0_usado": null
+  },
+  "preadensamento": {
+    "modo": "nenhum",
+    "valor": 0
+  },
+  "dilatancy_cutoff": {
+    "SoilTest": null
+  },
+  "triaxial": {
+    "CD_50kPa": {
+      "q_max_kPa": 4500.0,
+      "dilatacao_max_pct": 0.0,
+      "esperado": {
+        "descricao": "q0 + E x eps_a (linear)",
+        "kPa": 4500.0
+      },
+      "consolidacao": "Isotropic",
+      "sigma0_kPa": {
+        "sxx": 50.0,
+        "syy": 50.0
+      },
+      "sigma_v0_kPa": 50.0,
+      "pc_kPa": 0.0
+    }
+  },
+  "oedometer": {
+    "pontos": 61,
+    "sigma_v_max_kPa": 400.0,
+    "eps_v_max_pct": 0.99047619,
+    "E_oed_teorico_kPa": 40384.61538461538,
+    "eps_v_esperado_pct": 0.9904761904761905,
+    "eps_v_no_pico_pct": 0.99047619,
+    "pc_kPa": 0.0
+  },
+  "crs": {
+    "pontos": 51,
+    "sigma_v_max_kPa": 2019.2308,
+    "eps_v_max_pct": 5.0,
+    "E_oed_teorico_kPa": 40384.61538461538,
+    "eps_v_esperado_pct": 5.000000076190477,
+    "eps_v_no_pico_pct": 5.0,
+    "pc_kPa": 0.0
+  },
+  "dss": {
+    "CD_50kPa": {
+      "tau_max_kPa": 1153.8462,
+      "dilatacao_max_pct": 0.0,
+      "consolidacao": "Isotropic",
+      "sigma0_kPa": {
+        "sxx": 50.0,
+        "syy": 50.0
+      },
+      "sigma_v0_kPa": 50.0,
+      "pc_kPa": 0.0
+    }
+  },
+  "cdss": {
+    "CD_100kPa": {
+      "pontos": 261,
+      "pontos_esperados": 241,
+      "ultimo_ciclo": {
+        "amplitude_x_pct": 0.5,
+        "amplitude_y_kPa": 57.692308,
+        "modulo_secante_kPa": 11538.461599999999,
+        "amortecimento_pct": 2.392778393432133e-17
+      },
+      "rotulo_modulo": "G_sec",
+      "esperado": {
+        "descricao": "G = E/(2(1+nu)) (LE)",
+        "kPa": 11538.461538461537
+      },
+      "consolidacao": "Isotropic",
+      "sigma0_kPa": {
+        "sxx": 100.0,
+        "syy": 100.0
+      },
+      "sigma_v0_kPa": 100.0,
+      "pc_kPa": 0.0
+    }
+  },
+  "triaxial_ciclico": {
+    "CD_100kPa": {
+      "pontos": 261,
+      "pontos_esperados": 241,
+      "ultimo_ciclo": {
+        "amplitude_x_pct": 0.5,
+        "amplitude_y_kPa": 150.0,
+        "modulo_secante_kPa": 30000.0,
+        "amortecimento_pct": 0.0
+      },
+      "rotulo_modulo": "E_sec",
+      "esperado": {
+        "descricao": "E (LE, drenado)",
+        "kPa": 30000.0
+      },
+      "consolidacao": "Isotropic",
+      "sigma0_kPa": {
+        "sxx": 100.0,
+        "syy": 100.0
+      },
+      "sigma_v0_kPa": 100.0,
+      "pc_kPa": 0.0
+    }
+  },
+  "graficos": [
+    "graficos\\triaxial_q_x_eps_a.png",
+    "graficos\\triaxial_ev_x_eps_a.png",
+    "graficos\\triaxial_trajetoria_p_q.png",
+    "graficos\\oedometer_sigv_x_epsv.png",
+    "graficos\\oedometer_epsv_x_logsigv.png",
+    "graficos\\crs_sigv_x_epsv.png",
+    "graficos\\crs_epsv_x_logsigv.png",
+    "graficos\\dss_tau_x_gamma.png",
+    "graficos\\dss_ev_x_gamma.png",
+    "graficos\\dss_trajetoria_sigv_tau.png",
+    "graficos\\cdss_tau_x_gamma.png",
+    "graficos\\cdss_gamma_x_tempo.png",
+    "graficos\\cdss_tau_x_tempo.png",
+    "graficos\\cdss_trajetoria_sigv_tau.png",
+    "graficos\\cyctriaxial_q_x_eps_a.png",
+    "graficos\\cyctriaxial_eps_a_x_tempo.png",
+    "graficos\\cyctriaxial_q_x_tempo.png",
+    "graficos\\cyctriaxial_trajetoria_p_q.png"
+  ]
+}

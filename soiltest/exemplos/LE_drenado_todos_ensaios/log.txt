@@ -1,0 +1,96 @@
+PLAXIS SoilTest auto - Linear Elastic / Drained (2026-10-30T02:15:45)
+[OK ] g_i.soilmat() -> <SoilMat {A8515240-8C2E-4A73-893F-D6066DE42F8B}>
+[OK ] Identification -> 'SoilMat_1 renamed to LE_D_teste'
+[OK ] SoilModel = 1 -> Linear Elastic (1)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000.0 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 1
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50.0, MaximumStrain=15.0, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 4500.000 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q0 + E x eps_a (linear)): 4500.000 kPa
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.00 kPa; eps_v max = 0.9905 %
+   Esperado (eps_v = sigma_v/E_oed, E_oed = 40384.6 kPa): 0.9905 % no pico; simulado 0.9905 %
+
+================ CRS ================
+-- CRS --
+[OK ] CRS fases -> None
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CRS -> 'OK'
+   51 pontos; sigma_v max = 2019.23 kPa; eps_v max = 5.0000 %
+   Esperado (eps_v = sigma_v/E_oed, E_oed = 40384.6 kPa): 5.0000 % no pico; simulado 5.0000 %
+
+================ DSS ================
+
+-- DSS CD_50kPa --
+[OK ] DSS CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=50.0, MaximumShearStrain=10.0, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate DSS CD_50kPa -> 'OK'
+   tau_max simulado = 1153.846 kPa; dilatacao volumetrica maxima = 0.000 %
+
+================ CDSS (cisalhamento simples ciclico) ================
+
+-- CDSS (cisalhamento simples ciclico) CD_100kPa --
+[OK ] CDSS CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0.0, TestControlType=Strain, ShearStrainAmplitude=0.5, NumberOfCycles=3, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1.0
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS CD_100kPa -> 'OK'
+   Aviso: 261 pontos lidos; esperava 241 (4 x passos x ciclos + 1).
+   Ultimo ciclo: G_sec = 11538.5 kPa; amplitude = 0.5000 % / 57.69 kPa; amortecimento = 0.00 %
+   Esperado (G = E/(2(1+nu)) (LE)): 11538.462 kPa
+
+================ Triaxial ciclico ================
+
+-- Triaxial ciclico CD_100kPa --
+[OK ] CycTriaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, CellPressure=100.0, InitialAxialStressinc=0.0, TestControlType=Strain, AxialStrainAmplitude=0.5, NumberOfCycles=3, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1.0
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CycTriaxial CD_100kPa -> 'OK'
+   Aviso: 261 pontos lidos; esperava 241 (4 x passos x ciclos + 1).
+   Ultimo ciclo: E_sec = 30000.0 kPa; amplitude = 0.5000 % / 150.00 kPa; amortecimento = 0.00 %
+   Esperado (E (LE, drenado)): 30000.000 kPa
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+   (sem excesso de poropressao: grafico crs_du_x_tempo.png omitido)
+   (sem excesso de poropressao: grafico dss_du_x_gamma.png omitido)
+   (sem excesso de poropressao: grafico cdss_du_x_tempo.png omitido)
+   (sem excesso de poropressao: grafico cyctriaxial_du_x_tempo.png omitido)
+
+18 grafico(s) em C:\Users\User\Downloads\soiltest_saida\auto_LE_D_20261030_021605\graficos
+   triaxial_q_x_eps_a.png
+   triaxial_ev_x_eps_a.png
+   triaxial_trajetoria_p_q.png
+   oedometer_sigv_x_epsv.png
+   oedometer_epsv_x_logsigv.png
+   crs_sigv_x_epsv.png
+   crs_epsv_x_logsigv.png
+   dss_tau_x_gamma.png
+   dss_ev_x_gamma.png
+   dss_trajetoria_sigv_tau.png
+   cdss_tau_x_gamma.png
+   cdss_gamma_x_tempo.png
+   cdss_tau_x_tempo.png
+   cdss_trajetoria_sigv_tau.png
+   cyctriaxial_q_x_eps_a.png
+   cyctriaxial_eps_a_x_tempo.png
+   cyctriaxial_q_x_tempo.png
+   cyctriaxial_trajetoria_p_q.png
+
+Saida: C:\Users\User\Downloads\soiltest_saida\auto_LE_D_20261030_021605
