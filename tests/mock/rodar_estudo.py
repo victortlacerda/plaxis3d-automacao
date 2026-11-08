@@ -43,6 +43,12 @@ class GI(Rec):
         if k.startswith("Polygon_1_"): raise AttributeError(k)
         if k == "Polygon_1": return Poly("Polygon_1")
         if k == "surface": return lambda *a: (print("   CALL surface", a), Poly("Polygon_1"))[1]
+        if k == "Phases":
+            V = type("V", (), {})
+            def fase(n):
+                f = type("F", (), {})(); f.Identification = V(); f.Identification.value = n
+                f.LogInfo = V(); f.LogInfo.value = 0; return f
+            return [fase("Initial phase"), fase("Footing"), fase("Load")]
         if k == "mesh": return lambda *a: (print("   CALL mesh", a), "Generated %d elements, 3000 nodes" % int(0.35 / a[0] * 1000))[1]
         if k == "selectmeshpoints": return lambda *a: (print("   CALL selectmeshpoints"), 10001)[1]
         return Rec.__getattr__(self, k)

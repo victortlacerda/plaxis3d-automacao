@@ -50,6 +50,10 @@ def rodar_caso(motor, cd, pasta_lote):
     MT.salvar_json(os.path.join(pasta, "entrada.json"), P)
     t0 = time.time()
     _, elementos = motor.construir(P, pasta)
+    problema = motor.problema_calculo(cd["modo"])
+    if problema:
+        print("\n    (AVISO) cálculo não terminou como esperado: {}. Os resultados deste caso não entram na "
+              "qa adotada.".format(problema))
     R = motor.resultados(pasta)
     A = MT.analitico_completo(P, cd["FS"])
     with open(os.path.join(pasta, "memoria_analitica.txt"), "w", encoding="utf-8") as f:
@@ -69,12 +73,14 @@ def rodar_caso(motor, cd, pasta_lote):
     MT.salvar_json(os.path.join(pasta, "resultado.json"),
                    dict(resultados=R2, analitico={k: v for k, v in A.items() if not k.startswith("_")},
                         elementos=elementos, minutos=(time.time() - t0) / 60.0))
-    return dict(P=P, R=R, A=A, elementos=elementos, pasta=pasta, memorial=base, minutos=(time.time() - t0) / 60.0)
+    return dict(P=P, R=R, A=A, elementos=elementos, pasta=pasta, memorial=base, minutos=(time.time() - t0) / 60.0,
+                problema=problema)
 
 
-def qa_adotada(R, FS):
+def qa_adotada(R, FS, modo="carga"):
     cands = []
-    if R.get("qu_tang") is not None:
+    # com deslocamento prescrito a curva raramente forma patamar: a interseção das tangentes não é usada
+    if R.get("qu_tang") is not None and modo == "carga":
         cands.append(("tangentes/FS", R["qu_tang"] / FS))
     if R.get("q_10b") is not None:
         cands.append(("10%B/FS", R["q_10b"] / FS))
@@ -93,12 +99,15 @@ def linha_resumo(cd, out=None, erro=None):
     if erro:
         return base + [None] * 12 + ["ERRO: " + erro]
     R, A = out["R"], out["A"]
-    crit, qa = qa_adotada(R, cd["FS"])
+    crit, qa = qa_adotada(R, cd["FS"], cd["modo"])
+    if out.get("problema"):
+        crit, qa = None, None
     qv = A["metodos"][2]["qu"]
     return base + [out["elementos"], R.get("qu_tang"), (R["qu_tang"] / cd["FS"]) if R.get("qu_tang") else None,
                    R.get("q_10b"), R.get("q_25"), qa, crit,
                    A["metodos"][0]["qu"], A["metodos"][1]["qu"], qv,
-                   (R["qu_tang"] / qv) if R.get("qu_tang") and qv else None, round(out["minutos"], 1), "ok"]
+                   (R["qu_tang"] / qv) if R.get("qu_tang") and qv else None, round(out["minutos"], 1),
+                   "AVISO: " + out["problema"] if out.get("problema") else "ok"]
 
 
 def grafico_lote(linhas, caminho):
@@ -169,7 +178,7 @@ figure img{{max-width:100%}} .nota{{color:#5b6878;font-size:12.5px}}
 <div class="cards"><div class="card"><b>{n}</b>casos</div><div class="card"><b>{ok}</b>calculados</div>
 <div class="card"><b>{er}</b>com erro</div></div>
 <div class="tab"><table><thead><tr>{cab}<th>Memorial</th></tr></thead><tbody>{corpo}</tbody></table></div>
-{graf}<p class="nota">Cargas em kN/m². qa adotada = menor entre qu(tangentes)/FS, qu(10% de B)/FS e a tensão para 25 mm.
+{graf}<p class="nota">Cargas em kN/m². qa adotada = menor entre qu(tangentes)/FS (só no modo carga), qu(10% de B)/FS e a tensão para 25 mm.
 Valores para revisão do responsável técnico.</p></main></body></html>""".format(
         pl=H.escape(os.path.basename(planilha)), ini=inicio, n=len(linhas), ok=ok, er=len(linhas) - ok,
         cab="".join("<th>{}</th>".format(H.escape(c)) for c in CAB_RESUMO), corpo="".join(corpo), graf=graf)

@@ -87,7 +87,22 @@ class Motor(object):
         ns["resumo"](P)
         _, texto = com_captura(ns["construir"], P)
         m = re.findall(r"Generated (\d+) elements", texto)
+        # LogInfo de cada fase (0 = OK; 101 = solo colapsou, esperado no modo carga; 254 = cancelado; outros = falha)
+        self.loginfo = [(f, int(c)) for f, c in re.findall(r"^\s+(.+?)\s+-> LogInfo (\d+)", texto, re.M)]
         return texto, (int(m[-1]) if m else None)
+
+    def problema_calculo(self, modo):
+        """None se o cálculo terminou como esperado; senão, um texto curto com o motivo."""
+        li = getattr(self, "loginfo", [])
+        if not li:
+            return "sem informação de LogInfo (o cálculo rodou?)"
+        aceitos = (0, 101) if modo == "carga" else (0,)
+        ruins = [(f, c) for f, c in li if c not in aceitos]
+        if not ruins:
+            return None
+        nomes = {254: "cancelado", 101: "solo colapsou"}
+        return "; ".join("fase {} LogInfo {}{}".format(f, c, " ({})".format(nomes[c]) if c in nomes else "")
+                         for f, c in ruins)
 
     def resultados(self, pasta_caso):
         """Roda o plaxis_sapata_resultados.py validado na pasta do caso e devolve os números."""
@@ -146,10 +161,15 @@ def grafico_comparacao(q, s, A, R, caminho, titulo="PLAXIS x métodos analítico
             R["qu_tang"]))
     qmax_eixo = max([mt["qu"] for mt in A["metodos"]] + ([max(q)] if q else []) + [R.get("qu_tang") or 0]) * 1.12
     qe = [0.0, qmax_eixo]
+    if q and s:   # recorta a curva na mesma janela do eixo
+        lim = max(60.0, 150.0 * A["B"])
+        par = [(x, y) for x, y in zip(q, s) if y <= lim * 1.05]
+        if par:
+            ax.lines[0].set_data([p_[0] for p_ in par], [p_[1] for p_ in par])
     se = [AN.recalque_elastico_mm(x, A["B"], A["L"], *_E_nu(A)) for x in qe]
     ax.plot(qe, se, "-", color="#7f8c8d", lw=1.4, label="Recalque elástico (rígida, Iw = {:.2f})".format(A["Iw"]))
     ax.set_xlim(0, qmax_eixo)
-    ax.set_ylim(min(max(smax, 30.0) * 1.05, max(smax * 1.05, 30.0)), 0)
+    ax.set_ylim(min(smax * 1.05, max(60.0, 150.0 * A["B"])) if smax > 0 else 60.0, 0)   # foco até ~15% de B
     ax.set_xlabel("Carga (kN/m²)")
     ax.set_ylabel("Recalque (mm)")
     ax.set_title(titulo)

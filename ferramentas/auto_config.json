@@ -1,6 +1,9 @@
 {
-  "script": "../estudos/sapata_lote.py",
-  "respostas": ["teste_lote.xlsx", "s"],
-  "pasta": null,
-  "log": "auto_log.txt"
+ "script": "../estudos/sapata_lote.py",
+ "respostas": [
+  "teste_lote.xlsx",
+  "s"
+ ],
+ "pasta": null,
+ "log": "auto_log.txt"
 }

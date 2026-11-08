@@ -63,6 +63,8 @@ def caso_base():
             raise RuntimeError("A sensibilidade só trata os módulos 'só carga' e 'só deslocamento'.")
         return P, os.path.splitext(os.path.basename(P.get("projeto", "modelo")))[0], 3.0
     planilha = _ler("Planilha", os.path.join(PASTA, "sapatas_lote.xlsx")).strip('"')
+    if not os.path.isabs(planilha):
+        planilha = os.path.join(PASTA, planilha)
     casos, erros = MT.ler_casos(planilha)
     for e in erros:
         print("    (ignorado) " + e)
@@ -120,8 +122,8 @@ def estabiliza(valores, tol):
         return None, None
     ref = validos[-1][1]
     desv = [abs(v - ref) / abs(ref) if v else None for v in valores]
-    for i in range(len(valores)):
-        if all(d is not None and d <= tol for d in desv[i:]):
+    for i, _ in validos:                       # rodadas descartadas (None) não entram no critério
+        if all(desv[j] <= tol for j, _ in validos if j >= i):
             return i, desv
     return None, desv
 
@@ -199,10 +201,15 @@ def principal():
             print("\n" + "#" * 70 + "\n# {}: {}\n".format(estudo.upper(), rotulo) + "#" * 70)
             try:
                 _, ne = motor.construir(P, sub)
+                problema = motor.problema_calculo(modo)
                 R = motor.resultados(sub)
                 v = metrica(R, modo)
+                if problema:
+                    print("    (AVISO) rodada descartada: {}".format(problema))
+                    v = None
                 linhas.append([estudo, rotulo, ne, P["dominio"]["xmax"] - P["dominio"]["xmin"], P["dominio"]["H"],
-                               v, R.get("q_25"), "ok"])
+                               v, R.get("q_25") if not problema else None,
+                               "descartada: " + problema if problema else "ok"])
             except Exception as e:  # noqa
                 ne, v = None, None
                 msg = str(e).strip().splitlines()[-1] if str(e).strip() else repr(e)
@@ -227,6 +234,8 @@ def principal():
         if i_est is not None:
             concl = "estabiliza a partir de {} (diferença <= {:.0f}% da rodada mais {}).".format(
                 rot[i_est], tol * 100, "refinada" if estudo == "malha" else "ampla")
+        elif sum(1 for v in vals if v) < 2:
+            concl = "menos de duas rodadas válidas: não dá para concluir (veja as rodadas descartadas)."
         else:
             concl = "não estabilizou dentro de {:.0f}% nas rodadas feitas: amplie a lista.".format(tol * 100)
         print("\n>>> {}: {}".format(estudo.upper(), concl))

@@ -316,7 +316,10 @@ def memorial_sapata(d):
     B.append(("h1", "4. Resultados do PLAXIS"))
     B.append(("img", d["figuras"].get("curva"), "Figura 1 - Curva carga x recalque (PLAXIS 3D)", 14.5))
     crit = []
-    if R.get("qu_tang") is not None:
+    if R.get("qu_tang") is not None and c["modo"] != "carga":
+        crit.append(["Interseção das tangentes", fmt_num(R["qu_tang"], 0), "-",
+                     "não usada: com deslocamento prescrito a curva pode não formar patamar"])
+    elif R.get("qu_tang") is not None:
         crit.append(["Interseção das tangentes", fmt_num(R["qu_tang"], 0), fmt_num(R["qu_tang"] / FS, 0),
                      "recalque na interseção {} mm".format(fmt_num(R.get("s_int"), 1))])
     else:
@@ -387,7 +390,7 @@ def memorial_sapata(d):
 
     B.append(("h1", "6. Conclusão"))
     cands = []
-    if R.get("qu_tang") is not None:
+    if R.get("qu_tang") is not None and c["modo"] == "carga":
         cands.append(("qu (tangentes)/FS", R["qu_tang"] / FS))
     if R.get("q_10b") is not None:
         cands.append(("qu (10% de B)/FS", R["q_10b"] / FS))
