@@ -70,6 +70,7 @@ de ponta a ponta. Todos os valores batem com a teoria.
 | MC, controle por tensão (τ = 20 kPa, q = 50 kPa) | amplitudes exatas; não drenado E_u = 34500 kPa, Δu = ±16,3 kPa | 2G(1 + ν_u) = 34500; Δp = q/3 = 16,7 |
 | MC, cíclico não drenado por deformação | Δu oscila sem acumular; CDSS sem Δu | MC com ψ = 0 não tem tendência volumétrica no cisalhamento |
 | MCC edômetro com σ'p = 100 kPa | inclinação 0,0108 antes e 0,054 depois de σ'p | κ/(1 + e0) = 0,010 e λ/(1 + e0) = 0,050 |
+| Soft Soil edômetro com σ'p padrão (100 kPa) | inclinação 0,0195 antes e 0,1000 depois de σ'p | κ* = 0,02 e λ* = 0,10 |
 | HS edômetro com σ'p = 100 kPa | metade da deformação antes de σ'p; mesma inclinação depois | recompressão mais rígida, curva virgem igual |
 
 O histórico completo das descobertas (nomes de atributos, sinais, armadilhas de cada modelo) está em
@@ -107,5 +108,6 @@ Quando um item em desenvolvimento for validado no PLAXIS real, ele passa para o 
 - [x] Cíclicos não drenados com HS small, MCC e Soft Soil (nenhum acumula Δu de forma progressiva: HS small dilata, MCC e Soft Soil ficam elásticos após o 1º ciclo)
 - [x] Efeito do OCR no edômetro e no CRS do HS e do MCC (confere com κ e λ no MCC)
 - [ ] Mapear modelos cíclicos do PLAXIS (UBC3D-PLM, PM4Sand) para acúmulo de poropressão
-- [ ] No MCC e no Soft Soil, sugerir σ'p no edômetro/CRS por padrão (sem σ'p o ensaio parte de tensão zero)
+- [x] No MCC e no Soft Soil, σ'p = 100 kPa por padrão no edômetro e no CRS (ajustável; validado no PLAXIS real)
+- [ ] Mapear modelos cíclicos (UBC3D-PLM, PM4Sand): adiado, por decisão do projeto
 - [ ] Calibração automática contra ensaio de laboratório

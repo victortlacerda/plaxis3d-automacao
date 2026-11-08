@@ -1,6 +1,8 @@
 # Histórico de versões
 
 ## Não lançado
+- `soiltest/`: no MCC e no Soft Soil, edômetro e CRS usam σ'p padrão (100 kPa, ajustável em `sigma_p_padrao_fases_kPa`
+  ou na pergunta do modo interativo) quando o pré-adensamento não é informado; edômetro volta a vir ligado nesses modelos.
 - `soiltest/`: Δu e tensão efetiva ao fim de cada ciclo no log dos ensaios cíclicos; bateria 2 (modelos contráteis em
   ciclos e OCR no edômetro/CRS) rodada no PLAXIS real. O MCC com σ'p confere com κ e λ; nenhum dos 6 modelos acumula Δu
   ciclo a ciclo.

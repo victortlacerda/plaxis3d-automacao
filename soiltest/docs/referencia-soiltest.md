@@ -151,3 +151,8 @@ Edômetro (carga até 400 kPa) e CRS (−10 %), sem pré-adensamento × σ'p = 1
 - **MCC sem pré-adensamento:** parte de tensão zero e vira lixo numérico (ε = 18 % já em 25 kPa; CRS chega a só 6,4 kPa em 10 %). **No MCC, sempre informar σ'p no edômetro e no CRS.**
 - **HS com σ'p = 100:** antes de 100 kPa deforma cerca de metade (inclinação 0,0008–0,0012 contra 0,0015–0,0021, recompressão mais rígida); acima de 100 kPa a inclinação é igual à do normalmente adensado (0,0029 e 0,0042). ε em 400 kPa: 0,743 % contra 0,930 %. Aqui o OCR do HS aparece claramente (no triaxial era só +3 %).
 - O CRS saiu drenado (Δu = 0) nos dois modelos.
+
+## Passo 13 (bateria 3 real, 08/11/2026): σ'p padrão no edômetro/CRS do MCC e do Soft Soil
+Sem informar pré-adensamento, o script aplica `PreconsolidationPressure` = 100 kPa (CONFIG `sigma_p_padrao_fases_kPa`) no Oedometer e no CRS desses dois modelos, e avisa no log.
+- MCC: resultado idêntico ao caso com σ'p informado (ε 13,84 % em 400 kPa; CRS 221,8 kPa em 10 %).
+- Soft Soil: d(ε)/d(ln σ'v) = 0,0195 antes de σ'p (κ* = 0,02) e 0,1000 depois (λ* = 0,10). ε 21,5 % em 400 kPa; CRS 131,9 kPa em 10 %.

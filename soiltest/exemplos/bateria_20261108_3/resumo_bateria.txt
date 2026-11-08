@@ -1,0 +1,25 @@
+Bateria SoilTest 3 - 2026-11-08T13:09:19
+
+== 10_MCC_edometro_padrao (MCC / D) rc=0
+   verificar: Log mostra sigma'p padrao de 100 kPa; resultado igual ao 9b (eps 13,8 % em 400 kPa)
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_MCC_D_20261108_130929
+   Modified Cam-Clay: sigma'p padrao de 100 kPa no Oedometer (sem ele o ensaio parte de tensao zero).
+   [OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+   61 pontos; sigma_v max = 400.06 kPa; eps_v max = 13.8424 %
+   Modified Cam-Clay: sigma'p padrao de 100 kPa no CRS (sem ele o ensaio parte de tensao zero).
+   [OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+   101 pontos; sigma_v max = 221.84 kPa; eps_v max = 10.0000 %
+   [OK ] restaurar CRS.PreconsolidationPressure = 0 -> 'OK'
+   [OK ] restaurar Oedometer.PreconsolidationPressure = 0 -> 'OK'
+
+== 11_SS_edometro_padrao (SS / D) rc=0
+   verificar: Log mostra sigma'p padrao; inclinacao kappa* antes de 100 kPa e lambda* depois
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_SS_D_20261108_130944
+   Soft Soil: sigma'p padrao de 100 kPa no Oedometer (sem ele o ensaio parte de tensao zero).
+   [OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+   61 pontos; sigma_v max = 400.05 kPa; eps_v max = 21.5037 %
+   Soft Soil: sigma'p padrao de 100 kPa no CRS (sem ele o ensaio parte de tensao zero).
+   [OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+   101 pontos; sigma_v max = 131.87 kPa; eps_v max = 10.0000 %
+   [OK ] restaurar CRS.PreconsolidationPressure = 0 -> 'OK'
+   [OK ] restaurar Oedometer.PreconsolidationPressure = 0 -> 'OK'

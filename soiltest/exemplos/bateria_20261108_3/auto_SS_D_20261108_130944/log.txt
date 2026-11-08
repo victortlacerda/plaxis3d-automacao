@@ -1,0 +1,44 @@
+PLAXIS SoilTest auto - Soft Soil / Drained (2026-11-08T13:09:36)
+Material 'SS_D_teste' ja existe: reutilizando.
+[OK ] SoilModel = 5 -> Soft Soil (5)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] lambdaModified (lambdaModified) = 0.1 -> 'OK'
+[OK ] kappaModified (kappaModified) = 0.02 -> 'OK'
+[OK ] cRef (cRef) = 1 -> 'OK'
+[OK ] phi (phi) = 25 -> 'OK'
+[OK ] psi (psi) = 0 -> 'OK'
+[OK ] nuur (nuUR) = 0.15 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10002
+SoilTest na porta 10002.
+[OK ] SoilModel no SoilTest -> 5
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+   Soft Soil: sigma'p padrao de 100 kPa no Oedometer (sem ele o ensaio parte de tensao zero).
+[OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.05 kPa; eps_v max = 21.5037 %
+
+================ CRS ================
+-- CRS --
+[OK ] CRS fases -> None
+   Soft Soil: sigma'p padrao de 100 kPa no CRS (sem ele o ensaio parte de tensao zero).
+[OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CRS -> 'OK'
+   101 pontos; sigma_v max = 131.87 kPa; eps_v max = 10.0000 %
+[OK ] restaurar CRS.PreconsolidationPressure = 0 -> 'OK'
+[OK ] restaurar Oedometer.PreconsolidationPressure = 0 -> 'OK'
+   (sem excesso de poropressao: grafico crs_du_x_tempo.png omitido)
+
+4 grafico(s) em C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_SS_D_20261108_130944\graficos
+   oedometer_sigv_x_epsv.png
+   oedometer_epsv_x_logsigv.png
+   crs_sigv_x_epsv.png
+   crs_epsv_x_logsigv.png
+
+Saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_SS_D_20261108_130944
