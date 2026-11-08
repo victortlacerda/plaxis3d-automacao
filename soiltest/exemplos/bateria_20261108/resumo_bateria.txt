@@ -1,0 +1,54 @@
+Bateria SoilTest - 2026-11-08T12:47:45
+
+== 1_ciclicos_nao_drenados (MC / D) rc=0
+   verificar: Delta u deve aparecer e crescer ao longo dos ciclos
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_MC_D_20261108_124755
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+   Ultimo ciclo: G_sec = 10866.0 kPa; amplitude = 0.5000 % / 54.33 kPa; amortecimento = 3.70 %
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+   Ultimo ciclo: E_sec = 22409.9 kPa; amplitude = 0.5000 % / 112.05 kPa; amortecimento = 22.31 %
+   du max = 42.89 kPa; du min = -30.18 kPa
+
+== 2_controle_por_tensao (MC / D) rc=0
+   verificar: Amplitude de tensao aceita; amplitude de tau = 20 kPa (CDSS) e de q = 50 kPa (triaxial ciclico)
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_MC_D_20261108_124814
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+   Ultimo ciclo: G_sec = 11538.5 kPa; amplitude = 0.1733 % / 20.00 kPa; amortecimento = 0.00 %
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+   Ultimo ciclo: G_sec = 11538.5 kPa; amplitude = 0.1733 % / 20.00 kPa; amortecimento = 0.00 %
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+   Ultimo ciclo: E_sec = 30000.0 kPa; amplitude = 0.1667 % / 50.00 kPa; amortecimento = 0.00 %
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+   Ultimo ciclo: E_sec = 34500.0 kPa; amplitude = 0.1449 % / 50.00 kPa; amortecimento = 0.00 %
+   du max = 16.30 kPa; du min = -16.30 kPa
+
+== 3_K0_DSS_CDSS_ciclico (LE / D) rc=0
+   verificar: Tensoes iniciais com K = 0,5 em DSS, CDSS e triaxial ciclico; G e E iguais aos do isotropico
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_LE_D_20261108_124834
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 50.00 kPa (K = 0.500)
+   tau_max simulado = 1153.846 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (tau = G x gamma_max, G = E/(2(1+nu)) (LE)): 1153.846 kPa
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 50.00 kPa (K = 0.500)
+   Ultimo ciclo: G_sec = 11538.5 kPa; amplitude = 0.5000 % / 57.69 kPa; amortecimento = 0.00 %
+   Esperado (G = E/(2(1+nu)) (LE)): 11538.462 kPa
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 100.00 kPa (K = 0.500)
+   Ultimo ciclo: E_sec = 30000.0 kPa; amplitude = 0.5000 % / 150.00 kPa; amortecimento = 0.00 %
+   Esperado (E (LE, drenado)): 30000.000 kPa
+
+== 4a_HS_normalmente_adensado (HS / D) rc=0
+   verificar: Referencia para comparar com o 4b (mesmo material, sem pre-adensamento)
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_HS_D_20261108_124854
+   [OK ] E50ref (E50Ref) = 40000 -> 'OK'
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 100.00 kPa (K = 0.500)
+   q_max simulado = 272.877 kPa; dilatacao volumetrica maxima = 2.350 %
+   Esperado (q_f Mohr-Coulomb): 272.859 kPa
+
+== 4b_HS_OCR_2 (HS / D) rc=0
+   verificar: Inicio da curva q x eps_a mais rigido que no 4a; mesmo q_f
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_HS_D_20261108_124907
+   [OK ] E50ref (E50Ref) = 40000 -> 'OK'
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 100.00 kPa (K = 0.500)
+   [OK ] PreconsolidationPressure = 400.000 kPa -> 'OK'
+   q_max simulado = 272.877 kPa; dilatacao volumetrica maxima = 2.485 %
+   Esperado (q_f Mohr-Coulomb): 272.859 kPa
+   [OK ] restaurar Triaxial.PreconsolidationPressure = 0 -> 'OK'

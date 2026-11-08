@@ -6,6 +6,7 @@ explicadas no [glossário](../glossario.md). Os gráficos destas rodadas estão 
 | Pasta | Rodada |
 |---|---|
 | `LE_drenado_todos_ensaios/` | Linear Elastic drenado (E' = 30000 kPa, ν' = 0,3): triaxial, edômetro, CRS, DSS, CDSS e triaxial cíclico. Todos conferem com a teoria |
+| `bateria_20261108/` | Bateria de 08/11/2026: cíclicos não drenados e controle por tensão (MC), K0 no DSS/CDSS/triaxial cíclico (LE), HS normalmente adensado × OCR = 2. Resumo em `resumo_bateria.txt` |
 | `HS_K0_OCR2/` | Hardening Soil drenado com corte de dilatância, consolidação K0 = 0,5 e OCR = 2; triaxial em σ3 = 50, 100 e 200 kPa |
 
 O `log.txt` do Linear Elastic foi gerado por uma versão anterior e mostra o aviso "261 pontos lidos; esperava 241".

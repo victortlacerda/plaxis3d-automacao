@@ -1,0 +1,39 @@
+PLAXIS SoilTest auto - Hardening Soil / Drained (2026-11-08T12:48:45)
+Consolidacao K0 com K0 = 0.5 (informado).
+[OK ] g_i.soilmat() -> <SoilMat {705D5091-1196-47FD-8B49-CCB9700664DA}>
+[OK ] Identification -> 'SoilMat_1 renamed to HS_D_teste'
+[OK ] SoilModel = 3 -> Hardening Soil (3)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] E50ref (E50Ref) = 40000 -> 'OK'
+[OK ] Eoedref (EOedRef) = 40000 -> 'OK'
+[OK ] Eurref (EURRef) = 120000 -> 'OK'
+[OK ] m (PowerM) = 0.5 -> 'OK'
+[OK ] nuur (nuUR) = 0.2 -> 'OK'
+[OK ] pref (pRef) = 100 -> 'OK'
+[OK ] cref (cRef) = 1 -> 'OK'
+[OK ] phi (phi) = 35 -> 'OK'
+[OK ] psi (psi) = 5 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10004
+SoilTest na porta 10004.
+[OK ] SoilModel no SoilTest -> 3
+
+================ Triaxial ================
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=K0, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+[OK ] K0: K0=0.5
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 100.00 kPa (K = 0.500)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 272.877 kPa; dilatacao volumetrica maxima = 2.350 %
+   Esperado (q_f Mohr-Coulomb): 272.859 kPa
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+
+3 grafico(s) em C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_HS_D_20261108_124854\graficos
+   triaxial_q_x_eps_a.png
+   triaxial_ev_x_eps_a.png
+   triaxial_trajetoria_p_q.png
+
+Saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_HS_D_20261108_124854

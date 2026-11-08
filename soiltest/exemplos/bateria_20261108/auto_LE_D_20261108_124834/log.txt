@@ -1,0 +1,64 @@
+PLAXIS SoilTest auto - Linear Elastic / Drained (2026-11-08T12:48:26)
+Consolidacao K0 com K0 = 0.5 (informado).
+[OK ] g_i.soilmat() -> <SoilMat {0781548F-08CC-4D03-8A88-FEFFF395AE43}>
+[OK ] Identification -> 'SoilMat_1 renamed to LE_D_teste'
+[OK ] SoilModel = 1 -> Linear Elastic (1)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10003
+SoilTest na porta 10003.
+[OK ] SoilModel no SoilTest -> 1
+
+================ DSS ================
+
+-- DSS CD_100kPa --
+[OK ] DSS CD_100kPa: Behaviour=Drained, Consolidation=K0, AbsSigyyinit=100, MaximumShearStrain=10, Steps=100
+[OK ] K0: K0=0.5
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 50.00 kPa (K = 0.500)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate DSS CD_100kPa -> 'OK'
+   tau_max simulado = 1153.846 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (tau = G x gamma_max, G = E/(2(1+nu)) (LE)): 1153.846 kPa
+
+================ CDSS (cisalhamento simples ciclico) ================
+
+-- CDSS (cisalhamento simples ciclico) CD_100kPa --
+[OK ] CDSS CD_100kPa: Behaviour=Drained, Consolidation=K0, AbsSigyyinit=100, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.5, NumberOfCycles=3, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+[OK ] K0: K0=0.5
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 50.00 kPa (K = 0.500)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS CD_100kPa -> 'OK'
+   Ultimo ciclo: G_sec = 11538.5 kPa; amplitude = 0.5000 % / 57.69 kPa; amortecimento = 0.00 %
+   Esperado (G = E/(2(1+nu)) (LE)): 11538.462 kPa
+
+================ Triaxial ciclico ================
+
+-- Triaxial ciclico CD_100kPa --
+[OK ] CycTriaxial CD_100kPa: Behaviour=Drained, Consolidation=K0, CellPressure=100, InitialAxialStressinc=0, TestControlType=Strain, AxialStrainAmplitude=0.5, NumberOfCycles=3, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+[OK ] K0: K0=0.5
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 100.00 kPa (K = 0.500)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CycTriaxial CD_100kPa -> 'OK'
+   Ultimo ciclo: E_sec = 30000.0 kPa; amplitude = 0.5000 % / 150.00 kPa; amortecimento = 0.00 %
+   Esperado (E (LE, drenado)): 30000.000 kPa
+   (sem excesso de poropressao: grafico dss_du_x_gamma.png omitido)
+   (sem excesso de poropressao: grafico cdss_du_x_tempo.png omitido)
+   (sem excesso de poropressao: grafico cyctriaxial_du_x_tempo.png omitido)
+
+11 grafico(s) em C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_LE_D_20261108_124834\graficos
+   dss_tau_x_gamma.png
+   dss_ev_x_gamma.png
+   dss_trajetoria_sigv_tau.png
+   cdss_tau_x_gamma.png
+   cdss_gamma_x_tempo.png
+   cdss_tau_x_tempo.png
+   cdss_trajetoria_sigv_tau.png
+   cyctriaxial_q_x_eps_a.png
+   cyctriaxial_eps_a_x_tempo.png
+   cyctriaxial_q_x_tempo.png
+   cyctriaxial_trajetoria_p_q.png
+
+Saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_LE_D_20261108_124834

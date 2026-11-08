@@ -1,0 +1,61 @@
+PLAXIS SoilTest auto - Mohr-Coulomb / Drained (2026-11-08T12:48:07)
+Material 'MC_D_teste' ja existe: reutilizando.
+[OK ] SoilModel = 2 -> Mohr-Coulomb (2)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+[OK ] cRef (cRef) = 5 -> 'OK'
+[OK ] phi (phi) = 30 -> 'OK'
+[OK ] psi (psi) = 0 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10002
+SoilTest na porta 10002.
+[OK ] SoilModel no SoilTest -> 2
+
+================ CDSS (cisalhamento simples ciclico) ================
+
+-- CDSS (cisalhamento simples ciclico) CD_100kPa --
+[OK ] CDSS CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100, InitialStaticShear=0, TestControlType=Stress, ShearStressAmplitude=20, NumberOfCycles=5, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS CD_100kPa -> 'OK'
+   Ultimo ciclo: G_sec = 11538.5 kPa; amplitude = 0.1733 % / 20.00 kPa; amortecimento = 0.00 %
+
+-- CDSS (cisalhamento simples ciclico) CU_100kPa --
+[OK ] CDSS CU_100kPa: Behaviour=Undrained, Consolidation=Isotropic, AbsSigyyinit=100, InitialStaticShear=0, TestControlType=Stress, ShearStressAmplitude=20, NumberOfCycles=5, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS CU_100kPa -> 'OK'
+   Ultimo ciclo: G_sec = 11538.5 kPa; amplitude = 0.1733 % / 20.00 kPa; amortecimento = 0.00 %
+
+================ Triaxial ciclico ================
+
+-- Triaxial ciclico CD_100kPa --
+[OK ] CycTriaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, CellPressure=100, InitialAxialStressinc=0, TestControlType=Stress, AxialStressAmplitude=50, NumberOfCycles=5, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CycTriaxial CD_100kPa -> 'OK'
+   Ultimo ciclo: E_sec = 30000.0 kPa; amplitude = 0.1667 % / 50.00 kPa; amortecimento = 0.00 %
+
+-- Triaxial ciclico CU_100kPa --
+[OK ] CycTriaxial CU_100kPa: Behaviour=Undrained, Consolidation=Isotropic, CellPressure=100, InitialAxialStressinc=0, TestControlType=Stress, AxialStressAmplitude=50, NumberOfCycles=5, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CycTriaxial CU_100kPa -> 'OK'
+   Ultimo ciclo: E_sec = 34500.0 kPa; amplitude = 0.1449 % / 50.00 kPa; amortecimento = 0.00 %
+   du max = 16.30 kPa; du min = -16.30 kPa
+   (sem excesso de poropressao: grafico cdss_du_x_tempo.png omitido)
+
+9 grafico(s) em C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_MC_D_20261108_124814\graficos
+   cdss_tau_x_gamma.png
+   cdss_gamma_x_tempo.png
+   cdss_tau_x_tempo.png
+   cdss_trajetoria_sigv_tau.png
+   cyctriaxial_q_x_eps_a.png
+   cyctriaxial_eps_a_x_tempo.png
+   cyctriaxial_q_x_tempo.png
+   cyctriaxial_du_x_tempo.png
+   cyctriaxial_trajetoria_p_q.png
+
+Saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_MC_D_20261108_124814
