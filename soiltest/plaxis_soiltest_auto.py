@@ -32,10 +32,10 @@ import getpass
 import datetime
 import traceback
 
-# Versao estavel: so o que ja foi validado no PLAXIS real. Os ensaios ciclicos (CDSS e Triaxial ciclico)
-# ficam restritos a comportamento drenado e controle por deformacao. Ciclicos nao drenados e controle por
-# tensao estao em soiltest/em_desenvolvimento/ (mesmo script com SOMENTE_VALIDADO = False).
-SOMENTE_VALIDADO = True
+# Versao estavel. Ciclicos drenados e nao drenados, com controle por deformacao ou por tensao, foram
+# validados no PLAXIS real em 08/11/2026. Com SOMENTE_VALIDADO = True os ciclicos voltam a ficar restritos a
+# drenado e controle por deformacao.
+SOMENTE_VALIDADO = False
 
 # =========================== CONFIG (valores de TESTE) ===========================
 CONFIG = {
@@ -888,9 +888,9 @@ def laco_metricas(x_frac, y, n_por_ciclo):
 
 def checagem_ciclico(tipo, d, modelo, dren, p, comp, cfg_t):
     n_ciclo = 4 * int(cfg_t["passos_por_quarto"])
-    # O SoilTest faz primeiro 1 quarto de ciclo (0 ate o pico) e depois os ciclos completos, que comecam e
-    # terminam no pico (visto: 2 ciclos x 10 passos = 91 pontos; 3 x 20 = 261). Os ultimos n_ciclo passos
-    # sao, portanto, um ciclo completo.
+    # Os primeiros passos_por_quarto pontos sao uma fase inicial sem carga; depois vem os ciclos completos,
+    # que comecam e terminam em zero (visto: 2 ciclos x 10 passos = 91 pontos; 3 x 20 = 261; 5 x 20 = 421).
+    # Os ultimos n_ciclo passos sao, portanto, um ciclo completo.
     esperado_pontos = (4 * int(cfg_t["ciclos"]) + 1) * int(cfg_t["passos_por_quarto"]) + 1
     n = len(d["tempo"])
     out = {"pontos": n, "pontos_esperados": esperado_pontos}
@@ -1085,7 +1085,7 @@ O PLAXIS usa **compressão negativa**. Nos CSV e nos gráficos deste script vale
 | CDSS | DSS cíclico | distorção (ou tensão cisalhante) alternada, para módulo secante, amortecimento e geração de poropressão |
 | CycTriaxial | triaxial cíclico | carga axial alternada em compressão e extensão |
 
-Nos ensaios cíclicos o SoilTest faz primeiro um quarto de ciclo (do zero ao pico) e depois os ciclos completos, que começam e terminam no pico. Pontos = (4 × ciclos + 1) × passos por quarto + 1.
+Nos ensaios cíclicos os primeiros "passos por quarto" pontos são uma fase inicial, sem carga (deformação e tempo zero); depois vêm os ciclos completos, que começam e terminam em zero. Pontos = (4 × ciclos + 1) × passos por quarto + 1. No triaxial cíclico com controle por tensão, o primeiro meio ciclo é de extensão (q < 0).
 
 ## 3. Nome das curvas e dos arquivos (CD_50kPa, CU_100kPa)
 

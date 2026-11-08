@@ -21,7 +21,7 @@ O PLAXIS usa **compressão negativa**. Nos CSV e nos gráficos deste script vale
 | CDSS | DSS cíclico | distorção (ou tensão cisalhante) alternada, para módulo secante, amortecimento e geração de poropressão |
 | CycTriaxial | triaxial cíclico | carga axial alternada em compressão e extensão |
 
-Nos ensaios cíclicos o SoilTest faz primeiro um quarto de ciclo (do zero ao pico) e depois os ciclos completos, que começam e terminam no pico. Pontos = (4 × ciclos + 1) × passos por quarto + 1.
+Nos ensaios cíclicos os primeiros "passos por quarto" pontos são uma fase inicial, sem carga (deformação e tempo zero); depois vêm os ciclos completos, que começam e terminam em zero. Pontos = (4 × ciclos + 1) × passos por quarto + 1. No triaxial cíclico com controle por tensão, o primeiro meio ciclo é de extensão (q < 0).
 
 ## 3. Nome das curvas e dos arquivos (CD_50kPa, CU_100kPa)
 

@@ -1,4 +1,3 @@
-Versao estavel: CDSS (cisalhamento simples ciclico) limitado a drenado e controle de deformacao (o resto esta em soiltest/em_desenvolvimento/).
 PLAXIS SoilTest auto - Mohr-Coulomb / Drained (<DATA>)
 [OK ] g_i.soilmat() -> <__main__.Mat object at 0x<END>>
 [OK ] Identification -> 'OK'
@@ -18,18 +17,19 @@ ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
 
 ================ CDSS (cisalhamento simples ciclico) ================
 
--- CDSS (cisalhamento simples ciclico) CD_100kPa --
-[OK ] CDSS CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.5, NumberOfCycles=3, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+-- CDSS (cisalhamento simples ciclico) CU_100kPa --
+[OK ] CDSS CU_100kPa: Behaviour=Undrained, Consolidation=Isotropic, AbsSigyyinit=100, InitialStaticShear=0, TestControlType=Stress, ShearStressAmplitude=20, NumberOfCycles=3, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
    Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
 [OK ] validate -> 'The material definition is valid.'
-[OK ] calculate CDSS CD_100kPa -> 'OK'
+[OK ] calculate CDSS CU_100kPa -> 'OK'
    Ultimo ciclo: G_sec = 11538.5 kPa; amplitude = 0.5000 % / 57.69 kPa; amortecimento = 0.50 %
-   (sem excesso de poropressao: grafico cdss_du_x_tempo.png omitido)
+   du max = 52.00 kPa; du min = 0.00 kPa
 
-4 grafico(s) em <DIR>/soiltest_saida/auto_MC_D_<DATA>/graficos
+5 grafico(s) em <DIR>/soiltest_saida/auto_MC_D_<DATA>/graficos
    cdss_tau_x_gamma.png
    cdss_gamma_x_tempo.png
    cdss_tau_x_tempo.png
+   cdss_du_x_tempo.png
    cdss_trajetoria_sigv_tau.png
 
 Saida: <DIR>/soiltest_saida/auto_MC_D_<DATA>
