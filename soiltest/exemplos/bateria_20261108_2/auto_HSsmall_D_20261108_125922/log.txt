@@ -1,0 +1,57 @@
+PLAXIS SoilTest auto - HS small / Drained (2026-11-08T12:59:10)
+[OK ] g_i.soilmat() -> <SoilMat {FDCF7831-3D24-4498-B19E-0405BE50F62D}>
+[OK ] Identification -> 'SoilMat_1 renamed to HSsmall_D_teste'
+[OK ] SoilModel = 4 -> HS small (4)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] E50ref (E50Ref) = 40000 -> 'OK'
+[OK ] Eoedref (EOedRef) = 40000 -> 'OK'
+[OK ] Eurref (EURRef) = 120000 -> 'OK'
+[OK ] m (PowerM) = 0.5 -> 'OK'
+[OK ] nuur (nuUR) = 0.2 -> 'OK'
+[OK ] pref (pRef) = 100 -> 'OK'
+[OK ] cref (cRef) = 1 -> 'OK'
+[OK ] phi (phi) = 35 -> 'OK'
+[OK ] psi (psi) = 5 -> 'OK'
+[OK ] G0ref (G0Ref) = 120000 -> 'OK'
+[OK ] gamma07 (gamma07) = 0.0002 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10006
+SoilTest na porta 10006.
+[OK ] SoilModel no SoilTest -> 4
+
+================ CDSS (cisalhamento simples ciclico) ================
+
+-- CDSS (cisalhamento simples ciclico) CU_100kPa --
+[OK ] CDSS CU_100kPa: Behaviour=Undrained, Consolidation=Isotropic, AbsSigyyinit=100, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.2, NumberOfCycles=10, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS CU_100kPa -> 'OK'
+   Fim de cada ciclo: du = [-0.00, 13.84, 14.89, 10.66, 4.31, -2.90, -10.17, -17.11, -23.51, -29.22, -34.10] kPa; sigma'v = [100.00, 86.16, 85.11, 89.34, 95.69, 102.90, 110.17, 117.11, 123.51, 129.22, 134.10] kPa
+   Ultimo ciclo: G_sec = 38198.3 kPa; amplitude = 0.2000 % / 76.40 kPa; amortecimento = 16.27 %
+   du max = 15.18 kPa; du min = -34.10 kPa
+
+================ Triaxial ciclico ================
+
+-- Triaxial ciclico CU_100kPa --
+[OK ] CycTriaxial CU_100kPa: Behaviour=Undrained, Consolidation=Isotropic, CellPressure=100, InitialAxialStressinc=0, TestControlType=Strain, AxialStrainAmplitude=0.2, NumberOfCycles=10, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CycTriaxial CU_100kPa -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -8.65, -19.40, -36.50, -55.86, -76.26, -90.54, -104.50, -118.13, -131.13, -143.50] kPa; p' = [100.00, 83.32, 90.61, 103.25, 117.74, 133.20, 147.56, 162.03, 176.42, 190.48, 204.20] kPa
+   Ultimo ciclo: E_sec = 120725.4 kPa; amplitude = 0.2000 % / 241.45 kPa; amortecimento = 25.95 %
+   du max = 52.04 kPa; du min = -159.19 kPa
+
+10 grafico(s) em C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_HSsmall_D_20261108_125922\graficos
+   cdss_tau_x_gamma.png
+   cdss_gamma_x_tempo.png
+   cdss_tau_x_tempo.png
+   cdss_du_x_tempo.png
+   cdss_trajetoria_sigv_tau.png
+   cyctriaxial_q_x_eps_a.png
+   cyctriaxial_eps_a_x_tempo.png
+   cyctriaxial_q_x_tempo.png
+   cyctriaxial_du_x_tempo.png
+   cyctriaxial_trajetoria_p_q.png
+
+Saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_HSsmall_D_20261108_125922

@@ -1,0 +1,43 @@
+PLAXIS SoilTest auto - Modified Cam-Clay / Drained (2026-11-08T13:01:22)
+Pre-adensamento: pressao = 100.
+Material 'MCC_D_teste' ja existe: reutilizando.
+[OK ] SoilModel = 8 -> Modified Cam-Clay (8)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] lambda (lambda) = 0.1 -> 'OK'
+[OK ] kappa (kappa) = 0.02 -> 'OK'
+[OK ] M (M) = 1.2 -> 'OK'
+[OK ] nuur (nuUR) = 0.2 -> 'OK'
+[OK ] eInit (eInit) = 1.0 -> 'OK'
+[OK ] PhiInter (PhiInter) = 25 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10012
+SoilTest na porta 10012.
+[OK ] SoilModel no SoilTest -> 8
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+[OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.06 kPa; eps_v max = 13.8424 %
+
+================ CRS ================
+-- CRS --
+[OK ] CRS fases -> None
+[OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CRS -> 'OK'
+   101 pontos; sigma_v max = 221.84 kPa; eps_v max = 10.0000 %
+[OK ] restaurar CRS.PreconsolidationPressure = 0 -> 'OK'
+[OK ] restaurar Oedometer.PreconsolidationPressure = 0 -> 'OK'
+   (sem excesso de poropressao: grafico crs_du_x_tempo.png omitido)
+
+4 grafico(s) em C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_MCC_D_20261108_130136\graficos
+   oedometer_sigv_x_epsv.png
+   oedometer_epsv_x_logsigv.png
+   crs_sigv_x_epsv.png
+   crs_epsv_x_logsigv.png
+
+Saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_MCC_D_20261108_130136

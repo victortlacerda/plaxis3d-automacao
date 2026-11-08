@@ -1,0 +1,41 @@
+PLAXIS SoilTest auto - Hardening Soil / Drained (2026-11-08T13:00:19)
+Material 'HS_D_teste' ja existe: reutilizando.
+[OK ] SoilModel = 3 -> Hardening Soil (3)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] E50ref (E50Ref) = 40000 -> 'OK'
+[OK ] Eoedref (EOedRef) = 40000 -> 'OK'
+[OK ] Eurref (EURRef) = 120000 -> 'OK'
+[OK ] m (PowerM) = 0.5 -> 'OK'
+[OK ] nuur (nuUR) = 0.2 -> 'OK'
+[OK ] pref (pRef) = 100 -> 'OK'
+[OK ] cref (cRef) = 1 -> 'OK'
+[OK ] phi (phi) = 35 -> 'OK'
+[OK ] psi (psi) = 5 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10009
+SoilTest na porta 10009.
+[OK ] SoilModel no SoilTest -> 3
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.06 kPa; eps_v max = 0.9304 %
+
+================ CRS ================
+-- CRS --
+[OK ] CRS fases -> None
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CRS -> 'OK'
+   101 pontos; sigma_v max = 38377.13 kPa; eps_v max = 10.0000 %
+   (sem excesso de poropressao: grafico crs_du_x_tempo.png omitido)
+
+4 grafico(s) em C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_HS_D_20261108_130031\graficos
+   oedometer_sigv_x_epsv.png
+   oedometer_epsv_x_logsigv.png
+   crs_sigv_x_epsv.png
+   crs_epsv_x_logsigv.png
+
+Saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_HS_D_20261108_130031

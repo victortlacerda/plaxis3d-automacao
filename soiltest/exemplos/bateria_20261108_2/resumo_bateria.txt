@@ -1,0 +1,73 @@
+Bateria SoilTest 2 - 2026-11-08T12:59:10
+
+== 5_HSsmall_ciclico_nao_drenado (HSsmall / D) rc=0
+   verificar: Delta u (ou queda de sigma'v / p') acumulando de ciclo a ciclo
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_HSsmall_D_20261108_125922
+   [OK ] g_i.soilmat() -> <SoilMat {FDCF7831-3D24-4498-B19E-0405BE50F62D}>
+   [OK ] E50ref (E50Ref) = 40000 -> 'OK'
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+   Fim de cada ciclo: du = [-0.00, 13.84, 14.89, 10.66, 4.31, -2.90, -10.17, -17.11, -23.51, -29.22, -34.10] kPa; sigma'v = [100.00, 86.16, 85.11, 89.34, 95.69, 102.90, 110.17, 117.11, 123.51, 129.22, 134.10] kPa
+   Ultimo ciclo: G_sec = 38198.3 kPa; amplitude = 0.2000 % / 76.40 kPa; amortecimento = 16.27 %
+   du max = 15.18 kPa; du min = -34.10 kPa
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+   Fim de cada ciclo: du = [-0.00, -8.65, -19.40, -36.50, -55.86, -76.26, -90.54, -104.50, -118.13, -131.13, -143.50] kPa; p' = [100.00, 83.32, 90.61, 103.25, 117.74, 133.20, 147.56, 162.03, 176.42, 190.48, 204.20] kPa
+   Ultimo ciclo: E_sec = 120725.4 kPa; amplitude = 0.2000 % / 241.45 kPa; amortecimento = 25.95 %
+   du max = 52.04 kPa; du min = -159.19 kPa
+
+== 6_MCC_ciclico_nao_drenado (MCC / D) rc=0
+   verificar: Delta u acumulando; MCC normalmente adensado deve contrair
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_MCC_D_20261108_125946
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+   Fim de cada ciclo: du = [-0.00, 3.78, 3.78, 3.78, 3.78, 3.78, 3.78, 3.78, 3.78, 3.78, 3.78] kPa; sigma'v = [100.00, 96.22, 96.22, 96.22, 96.22, 96.22, 96.22, 96.22, 96.22, 96.22, 96.22] kPa
+   Ultimo ciclo: G_sec = 7212.5 kPa; amplitude = 0.2000 % / 14.43 kPa; amortecimento = 0.00 %
+   du max = 3.78 kPa; du min = -0.00 kPa
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+   Fim de cada ciclo: du = [-0.00, 11.11, 11.11, 11.11, 11.11, 11.11, 11.10, 11.10, 11.10, 11.10, 11.09] kPa; p' = [100.00, 89.36, 89.35, 89.35, 89.35, 89.35, 89.35, 89.35, 89.35, 89.35, 89.35] kPa
+   Ultimo ciclo: E_sec = 20035.3 kPa; amplitude = 0.2000 % / 40.07 kPa; amortecimento = 0.00 %
+   du max = 24.31 kPa; du min = -4.80 kPa
+
+== 7_SoftSoil_ciclico_nao_drenado (SS / D) rc=0
+   verificar: Delta u acumulando
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_SS_D_20261108_130008
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+   Fim de cada ciclo: du = [-0.00, 1.94, 1.94, 1.94, 1.94, 1.94, 1.94, 1.94, 1.94, 1.94, 1.94] kPa; sigma'v = [100.00, 98.06, 98.06, 98.06, 98.06, 98.06, 98.06, 98.06, 98.06, 98.06, 98.06] kPa
+   Ultimo ciclo: G_sec = 4568.6 kPa; amplitude = 0.2000 % / 9.14 kPa; amortecimento = 0.00 %
+   du max = 1.94 kPa; du min = -0.00 kPa
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+   Fim de cada ciclo: du = [-0.00, 5.46, 5.83, 6.38, 6.93, 7.48, 8.03, 8.58, 9.12, 9.66, 10.20] kPa; p' = [100.00, 95.74, 95.74, 95.50, 95.25, 95.00, 94.75, 94.49, 94.23, 93.97, 93.71] kPa
+   Ultimo ciclo: E_sec = 13034.3 kPa; amplitude = 0.2000 % / 26.07 kPa; amortecimento = 0.18 %
+   du max = 18.65 kPa; du min = -3.59 kPa
+
+== 8a_HS_edometro_NC (HS / D) rc=0
+   verificar: Referencia normalmente adensada
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_HS_D_20261108_130031
+   [OK ] E50ref (E50Ref) = 40000 -> 'OK'
+   61 pontos; sigma_v max = 400.06 kPa; eps_v max = 0.9304 %
+   101 pontos; sigma_v max = 38377.13 kPa; eps_v max = 10.0000 %
+
+== 8b_HS_edometro_pc100 (HS / D) rc=0
+   verificar: Menos deformacao ate ~100 kPa (recompressao com Eur) e depois curva virgem
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_HS_D_20261108_130054
+   [OK ] E50ref (E50Ref) = 40000 -> 'OK'
+   [OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+   61 pontos; sigma_v max = 400.05 kPa; eps_v max = 0.7433 %
+   [OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+   101 pontos; sigma_v max = 39930.61 kPa; eps_v max = 10.0000 %
+   [OK ] restaurar CRS.PreconsolidationPressure = 0 -> 'OK'
+   [OK ] restaurar Oedometer.PreconsolidationPressure = 0 -> 'OK'
+
+== 9a_MCC_edometro_NC (MCC / D) rc=0
+   verificar: Referencia normalmente adensada
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_MCC_D_20261108_130115
+   61 pontos; sigma_v max = 400.06 kPa; eps_v max = 36.4263 %
+   101 pontos; sigma_v max = 6.42 kPa; eps_v max = 10.0000 %
+
+== 9b_MCC_edometro_pc100 (MCC / D) rc=0
+   verificar: Inclinacao kappa ate ~100 kPa e lambda depois
+   saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\em_desenvolvimento\soiltest_saida\auto_MCC_D_20261108_130136
+   [OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+   61 pontos; sigma_v max = 400.06 kPa; eps_v max = 13.8424 %
+   [OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+   101 pontos; sigma_v max = 221.84 kPa; eps_v max = 10.0000 %
+   [OK ] restaurar CRS.PreconsolidationPressure = 0 -> 'OK'
+   [OK ] restaurar Oedometer.PreconsolidationPressure = 0 -> 'OK'
