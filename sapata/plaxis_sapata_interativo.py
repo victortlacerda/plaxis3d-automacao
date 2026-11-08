@@ -1048,6 +1048,7 @@ def construir(P):
         carga=carga_json,
         sapata=dict(cx=x0, cy=y0, cz=z0, L=f["L"], W=f["W"], B=f["B"],
                     modelo=f.get("modelo", "placa"), gamma=f["gamma"], d=f["d"]),
+        entrada=P,      # todas as respostas (usado por sapata_relatorio.py e sapata_sensibilidade.py)
     )
     with open(ARQUIVO_JSON, "w", encoding="utf-8") as fh:
         json.dump(dados, fh, indent=2, ensure_ascii=False)
