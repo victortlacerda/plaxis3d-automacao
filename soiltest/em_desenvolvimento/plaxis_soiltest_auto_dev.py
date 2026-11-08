@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-plaxis_soiltest_auto_dev.py  -  VERSAO EM DESENVOLVIMENTO (ciclicos nao drenados e controle por
-tensao ainda sem validacao no PLAXIS real; use a versao estavel soiltest/plaxis_soiltest_auto.py para trabalho).
+plaxis_soiltest_auto_dev.py  -  COPIA DE TRABALHO da versao estavel (soiltest/plaxis_soiltest_auto.py), usada pela
+bateria e pelas ferramentas em desenvolvimento. Para trabalho, use a versao estavel.
 
 Fluxo completo: modelo + parametros -> material no PLAXIS 3D Input -> SoilTest -> ensaios -> saida.
 
@@ -35,10 +35,10 @@ import getpass
 import datetime
 import traceback
 
-# Versao estavel: so o que ja foi validado no PLAXIS real. Os ensaios ciclicos (CDSS e Triaxial ciclico)
-# ficam restritos a comportamento drenado e controle por deformacao. Ciclicos nao drenados e controle por
-# tensao estao em soiltest/em_desenvolvimento/ (mesmo script com SOMENTE_VALIDADO = False).
-SOMENTE_VALIDADO = False   # VERSAO EM DESENVOLVIMENTO: libera ciclico nao drenado e controle por tensao
+# Versao estavel. Ciclicos drenados e nao drenados, com controle por deformacao ou por tensao, foram
+# validados no PLAXIS real em 08/11/2026. Com SOMENTE_VALIDADO = True os ciclicos voltam a ficar restritos a
+# drenado e controle por deformacao.
+SOMENTE_VALIDADO = False
 
 # =========================== CONFIG (valores de TESTE) ===========================
 CONFIG = {
@@ -48,6 +48,7 @@ CONFIG = {
     "valores": {},                     # sobrescreve valores de teste quando interativo=False. Ex.: {"phi": 33, "cref": 2}
     "porta_input": 10000,
     "espera_soiltest_s": 90,
+    "fechar_soiltest_no_fim": False,   # True fecha a janela do SoilTest ao terminar (a bateria usa True)
 
     # Consolidacao inicial (Triaxial, DSS, CDSS, Triaxial ciclico). K0: None = automatico
     # (K0nc se informado; senao Jaky 1 - sen(phi'); MCC: a partir de M; sem phi: nu/(1-nu)).
@@ -1199,50 +1200,125 @@ def gravar_glossario(pasta):
         log("Glossario nao gravado: {}".format(e))
 
 
-# ------------------------------------------------------------------ principal
-def main():
-    cfg = CONFIG
-    if cfg["interativo"]:
-        cfg = perguntar(cfg)
-    modelo, dren = cfg["modelo"], cfg["drenagem"]
-    if modelo not in MODELOS:
-        raise ValueError("modelo deve ser um de {}".format(list(MODELOS)))
-    if dren not in MODELOS[modelo]["dren"]:
-        raise ValueError("drenagem {} invalida para {}; use uma de {}".format(dren, modelo, MODELOS[modelo]["dren"]))
-    info = MODELOS[modelo]
-    valores = {c: cfg["valores"].get(c, v) for c, _a, _r, v in parametros(modelo, dren)}
-    dil = cfg["dilatancy_cutoff"] if modelo in ("HS", "HSsmall") else None
-    if dren == "NP":
-        for t in COM_PRESSOES:
-            cfg[CHAVE_CFG[t]]["comportamentos"] = ["Drained"]
-    if SOMENTE_VALIDADO:
-        for t in ("CDSS", "CycTriaxial"):
-            c = cfg[CHAVE_CFG[t]]
-            if c.get("rodar") and (c["comportamentos"] != ["Drained"] or c["controle"] != "Strain"):
-                log("Versao estavel: {} limitado a drenado e controle de deformacao (o resto esta em "
-                    "soiltest/em_desenvolvimento/).".format(ENSAIOS_NOMES[t]))
-                c["comportamentos"], c["controle"] = ["Drained"], "Strain"
-                if c["amplitude"] >= 5:
-                    c["amplitude"] = 0.5
-    if cfg["oedometer"]["rodar"] is None:
-        cfg["oedometer"]["rodar"] = info["oed"]
-    titulo = "{} / {}".format(info["nome"], DRENAGENS[dren]["rotulo"])
-    log("PLAXIS SoilTest auto - {} ({})".format(titulo, datetime.datetime.now().isoformat(timespec="seconds")))
+# ------------------------------------------------------------------ relatorio tecnico (HTML unico, imprimivel em PDF)
+def _esc(t):
+    return (str(t).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
 
-    p = {k: float(v) for k, v in valores.items() if v is not None}
-    cons = dict(cfg["consolidacao"])
-    k0 = None
-    if cons["tipo"] == "K0":
-        k0a, origem = k0_automatico(modelo, p)
-        k0 = float(cons["K0"]) if cons.get("K0") is not None else k0a
-        log("Consolidacao K0 com K0 = {} ({}).".format(k0, "informado" if cons.get("K0") is not None else origem))
-    pre = dict(cfg["preadensamento"])
-    if pre["modo"] != "nenhum" and not info["precons"]:
-        log("Pre-adensamento ignorado: no {} o SoilTest nao permite editar PreconsolidationPressure.".format(info["nome"]))
-        pre["modo"] = "nenhum"
-    if pre["modo"] != "nenhum":
-        log("Pre-adensamento: {} = {}.".format(pre["modo"], pre["valor"]))
 
+def _num(v, casas=3):
+    try:
+        v = float(v)
+    except Exception:
+        return _esc(v)
+    if v != 0 and (abs(v) >= 1e5 or abs(v) < 1e-3):
+        return "{:.3e}".format(v).replace(".", ",")
+    return "{:.{}f}".format(v, casas).replace(".", ",")
+
+
+def html_tabela(cab, linhas):
+    h = "<table><thead><tr>" + "".join("<th>{}</th>".format(_esc(c)) for c in cab) + "</tr></thead><tbody>"
+    for l in linhas:
+        h += "<tr>" + "".join("<td>{}</td>".format(c if str(c).startswith("<") else _esc(c)) for c in l) + "</tr>"
+    return h + "</tbody></table>"
+
+
+def html_imagem(caminho, legenda=""):
+    import base64
+    try:
+        with open(caminho, "rb") as f:
+            b64 = base64.b64encode(f.read()).decode("ascii")
+    except Exception:
+        return ""
+    return '<figure><img src="data:image/png;base64,{}"><figcaption>{}</figcaption></figure>'.format(b64, _esc(legenda))
+
+
+def relatorio_html(caminho, titulo, subtitulo, secoes):
+    """secoes: lista de (titulo, html). Grava um HTML autocontido (imagens embutidas)."""
+    css = """body{font-family:Segoe UI,Arial,sans-serif;color:#1d2433;max-width:1000px;margin:24px auto;padding:0 18px;line-height:1.45}
+h1{font-size:24px;margin:0 0 4px}h2{font-size:18px;border-bottom:2px solid #1d5fa8;padding-bottom:4px;margin-top:28px}
+.sub{color:#5b6475;margin-bottom:18px}table{border-collapse:collapse;width:100%;margin:8px 0 14px;font-size:13px}
+th,td{border:1px solid #cfd6e3;padding:5px 8px;text-align:left}th{background:#eef3fb}
+.figs{display:flex;flex-wrap:wrap;gap:12px}figure{margin:0 0 6px;break-inside:avoid;width:calc(50% - 6px)}figure img{width:100%;border:1px solid #e0e5ee}
+figcaption{font-size:12px;color:#5b6475}.ok{color:#137a3a;font-weight:600}.alerta{color:#a15c00;font-weight:600}
+.erro{color:#b3261e;font-weight:600}.nota{font-size:12.5px;color:#4a5263}
+@media print{body{margin:0;max-width:none}h2{break-after:avoid}}"""
+    corpo = "".join("<h2>{}</h2>{}".format(_esc(t), h) for t, h in secoes)
+    doc = ('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>{}</title><style>{}</style></head>'
+           '<body><h1>{}</h1><div class="sub">{}</div>{}'
+           '<p class="nota">Gerado automaticamente por plaxis_soiltest_auto.py em {}. Para PDF: abra no navegador e use '
+           'Imprimir &gt; Salvar como PDF.</p></body></html>').format(
+        _esc(titulo), css, _esc(titulo), _esc(subtitulo), corpo, datetime.datetime.now().strftime("%d/%m/%Y %H:%M"))
+    with open(caminho, "w", encoding="utf-8") as f:
+        f.write(doc)
+    return caminho
+
+
+def classe_diferenca(simulado, esperado, tol=2.0):
+    try:
+        d = 100.0 * (float(simulado) - float(esperado)) / float(esperado)
+    except Exception:
+        return "", ""
+    cls = "ok" if abs(d) <= tol else "alerta"
+    return '<span class="{}">{}</span>'.format(cls, _num(d, 2) + " %"), d
+
+
+def relatorio_auto(pasta, titulo, resumo, gerados):
+    """Relatorio do plaxis_soiltest_auto: parametros, estado inicial, conferencias e graficos."""
+    try:
+        modelo, dren = resumo["modelo"], resumo["drenagem"]
+        sec = []
+        rot = {c: r for c, _a, r, _v in parametros(modelo, dren)}
+        lin = [(rot.get(k, k), _num(v, 4) if v is not None else "padrão do PLAXIS") for k, v in resumo["parametros"].items()]
+        sec.append(("Parâmetros do material", html_tabela(["Parâmetro", "Valor"], lin)))
+        cons, pre = resumo.get("consolidacao", {}), resumo.get("preadensamento", {})
+        est = [("Consolidação", cons.get("tipo")), ("K0 usado", _num(cons["K0_usado"], 3) if cons.get("K0_usado") else "-"),
+               ("Pré-adensamento", "{} {}".format(pre.get("modo"), pre.get("valor") if pre.get("modo") != "nenhum" else ""))]
+        dil = resumo.get("dilatancy_cutoff") or {}
+        if dil.get("ligar"):
+            est.append(("Corte de dilatância", "eInit = {}, eMax = {}".format(dil.get("eInit"), dil.get("eMax"))))
+        sec.append(("Estado inicial", html_tabela(["Item", "Valor"], est)))
+        linhas = []
+        for chave, nome_ens in (("triaxial", "Triaxial"), ("dss", "DSS"), ("cdss", "CDSS"), ("triaxial_ciclico", "Triaxial ciclico")):
+            for nome, chk in (resumo.get(chave) or {}).items():
+                if chave in ("cdss", "triaxial_ciclico"):
+                    m = chk.get("ultimo_ciclo") or {}
+                    sim = m.get("modulo_secante_kPa")
+                    grand = "{} (amort. {})".format(chk.get("rotulo_modulo", "modulo"), _num(m.get("amortecimento_pct"), 2) + " %"
+                                                     if m.get("amortecimento_pct") is not None else "-")
+                else:
+                    sim = chk.get("q_max_kPa", chk.get("tau_max_kPa"))
+                    grand = "q_max" if "q_max_kPa" in chk else "tau_max"
+                esp = chk.get("esperado") or {}
+                dif = classe_diferenca(sim, esp.get("kPa"))[0] if esp else ""
+                linhas.append((nome_ens, nome, grand, _num(sim, 2), esp.get("descricao", "-"), _num(esp["kPa"], 2) if esp else "-", dif))
+        for chave, nome_ens in (("oedometer", "Edômetro"), ("crs", "CRS")):
+            chk = resumo.get(chave)
+            if chk:
+                esp = chk.get("eps_v_esperado_pct")
+                linhas.append((nome_ens, "-", "eps_v no pico (%)", _num(chk.get("eps_v_no_pico_pct", chk.get("eps_v_max_pct")), 4),
+                               "sigma_v / E_oed" if esp is not None else "-", _num(esp, 4) if esp is not None else "-",
+                               classe_diferenca(chk.get("eps_v_no_pico_pct"), esp)[0] if esp is not None else ""))
+        if linhas:
+            sec.append(("Resultados e conferência com a teoria",
+                        html_tabela(["Ensaio", "Curva", "Grandeza", "Simulado", "Solução teórica", "Teórico", "Diferença"], linhas)
+                        + '<p class="nota">Tensões e módulos em kPa; deformações em %. Diferença até 2 % em verde. Sem solução teórica, a linha só registra o '
+                          'valor simulado. CD = drenado, CU = não drenado; o número é a pressão de partida (kPa).</p>'))
+        figs = "".join(html_imagem(c, os.path.splitext(os.path.basename(c))[0]) for c in gerados)
+        if figs:
+            sec.append(("Gráficos", '<div class="figs">' + figs + "</div>"))
+        sec.append(("Convenções", '<p class="nota">Compressão positiva (o PLAXIS usa compressão negativa). ε_a: deformação '
+                    "axial; ε_v: deformação volumétrica (contração +); q = σ'a − σ'r; p' = tensão efetiva média; "
+                    "Δu = excesso de poropressão (acréscimo +). Detalhes em glossario.md.</p>"))
+        return relatorio_html(os.path.join(pasta, "relatorio.html"), "Relatório SoilTest: " + titulo,
+                              "Modelo {} | drenagem {} | pasta {}".format(MODELOS[modelo]["nome"], dren, os.path.basename(pasta)), sec)
+    except Exception as e:
+        log("Relatorio nao gerado: {}".format(e))
+        return None
+
+
+# ------------------------------------------------------------------ sessao (Input + SoilTest) e execucao dos ensaios
+def obter_input(cfg):
+    """Servidor do PLAXIS 3D Input: o g_i injetado pelo executor ou uma conexao nova."""
     if "g_i" in globals() and "s_i" in globals():
         gi = globals()["g_i"]
     else:
@@ -1250,45 +1326,48 @@ def main():
         gi = new_server("localhost", cfg["porta_input"], password=pedir_senha("Senha do servidor Input: "))[1]
     if hasattr(gi, "Triaxial"):
         log("Conectado ao SoilTest em vez do Input. Use o servidor do PLAXIS 3D Input (porta {}).".format(cfg["porta_input"]))
-        return 1
+        return None
+    return gi
 
-    ident = "{}_{}_teste".format(modelo, dren)
-    mat = criar_material(gi, ident, modelo, dren, valores, dil)
-    if mat is None:
-        log("Material nao criado. Ha projeto aberto no Input?")
-        return 1
 
+def abrir_soiltest(gi, mat, espera, porta_input, modelo=None):
+    """Abre uma janela do SoilTest com o material e conecta nela. Devolve (g, porta) ou (None, None)."""
     log("\n== Abrindo o SoilTest ==")
     ok, porta = tentar("g_i.soiltest(material)", lambda: gi.soiltest(mat))
     if not ok:
         log("O SoilTest recusou o material. A mensagem acima diz o que falta (ex.: PhiInter/CInter no MCC, "
             "lambda* e kappa* no Soft Soil).")
-        return 1
+        return None, None
     senha = pedir_senha("Senha do servidor do SoilTest: ")
     try:
         porta = int(valor(porta))
     except Exception:
         log("g_i.soiltest nao devolveu a porta; procurando entre 10000 e 10030...")
-        porta = descobrir_porta(senha, cfg["espera_soiltest_s"], cfg["porta_input"])
+        porta = descobrir_porta(senha, espera, porta_input)
         if porta is None:
             log("SoilTest nao encontrado.")
-            return 1
+            return None, None
     log("SoilTest na porta {}.".format(porta))
-    g = conectar_soiltest(porta, senha, cfg["espera_soiltest_s"])
-    ok, sm = tentar("SoilModel no SoilTest", lambda: valor(g.Material.SoilModel))
-    if ok and int(sm) != int(info["numero"]):
-        log("ATENCAO: o SoilTest abriu o modelo {} (esperado {}).".format(sm, info["numero"]))
-    estado_corte = propagar_corte(g, dil) if dil and dil.get("ligar") else None
+    g = conectar_soiltest(porta, senha, espera)
+    if modelo:
+        ok, sm = tentar("SoilModel no SoilTest", lambda: valor(g.Material.SoilModel))
+        if ok and int(sm) != int(MODELOS[modelo]["numero"]):
+            log("ATENCAO: o SoilTest abriu o modelo {} (esperado {}).".format(sm, MODELOS[modelo]["numero"]))
+    return g, porta
 
-    pasta = os.path.join(AQUI, "soiltest_saida", "auto_{}_{}_{}".format(modelo, dren, datetime.datetime.now().strftime("%Y%m%d_%H%M%S")))
-    os.makedirs(pasta, exist_ok=True)
-    resumo = {"modelo": modelo, "drenagem": dren, "parametros": valores, "porta_soiltest": porta,
-              "consolidacao": dict(cons, K0_usado=k0), "preadensamento": pre,
-              "dilatancy_cutoff": dict(dil or {}, SoilTest=estado_corte)}
-    ctx = {"modelo": modelo, "dren": dren, "consolidacao": cons, "k0": k0, "preadensamento": pre, "pc_usados": set(),
-           "pc_fases_kPa": float(cfg.get("sigma_p_padrao_fases_kPa") or 0)}
+
+def fechar_soiltest(g):
+    """Fecha a janela do SoilTest (comando close da API). A conexao cai junto, entao o erro de retorno e esperado."""
+    try:
+        g.close()
+    except Exception:
+        pass
+    log("SoilTest fechado.")
+
+
+def executar_ensaios(g, cfg, modelo, dren, p, ctx, pasta, resumo):
+    """Roda os ensaios com "rodar" ligado no cfg, grava os CSV e preenche o resumo. Devolve {tipo: {curva: dados}}."""
     todas = {}
-
     for tipo in ORDEM_ENSAIOS:
         cfg_t = cfg[CHAVE_CFG[tipo]]
         if not cfg_t.get("rodar"):
@@ -1348,10 +1427,85 @@ def main():
 
     if ctx["pc_usados"]:
         restaurar_preadensamento(g, ctx["pc_usados"])
+        ctx["pc_usados"] = set()
+    return todas
+
+
+# ------------------------------------------------------------------ principal
+def main():
+    cfg = CONFIG
+    if cfg["interativo"]:
+        cfg = perguntar(cfg)
+    modelo, dren = cfg["modelo"], cfg["drenagem"]
+    if modelo not in MODELOS:
+        raise ValueError("modelo deve ser um de {}".format(list(MODELOS)))
+    if dren not in MODELOS[modelo]["dren"]:
+        raise ValueError("drenagem {} invalida para {}; use uma de {}".format(dren, modelo, MODELOS[modelo]["dren"]))
+    info = MODELOS[modelo]
+    valores = {c: cfg["valores"].get(c, v) for c, _a, _r, v in parametros(modelo, dren)}
+    dil = cfg["dilatancy_cutoff"] if modelo in ("HS", "HSsmall") else None
+    if dren == "NP":
+        for t in COM_PRESSOES:
+            cfg[CHAVE_CFG[t]]["comportamentos"] = ["Drained"]
+    if SOMENTE_VALIDADO:
+        for t in ("CDSS", "CycTriaxial"):
+            c = cfg[CHAVE_CFG[t]]
+            if c.get("rodar") and (c["comportamentos"] != ["Drained"] or c["controle"] != "Strain"):
+                log("Versao estavel: {} limitado a drenado e controle de deformacao (o resto esta em "
+                    "soiltest/em_desenvolvimento/).".format(ENSAIOS_NOMES[t]))
+                c["comportamentos"], c["controle"] = ["Drained"], "Strain"
+                if c["amplitude"] >= 5:
+                    c["amplitude"] = 0.5
+    if cfg["oedometer"]["rodar"] is None:
+        cfg["oedometer"]["rodar"] = info["oed"]
+    titulo = "{} / {}".format(info["nome"], DRENAGENS[dren]["rotulo"])
+    log("PLAXIS SoilTest auto - {} ({})".format(titulo, datetime.datetime.now().isoformat(timespec="seconds")))
+
+    p = {k: float(v) for k, v in valores.items() if v is not None}
+    cons = dict(cfg["consolidacao"])
+    k0 = None
+    if cons["tipo"] == "K0":
+        k0a, origem = k0_automatico(modelo, p)
+        k0 = float(cons["K0"]) if cons.get("K0") is not None else k0a
+        log("Consolidacao K0 com K0 = {} ({}).".format(k0, "informado" if cons.get("K0") is not None else origem))
+    pre = dict(cfg["preadensamento"])
+    if pre["modo"] != "nenhum" and not info["precons"]:
+        log("Pre-adensamento ignorado: no {} o SoilTest nao permite editar PreconsolidationPressure.".format(info["nome"]))
+        pre["modo"] = "nenhum"
+    if pre["modo"] != "nenhum":
+        log("Pre-adensamento: {} = {}.".format(pre["modo"], pre["valor"]))
+
+    gi = obter_input(cfg)
+    if gi is None:
+        return 1
+
+    ident = "{}_{}_teste".format(modelo, dren)
+    mat = criar_material(gi, ident, modelo, dren, valores, dil)
+    if mat is None:
+        log("Material nao criado. Ha projeto aberto no Input?")
+        return 1
+    g, porta = abrir_soiltest(gi, mat, cfg["espera_soiltest_s"], cfg["porta_input"], modelo)
+    if g is None:
+        return 1
+    estado_corte = propagar_corte(g, dil) if dil and dil.get("ligar") else None
+
+    pasta = os.path.join(AQUI, "soiltest_saida", "auto_{}_{}_{}".format(modelo, dren, datetime.datetime.now().strftime("%Y%m%d_%H%M%S")))
+    os.makedirs(pasta, exist_ok=True)
+    resumo = {"modelo": modelo, "drenagem": dren, "parametros": valores, "porta_soiltest": porta,
+              "consolidacao": dict(cons, K0_usado=k0), "preadensamento": pre,
+              "dilatancy_cutoff": dict(dil or {}, SoilTest=estado_corte)}
+    ctx = {"modelo": modelo, "dren": dren, "consolidacao": cons, "k0": k0, "preadensamento": pre, "pc_usados": set(),
+           "pc_fases_kPa": float(cfg.get("sigma_p_padrao_fases_kPa") or 0)}
+    todas = executar_ensaios(g, cfg, modelo, dren, p, ctx, pasta, resumo)
 
     gerados = graficos(pasta, titulo, todas)
     gravar_glossario(pasta)
     resumo["graficos"] = [os.path.relpath(c, pasta) for c in gerados]
+    rel = relatorio_auto(pasta, titulo, resumo, gerados)
+    if rel:
+        log("Relatorio: {}".format(rel))
+    if cfg.get("fechar_soiltest_no_fim"):
+        fechar_soiltest(g)
     with open(os.path.join(pasta, "resumo.json"), "w", encoding="utf-8") as f:
         json.dump(resumo, f, indent=2, ensure_ascii=False, default=str)
     log("\n{} grafico(s) em {}".format(len(gerados), os.path.join(pasta, "graficos")))

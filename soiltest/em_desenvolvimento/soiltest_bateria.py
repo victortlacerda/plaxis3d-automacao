@@ -120,6 +120,7 @@ def main():
             exec(codigo, ns, ns)
             cfg = ns["CONFIG"]
             cfg["interativo"] = False
+            cfg["fechar_soiltest_no_fim"] = True
             cfg["modelo"], cfg["drenagem"] = modelo, dren
             mesclar(cfg, ajustes)
             ns["_linhas"].clear()
