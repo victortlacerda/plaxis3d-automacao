@@ -69,6 +69,10 @@ def principal():
     print("COMPARAÇÃO COM MÉTODOS ANALÍTICOS")
     print("=" * 70)
     print(AN.tabela_texto(A, R.get("qu_tang")))
+    print()
+    print(AN.memoria_texto(A))
+    with open(os.path.join(PASTA, "sapata_memoria_analitica.txt"), "w", encoding="utf-8") as f:
+        f.write(AN.memoria_texto(A))
     fig = MT.grafico_comparacao(R["q"], R["s"], A, R, os.path.join(PASTA, "sapata_comparacao_analitico.png"))
     print("    gráfico salvo em", fig)
     nome = MT._seguro(os.path.splitext(os.path.basename(P.get("projeto", "modelo")))[0])

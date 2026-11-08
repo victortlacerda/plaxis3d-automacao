@@ -353,6 +353,37 @@ def memorial_sapata(d):
                                                                          fmt_num(A["metodos"][0]["gamma_ef"], 2))))
         if d["figuras"].get("comparacao"):
             B.append(("img", d["figuras"]["comparacao"], "Figura 5 - Curva do PLAXIS e métodos analíticos", 14.5))
+        B.append(("h2", "5.1 Memória de cálculo dos métodos analíticos"))
+        dd = A.get("dados", {})
+        B.append(("p", "Dados: B = {} m; L = {} m; D = {} m; c' = {} kN/m²; φ' = {}°; γ = {} kN/m³; γsat = {} kN/m³; "
+                       "N.A. {}; E' = {} kN/m²; ν' = {}; FS = {}.".format(
+                           fmt_num(A["B"], 2), fmt_num(A["L"], 2), fmt_num(A["D"], 2), fmt_num(dd.get("c"), 1),
+                           fmt_num(dd.get("phi"), 1), fmt_num(dd.get("gamma"), 1), fmt_num(dd.get("gamma_sat"), 1),
+                           "a {} m de profundidade".format(fmt_num(dd["prof_na"], 2)) if dd.get("prof_na") is not None
+                           else "abaixo da zona de influência", fmt_num(dd.get("E"), 0), fmt_num(dd.get("nu"), 2),
+                           fmt_num(A["FS"], 1))))
+        B.append(("p", "Sobrecarga efetiva na cota da base q = {} kN/m²; peso específico efetivo no termo de Nγ "
+                       "γ' = {} kN/m³.".format(fmt_num(A["metodos"][0]["q"], 2), fmt_num(A["metodos"][0]["gamma_ef"], 2))))
+        try:
+            import sapata_analitico as _AN
+            formulas, fat_n = _AN.FORMULAS, _AN.FATORES_N
+        except Exception:
+            formulas, fat_n = {}, {}
+        for mt in A["metodos"]:
+            ft = mt["fatores"]
+            B.append(("p", mt["metodo"] + ": " + fat_n.get(mt["metodo"], "") + "\n" + formulas.get(mt["metodo"], "")))
+            B.append(("tabela", ["Fator", "Valor", "Fator", "Valor", "Fator", "Valor"], [
+                ["Nc", fmt_num(mt["Nc"], 3), "sc", fmt_num(ft["sc"], 3), "dc", fmt_num(ft["dc"], 3)],
+                ["Nq", fmt_num(mt["Nq"], 3), "sq", fmt_num(ft["sq"], 3), "dq", fmt_num(ft["dq"], 3)],
+                ["Nγ", fmt_num(mt["Ng"], 3), "sγ", fmt_num(ft["sg"], 3), "dγ", fmt_num(ft["dg"], 3)],
+                ["Parcela coesão", fmt_num(mt["termos"][0], 1), "Parcela sobrecarga", fmt_num(mt["termos"][1], 1),
+                 "Parcela peso", fmt_num(mt["termos"][2], 1)],
+                ["qu ({})".format(un), fmt_num(mt["qu"], 1), "qa = qu/FS", fmt_num(mt["qa"], 1), "s(qa) elástico",
+                 "{} mm".format(fmt_num(mt["recalque_qa_mm"], 1))],
+            ]))
+        B.append(("p", "Recalque elástico: s = q·B·(1 - ν²)·Iw/E', com Iw = {} (sapata rígida, L/B = {}; Bowles, 1996). "
+                       "Tensão que causa 25 mm: {} {}.".format(fmt_num(A["Iw"], 2), fmt_num(A["L"] / A["B"], 2),
+                                                               fmt_num(A["q_25mm"], 0), un)))
 
     B.append(("h1", "6. Conclusão"))
     cands = []

@@ -5,6 +5,7 @@ B2;2;2;0;carga;medium;6999;1119,9507;373,3169;;1059,1463;373,3169;tangentes/FS;7
 B1.5xL3;1,5;3;0;carga;medium;6999;895,9605;298,6535;;847,3171;298,6535;tangentes/FS;663,8585;578,522;599,2045;1,4953;ok
 comparacao_analitico.png
 entrada.json
+memoria_analitica.txt
 memorial_B1.5xL3.docx
 memorial_B1.5xL3.html
 resultado.json
@@ -17,6 +18,7 @@ sapata_grafico_tangentes.png
 ultimo_modelo.json
 comparacao_analitico.png
 entrada.json
+memoria_analitica.txt
 memorial_B2.docx
 memorial_B2.html
 resultado.json
@@ -29,6 +31,7 @@ sapata_grafico_tangentes.png
 ultimo_modelo.json
 comparacao_analitico.png
 entrada.json
+memoria_analitica.txt
 memorial_Ex1_B1.docx
 memorial_Ex1_B1.html
 resultado.json
@@ -41,6 +44,7 @@ sapata_grafico_tangentes.png
 ultimo_modelo.json
 comparacao_analitico.png
 entrada.json
+memoria_analitica.txt
 memorial_Ex2_B3.docx
 memorial_Ex2_B3.html
 resultado.json

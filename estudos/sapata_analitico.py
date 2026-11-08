@@ -139,10 +139,55 @@ def calcular(B, L, D, c, phi, gamma, gamma_sat, prof_na, E, nu, FS=3.0):
         m["recalque_qa_mm"] = recalque_elastico_mm(m["qa"], Bm, Lm, E, nu)
     return dict(
         metodos=metodos, FS=FS, Iw=iw_rigida(Bm, Lm), B=Bm, L=Lm, D=D,
+        dados=dict(c=c, phi=phi, gamma=gamma, gamma_sat=gamma_sat, prof_na=prof_na, E=E, nu=nu),
         q_25mm=tensao_para_recalque(25.0, Bm, Lm, E, nu),
         hipoteses=("ruptura geral; parâmetros drenados; carga vertical centrada; solo homogêneo abaixo da base; "
                    "recalque elástico de sapata rígida em meio semi-infinito (Iw de Bowles)"),
     )
+
+
+FORMULAS = {
+    "Terzaghi (1943)": "qu = c'·Nc·sc + q·Nq + 0,5·γ'·B·Nγ·sγ   (sc = 1 + 0,3·B/L; sγ = 1 - 0,2·B/L; sem fatores de profundidade)",
+    "Meyerhof (1963)": "qu = c'·Nc·sc·dc + q·Nq·sq·dq + 0,5·γ'·B·Nγ·sγ·dγ   (Kp = tg²(45 + φ/2); sc = 1 + 0,2·Kp·B/L; "
+                       "sq = sγ = 1 + 0,1·Kp·B/L; dc = 1 + 0,2·√Kp·D/B; dq = dγ = 1 + 0,1·√Kp·D/B; s e d de q e γ = 1 se φ ≤ 10°)",
+    "Vesić (1975)": "qu = c'·Nc·sc·dc + q·Nq·sq·dq + 0,5·γ'·B·Nγ·sγ·dγ   (sc = 1 + (B/L)·Nq/Nc; sq = 1 + (B/L)·tg φ; "
+                    "sγ = 1 - 0,4·B/L ≥ 0,6; dc = 1 + 0,4·k; dq = 1 + 2·tg φ·(1 - sen φ)²·k; dγ = 1; k = D/B se D ≤ B, senão arctg(D/B))",
+}
+FATORES_N = {
+    "Terzaghi (1943)": "Nq = a²/[2·cos²(45 + φ/2)], a = e^((0,75π - φ/2)·tg φ); Nc = (Nq - 1)·cotg φ; "
+                       "Nγ = 2·(Nq + 1)·tg φ/(1 + 0,4·sen 4φ) (Coduto, 2001)",
+    "Meyerhof (1963)": "Nq = e^(π·tg φ)·tg²(45 + φ/2); Nc = (Nq - 1)·cotg φ; Nγ = (Nq - 1)·tg(1,4φ)",
+    "Vesić (1975)": "Nq = e^(π·tg φ)·tg²(45 + φ/2); Nc = (Nq - 1)·cotg φ; Nγ = 2·(Nq + 1)·tg φ",
+}
+
+
+def memoria_texto(res):
+    """Memória de cálculo completa (texto), com dados, fatores e parcelas de cada método."""
+    d = res["dados"]
+    m0 = res["metodos"][0]
+    L = ["MEMÓRIA DE CÁLCULO - MÉTODOS ANALÍTICOS",
+         "Dados: B = {:.2f} m; L = {:.2f} m; D = {:.2f} m; c' = {:.1f} kN/m²; φ' = {:.1f}°; γ = {:.1f} kN/m³; "
+         "γsat = {:.1f} kN/m³; N.A. a {} ; E' = {:.0f} kN/m²; ν' = {:.2f}; FS = {:.1f}".format(
+             res["B"], res["L"], res["D"], d["c"], d["phi"], d["gamma"], d["gamma_sat"],
+             "{:.2f} m de profundidade".format(d["prof_na"]) if d["prof_na"] is not None else "(sem N.A.)",
+             d["E"], d["nu"], res["FS"]),
+         "Sobrecarga efetiva na cota da base: q = {:.2f} kN/m²; γ' no termo de Nγ = {:.2f} kN/m³".format(
+             m0["q"], m0["gamma_ef"]), ""]
+    for m in res["metodos"]:
+        f = m["fatores"]
+        L.append(m["metodo"])
+        L.append("  " + FATORES_N[m["metodo"]])
+        L.append("  " + FORMULAS[m["metodo"]])
+        L.append("  Nc = {:.3f}  Nq = {:.3f}  Nγ = {:.3f}".format(m["Nc"], m["Nq"], m["Ng"]))
+        L.append("  sc = {:.3f}  sq = {:.3f}  sγ = {:.3f}  |  dc = {:.3f}  dq = {:.3f}  dγ = {:.3f}".format(
+            f["sc"], f["sq"], f["sg"], f["dc"], f["dq"], f["dg"]))
+        L.append("  parcelas: coesão = {:.1f} + sobrecarga = {:.1f} + peso = {:.1f}  ->  qu = {:.1f} kN/m²; "
+                 "qa = qu/FS = {:.1f} kN/m²".format(m["termos"][0], m["termos"][1], m["termos"][2], m["qu"], m["qa"]))
+        L.append("")
+    L.append("Recalque elástico (sapata rígida, meio semi-infinito): s = q·B·(1 - ν²)·Iw/E, Iw = {:.2f} (L/B = {:.2f}, "
+             "Bowles 1996)".format(res["Iw"], res["L"] / res["B"]))
+    L.append("  tensão para 25 mm: q = 0,025·E/(B·(1 - ν²)·Iw) = {:.0f} kN/m²".format(res["q_25mm"]))
+    return "\n".join(L)
 
 
 def tabela_texto(res, qu_plaxis=None, unid="kN/m²"):
@@ -182,4 +227,6 @@ if __name__ == "__main__":
     print()
     print("Exemplo 1 das notas (1x1 m na superfície, c'=30, φ'=20):")
     print(tabela_texto(r, qu_plaxis=792))
+    print()
+    print(memoria_texto(r))
     sys.exit(1 if erros else 0)

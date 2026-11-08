@@ -28,6 +28,7 @@ if PASTA not in sys.path:
 
 import sapata_motor as MT          # noqa: E402
 import sapata_memorial as MEM      # noqa: E402
+import sapata_analitico as AN      # noqa: E402
 
 PLANILHA_PADRAO = os.path.join(PASTA, "sapatas_lote.xlsx")
 
@@ -51,6 +52,8 @@ def rodar_caso(motor, cd, pasta_lote):
     _, elementos = motor.construir(P, pasta)
     R = motor.resultados(pasta)
     A = MT.analitico_completo(P, cd["FS"])
+    with open(os.path.join(pasta, "memoria_analitica.txt"), "w", encoding="utf-8") as f:
+        f.write(AN.memoria_texto(A))
     fig_cmp = MT.grafico_comparacao(R["q"], R["s"], A, R, os.path.join(pasta, "comparacao_analitico.png"),
                                     "Caso {}: PLAXIS x métodos analíticos".format(cd["caso"]))
     R2 = {k: v for k, v in R.items() if k not in ("q", "s", "texto")}

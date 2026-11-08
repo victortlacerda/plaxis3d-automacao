@@ -16,3 +16,7 @@ resumo_projeto.txt
 __pycache__/
 *.pyc
 .venv/
+
+ferramentas/auto_log.txt
+estudos/lote_*/
+estudos/sensibilidade_*/
