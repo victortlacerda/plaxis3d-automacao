@@ -1,6 +1,9 @@
 # Histórico de versões
 
 ## Não lançado
+- `estudos/`: lote de sapatas por planilha, sensibilidade de malha/domínio, métodos analíticos (Terzaghi, Meyerhof, Vesić, recalque elástico) e memorial em .docx/.html.
+- `ferramentas/resumo_projeto.py`: além do .txt, gera o painel `resumo_projeto.html`.
+- `sapata/plaxis_sapata_interativo.py`: o JSON passa a guardar todas as respostas (`entrada`); nenhum comando ao PLAXIS mudou.
 - `soiltest/`: relatório técnico HTML (`relatorio.html`, imprimível em PDF) em toda rodada do script principal.
 - `soiltest/`: ferramentas `soiltest_auditoria.py` (auditoria dos materiais do projeto), `soiltest_biblioteca.py`
   (materiais a partir de planilha CSV), `soiltest_parametrico.py` (estudo paramétrico) e `soiltest_gg0.py`

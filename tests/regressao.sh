@@ -76,5 +76,16 @@ ferramenta ferr_gg0 soiltest_gg0.py
 ferramenta ferr_biblioteca soiltest_biblioteca.py
 ferramenta ferr_auditoria soiltest_auditoria.py 2:0:Aterro 8:0:Argila 5:2:Errada
 
+# --- estudos (lote, analítico, painel do resumo)
+estudo_lote() {
+  local d; d="$(mktemp -d)"
+  ( cd "$d" && printf "%s\ns\n" "$RAIZ/estudos/sapatas_lote.xlsx" | python3 "$T/mock/rodar_estudo.py" "$RAIZ/estudos/sapata_lote.py" >/dev/null 2>&1
+    cut -d";" -f1-17,19 lote_*/resumo_lote.csv > "$d/saida.log"
+    for c in lote_*/*/; do ls "$c" >> "$d/saida.log"; done )
+  compara "estudos_lote.log" "$d/saida.log"; rm -rf "$d"
+}
+estudo_lote
+if python3 "$RAIZ/estudos/sapata_analitico.py" > /dev/null; then echo "OK        analitico (valores de livro)"; else echo "DIFERE    analitico"; FALHAS=$((FALHAS+1)); fi
+
 [ $GRAVAR -eq 1 ] && exit 0
 [ $FALHAS -eq 0 ] && echo "Tudo igual às linhas de base." || { echo "$FALHAS caso(s) mudaram."; exit 1; }
