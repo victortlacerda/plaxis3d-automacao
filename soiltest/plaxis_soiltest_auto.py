@@ -56,6 +56,9 @@ CONFIG = {
     #   "OCR"     : sigma'p = OCR x sigma'v0, com sigma'v0 lida do proprio ensaio (nao se aplica a Oedometer/CRS,
     #               que partem de tensao zero)
     "preadensamento": {"modo": "nenhum", "valor": 0},
+    # MCC e Soft Soil: o edometro e o CRS partem de tensao zero e, sem sigma'p, dao deformacao sem sentido
+    # (MCC: 18 % ja em 25 kPa). Quando o pre-adensamento nao for "pressao", estes ensaios usam este sigma'p (kPa).
+    "sigma_p_padrao_fases_kPa": 100,
 
     "triaxial": {
         "rodar": True,
@@ -117,8 +120,8 @@ MODELOS = {
     "LE":      {"nome": "Linear Elastic", "numero": 1, "dren": ["D", "UA", "UC", "NP"], "precons": False, "oed": True},
     "HS":      {"nome": "Hardening Soil", "numero": 3, "dren": ["D", "UA", "UB"], "precons": True, "oed": True},
     "HSsmall": {"nome": "HS small", "numero": 4, "dren": ["D", "UA", "UB"], "precons": True, "oed": True},
-    "MCC":     {"nome": "Modified Cam-Clay", "numero": 8, "dren": ["D", "UA"], "precons": True, "oed": False},
-    "SS":      {"nome": "Soft Soil", "numero": 5, "dren": ["D", "UA"], "precons": True, "oed": False},
+    "MCC":     {"nome": "Modified Cam-Clay", "numero": 8, "dren": ["D", "UA"], "precons": True, "oed": True, "pc_fases": True},
+    "SS":      {"nome": "Soft Soil", "numero": 5, "dren": ["D", "UA"], "precons": True, "oed": True, "pc_fases": True},
 }
 # O echo mostra "Undrained A (1)"; a conferencia usa a marca (regex).
 DRENAGENS = {
@@ -391,9 +394,6 @@ def perguntar(cfg):
     print("\n  Ensaios a rodar:")
     cfg["triaxial"]["rodar"] = sim_nao("Triaxial", cfg["triaxial"]["rodar"])
     padrao_oed = cfg["oedometer"]["rodar"] if cfg["oedometer"]["rodar"] is not None else m["oed"]
-    if not m["oed"]:
-        print("  Aviso: no MCC e no Soft Soil o edometro e o CRS partem de tensao zero e dao deformacao exagerada "
-              "(MCC: 27 % em 100 kPa no teste). Por isso vem desligados.")
     cfg["oedometer"]["rodar"] = sim_nao("Edometro", padrao_oed)
     cfg["crs"]["rodar"] = sim_nao("CRS (compressao a velocidade de deformacao constante)", cfg["crs"]["rodar"])
     cfg["dss"]["rodar"] = sim_nao("DSS (cisalhamento simples)", cfg["dss"]["rodar"])
@@ -423,6 +423,9 @@ def perguntar(cfg):
     else:
         cfg["preadensamento"]["modo"] = "nenhum"
         print("\n  Pre-adensamento: no {} o SoilTest nao permite editar a pressao de pre-adensamento (somente leitura).".format(m["nome"]))
+    if m.get("pc_fases") and (cfg["oedometer"]["rodar"] or cfg["crs"]["rodar"]) and cfg["preadensamento"]["modo"] != "pressao":
+        print("  No {} o edometro e o CRS precisam de sigma'p (sem ele partem de tensao zero e a deformacao nao faz sentido).".format(m["nome"]))
+        cfg["sigma_p_padrao_fases_kPa"] = ler_numero("sigma'p do edometro e do CRS (kPa)", cfg["sigma_p_padrao_fases_kPa"])
 
     # ---- detalhes de cada ensaio
     if cfg["triaxial"]["rodar"]:
@@ -768,7 +771,12 @@ def rodar_fases(g, tipo, cfg_t, ctx):
     if not ok:
         return None, None
     ext = {}
-    ext["pc_kPa"] = aplicar_preadensamento(t, tipo, ctx["preadensamento"], ctx["modelo"], None, ext)
+    pre = ctx["preadensamento"]
+    if MODELOS[ctx["modelo"]].get("pc_fases") and pre["modo"] != "pressao" and ctx.get("pc_fases_kPa"):
+        log("   {}: sigma'p padrao de {} kPa no {} (sem ele o ensaio parte de tensao zero).".format(
+            MODELOS[ctx["modelo"]]["nome"], fmt_num(ctx["pc_fases_kPa"]), tipo))
+        pre = {"modo": "pressao", "valor": ctx["pc_fases_kPa"]}
+    ext["pc_kPa"] = aplicar_preadensamento(t, tipo, pre, ctx["modelo"], None, ext)
     if ext["pc_kPa"]:
         ctx["pc_usados"].add(tipo)
     tentar("validate", lambda: g.validate(g.Material))
@@ -1160,6 +1168,7 @@ O comportamento do ensaio (CD ou CU) é escolhido à parte. Ele não depende da 
 - **σ'v0**: tensão vertical efetiva no início do cisalhamento. **σ'p**: pressão de pré-adensamento (maior tensão vertical efetiva já suportada).
 - **OCR** = σ'p / σ'v0 (razão de pré-adensamento). **POP** = σ'p − σ'v0 (pressão de pré-sobrecarga). O script entrega ao SoilTest a pressão σ'p; com a opção OCR, σ'p = OCR × σ'v0 de cada ensaio.
 - Só HS, HSsmall, MCC e Soft Soil aceitam editar σ'p; no MC e no LE é somente leitura.
+- No MCC e no Soft Soil, o edômetro e o CRS usam σ'p = 100 kPa por padrão (ajustável), porque sem σ'p esses ensaios partem de tensão zero e a deformação não tem sentido.
 
 ## 8. Valores que o script calcula
 
@@ -1273,7 +1282,8 @@ def main():
     resumo = {"modelo": modelo, "drenagem": dren, "parametros": valores, "porta_soiltest": porta,
               "consolidacao": dict(cons, K0_usado=k0), "preadensamento": pre,
               "dilatancy_cutoff": dict(dil or {}, SoilTest=estado_corte)}
-    ctx = {"modelo": modelo, "dren": dren, "consolidacao": cons, "k0": k0, "preadensamento": pre, "pc_usados": set()}
+    ctx = {"modelo": modelo, "dren": dren, "consolidacao": cons, "k0": k0, "preadensamento": pre, "pc_usados": set(),
+           "pc_fases_kPa": float(cfg.get("sigma_p_padrao_fases_kPa") or 0)}
     todas = {}
 
     for tipo in ORDEM_ENSAIOS:

@@ -82,8 +82,15 @@ CASOS_2 = [
     ("9b_MCC_edometro_pc100", "MCC", "D", dict(FASES, triaxial={"rodar": False}, preadensamento={"modo": "pressao", "valor": 100}),
      "Inclinacao kappa ate ~100 kPa e lambda depois"),
 ]
-BATERIAS = {"1": CASOS_1, "2": CASOS_2}
-RODAR = "2"          # qual bateria rodar ("1" = cicicos MC/tensao/K0/OCR triaxial; "2" = modelos contrateis e OCR no edometro)
+CASOS_3 = [
+    # sigma'p padrao no edometro/CRS do MCC e do Soft Soil (sem informar pre-adensamento)
+    ("10_MCC_edometro_padrao", "MCC", "D", dict(FASES, triaxial={"rodar": False}, preadensamento={"modo": "nenhum", "valor": 0}),
+     "Log mostra sigma'p padrao de 100 kPa; resultado igual ao 9b (eps 13,8 % em 400 kPa)"),
+    ("11_SS_edometro_padrao", "SS", "D", dict(FASES, triaxial={"rodar": False}, preadensamento={"modo": "nenhum", "valor": 0}),
+     "Log mostra sigma'p padrao; inclinacao kappa* antes de 100 kPa e lambda* depois"),
+]
+BATERIAS = {"1": CASOS_1, "2": CASOS_2, "3": CASOS_3}
+RODAR = "3"          # "1" = ciclicos MC/tensao/K0/OCR triaxial; "2" = modelos contrateis e OCR no edometro; "3" = sigma'p padrao MCC/SS
 CASOS = BATERIAS[RODAR]
 
 
@@ -122,7 +129,7 @@ def main():
             chave = [l for l in linhas if any(t in l for t in ("Tensoes iniciais", "q_max", "tau_max", "Ultimo ciclo",
                                                                  "du max", "Esperado", "Precons", "ERR", "ATENCAO",
                                                                  "Aviso", "Versao estavel", "E50", "Fim de cada ciclo",
-                                                                 "pontos; sigma_v"))]
+                                                                 "pontos; sigma_v", "sigma'p padrao"))]
             resumo += ["== {} ({} / {}) rc={}".format(nome, modelo, dren, rc), "   verificar: " + verificar,
                        "   saida: " + saida] + ["   " + l.strip() for l in chave] + [""]
         except Exception:

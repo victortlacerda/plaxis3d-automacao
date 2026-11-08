@@ -86,6 +86,7 @@ O comportamento do ensaio (CD ou CU) é escolhido à parte. Ele não depende da 
 - **σ'v0**: tensão vertical efetiva no início do cisalhamento. **σ'p**: pressão de pré-adensamento (maior tensão vertical efetiva já suportada).
 - **OCR** = σ'p / σ'v0 (razão de pré-adensamento). **POP** = σ'p − σ'v0 (pressão de pré-sobrecarga). O script entrega ao SoilTest a pressão σ'p; com a opção OCR, σ'p = OCR × σ'v0 de cada ensaio.
 - Só HS, HSsmall, MCC e Soft Soil aceitam editar σ'p; no MC e no LE é somente leitura.
+- No MCC e no Soft Soil, o edômetro e o CRS usam σ'p = 100 kPa por padrão (ajustável), porque sem σ'p esses ensaios partem de tensão zero e a deformação não tem sentido.
 
 ## 8. Valores que o script calcula
 
