@@ -10,7 +10,7 @@ A força necessária para impor esse recalque, dividida pela área da sapata, d�
 Roda pelo executor externo (ele já entrega s_i e g_i). Não pergunta nada: edite os PARÂMETROS abaixo.
 
 Fases: Initial (K0) -> Footing (ativa a placa) -> Settlement (ativa o deslocamento prescrito).
-Depois rode exemplo2_resultados.py.
+Depois rode nichirvan_taher_exemplo2_resultados.py.
 
 Validado no PLAXIS real (Exemplo 1): tudo, exceto o deslocamento prescrito (comando, nomes das
 propriedades), que está "não testado": se algo for recusado o script mostra o echo() do objeto.
@@ -299,7 +299,7 @@ def aplicar_coarseness(valor):
         msg = str(e).strip().splitlines()
         print("    - por índice em Polygon_1: erro ({})".format(msg[0] if msg else repr(e)))
 
-    # Caminho 3: a MESMA sequência de tentativas do exemplo1_modelo.py (a que funcionou no Exemplo 1),
+    # Caminho 3: a MESMA sequência de tentativas do nichirvan_taher_exemplo1_modelo.py (a que funcionou no Exemplo 1),
     # na mesma ordem, caso o índice só funcione depois das tentativas anteriores.
     try:
         poly = g_i.Polygon_1
@@ -507,4 +507,4 @@ try:
     g_i.save(SALVAR_EM)
 except Exception:
     pass
-print("\nPronto. Rode exemplo2_resultados.py com este projeto aberto.")
+print("\nPronto. Rode nichirvan_taher_exemplo2_resultados.py com este projeto aberto.")

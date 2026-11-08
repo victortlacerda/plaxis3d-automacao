@@ -11,7 +11,7 @@ Etapas (iguais às do PDF):
   5. Malha (fina, com refinamento na sapata) + ponto de curva em (0,0,0)
   6. Fases: Initial (K0) -> Footing -> Load, e cálculo
 
-Depois rode exemplo1_resultados.py para extrair a curva carga x recalque.
+Depois rode nichirvan_taher_exemplo1_resultados.py para extrair a curva carga x recalque.
 """
 import os
 import sys
@@ -357,4 +357,4 @@ try:
 except Exception:
     pass
 
-print("\nModelo pronto e calculado. Agora rode exemplo1_resultados.py.")
+print("\nModelo pronto e calculado. Agora rode nichirvan_taher_exemplo1_resultados.py.")

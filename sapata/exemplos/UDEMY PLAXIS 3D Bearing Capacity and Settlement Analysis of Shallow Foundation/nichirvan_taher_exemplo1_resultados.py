@@ -2,7 +2,7 @@
 """
 Exemplo 1 - Resultados: curva carga x recalque e critérios de capacidade de carga.
 
-Pré-requisito: exemplo1_modelo.py já rodado (projeto calculado e aberto no PLAXIS Input).
+Pré-requisito: nichirvan_taher_exemplo1_modelo.py já rodado (projeto calculado e aberto no PLAXIS Input).
 Roda pelo executor externo (s_i e g_i já existem).
 
 Gera na mesma pasta deste script:
@@ -68,7 +68,7 @@ print("    Fase:", valor(fase.Identification) if hasattr(fase, "Identification")
 try:
     no = g_o.Nodes[0]
 except Exception as e:
-    raise RuntimeError("Não achei o nó pré-selecionado em g_o.Nodes (rodou o exemplo1_modelo.py "
+    raise RuntimeError("Não achei o nó pré-selecionado em g_o.Nodes (rodou o nichirvan_taher_exemplo1_modelo.py "
                        "até o fim, com o ponto de curva em (0,0,0)?): {}".format(e))
 
 # ----------------------------------------------------------------------------

@@ -5,8 +5,10 @@
 ## Scripts
 - `plaxis_sapata_interativo.py`: cria o modelo, salva e (opcional) calcula.
 - `plaxis_sapata_resultados.py`: lê o Output e gera curva, critérios, CSV e gráficos.
-- `exemplos/`: versões **não interativas** dos Exemplos 1 e 2 (parâmetros no topo do arquivo). São as
-  referências validadas; não alterar.
+- `exemplos/`: versões **não interativas** dos exemplos validados (parâmetros no topo do arquivo); não alterar.
+  - `UDEMY PLAXIS 3D Bearing Capacity and Settlement Analysis of Shallow Foundation/`: Exemplos 1 e 2 do curso
+    (`nichirvan_taher_exemplo1_*.py`, `nichirvan_taher_exemplo2_*.py`).
+  - `Exemplos Manual Bentley/`: `bentley_caso_a.py` (Tutorial 1, Case A: rigid foundation).
 
 ## Módulos de ação (escolhidos na pergunta 5)
 1. **Só carga** (surface load ou point load): Exemplo 1. Validado.

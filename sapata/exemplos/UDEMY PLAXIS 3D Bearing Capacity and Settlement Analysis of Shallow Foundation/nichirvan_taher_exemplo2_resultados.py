@@ -2,7 +2,7 @@
 """
 Exemplo 2 - Resultados: força/tensão para impor 2,5 cm de recalque (deslocamento prescrito).
 
-Pré-requisito: exemplo2_modelo.py rodado (projeto calculado e aberto no PLAXIS Input).
+Pré-requisito: nichirvan_taher_exemplo2_modelo.py rodado (projeto calculado e aberto no PLAXIS Input).
 Roda pelo executor externo (s_i e g_i já existem).
 
 O deslocamento (uz do nó sob a sapata) vem da curva pré-selecionada, como no Exemplo 1.
