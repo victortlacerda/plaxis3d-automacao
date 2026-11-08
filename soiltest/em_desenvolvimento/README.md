@@ -1,20 +1,16 @@
 # SoilTest: em desenvolvimento
 
-Nada aqui foi validado por completo no PLAXIS real. Para trabalho, use `../plaxis_soiltest_auto.py`.
+Para trabalho, use `../plaxis_soiltest_auto.py`. Os cíclicos não drenados e o controle por tensão foram validados no PLAXIS real em 08/11/2026 e já estão na versão estável.
 
 | Arquivo | O que é | Situação |
 |---|---|---|
-| `plaxis_soiltest_auto_dev.py` | O mesmo script da versão estável com `SOMENTE_VALIDADO = False`: libera **cíclicos não drenados** e **controle por tensão** no CDSS e no triaxial cíclico | Atributos existem na API; ainda não calculados no PLAXIS real |
-| `soiltest_bateria.py` | Roda sem perguntas, numa única execução, as rodadas pendentes: cíclicos não drenados, controle por tensão, K0 no DSS/CDSS/cíclico e HS sem pré-adensamento × OCR = 2. Grava `soiltest_saida/bateria_<data>.txt` | Testada no mock; falta rodar no PLAXIS |
+| `plaxis_soiltest_auto_dev.py` | Cópia de trabalho do script, usada pela bateria; é onde entram os próximos recursos antes de irem para a versão estável | Hoje igual à estável |
+| `soiltest_bateria.py` | Roda sem perguntas, numa única execução, as rodadas pendentes: cíclicos não drenados, controle por tensão, K0 no DSS/CDSS/cíclico e HS sem pré-adensamento × OCR = 2. Grava `soiltest_saida/bateria_<data>.txt` | Rodada no PLAXIS real em 08/11/2026 (5 casos, sem erro); saídas em `../exemplos/bateria_20261108/` |
 | `soiltest_triaxial.py` | Triaxial com comparação contra um CSV de laboratório (RMSE e R² de q × ε_a, ε_v e Δu) | Triaxial validado; comparação com laboratório testada só com dados fictícios (mock). É a base da calibração |
 | `soiltest_ensaios.py` | Edômetro, CRS e DSS com comparação contra laboratório | Superado pelo script automático para rodar os ensaios; mantido pela parte de comparação |
 
 ## Próximos passos
 
-1. Rodar o `_dev` com MC ou HS e comportamento U no CDSS e no triaxial cíclico (Δu deve crescer a cada ciclo).
-2. Rodar o `_dev` com controle por tensão (amplitude de 20 a 30 % da resistência).
-3. Calibração: ajustar parâmetros (por exemplo φ', E50ref, m) minimizando o erro contra o ensaio de laboratório,
-   usando o script automático para simular e `soiltest_triaxial.py` para medir o erro.
-
-Quando um item for validado, ele passa para o script estável. Basta mudar a condição em `SOMENTE_VALIDADO` e
-acrescentar o caso em `tests/regressao.sh`.
+1. Acúmulo de poropressão em ciclos: repetir a bateria com HS small, MCC e Soft Soil (modelos com contração plástica). O MC com ψ = 0 não acumula.
+2. Efeito do OCR no HS e no MCC pelo edômetro e pelo CRS (modo σ'p), onde o pré-adensamento aparece de fato.
+3. Calibração: ajustar parâmetros (por exemplo φ', E50ref, m) minimizando o erro contra o ensaio de laboratório, usando o script automático para simular e `soiltest_triaxial.py` para medir o erro.

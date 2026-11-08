@@ -1,6 +1,9 @@
 # Histórico de versões
 
 ## Não lançado
+- `soiltest/`: cíclicos não drenados, controle por tensão e K0 no DSS/CDSS/triaxial cíclico validados no PLAXIS real
+  (bateria de 08/11/2026) e liberados na versão estável. Corrigida a descrição da ordem dos pontos nos cíclicos
+  (fase inicial sem carga, depois ciclos de zero a zero) e anotado que o triaxial cíclico por tensão começa em extensão.
 - `soiltest/`: SoilTest automático. `plaxis_soiltest_auto.py` (estável) cria o material no Input, abre o SoilTest
   e roda triaxial, edômetro, CRS, DSS, CDSS e triaxial cíclico para MC, LE, HS, HS small, MCC e Soft Soil, com
   consolidação K0, pré-adensamento (σ'p ou OCR), corte de dilatância, um PNG por gráfico, glossário e conferência

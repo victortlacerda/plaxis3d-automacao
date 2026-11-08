@@ -66,6 +66,9 @@ de ponta a ponta. Todos os valores batem com a teoria.
 | LE DSS, γ = 10 % | τ 1153,846 kPa | G·γ = 1153,846 |
 | LE CDSS, ±0,5 % | G_sec 11538,5 kPa, amortecimento 0 | G = 11538,46 |
 | LE triaxial cíclico, ±0,5 % | E_sec 30000 kPa, amortecimento 0 | E = 30000 |
+| LE com K0 = 0,5: DSS, CDSS, triaxial cíclico | σ'x/σ'y = 0,5; τ, G e E iguais aos do isotrópico | K0 aplicado sem mudar a rigidez elástica |
+| MC, controle por tensão (τ = 20 kPa, q = 50 kPa) | amplitudes exatas; não drenado E_u = 34500 kPa, Δu = ±16,3 kPa | 2G(1 + ν_u) = 34500; Δp = q/3 = 16,7 |
+| MC, cíclico não drenado por deformação | Δu oscila sem acumular; CDSS sem Δu | MC com ψ = 0 não tem tendência volumétrica no cisalhamento |
 
 O histórico completo das descobertas (nomes de atributos, sinais, armadilhas de cada modelo) está em
 [`docs/referencia-soiltest.md`](docs/referencia-soiltest.md).
@@ -84,8 +87,8 @@ Sem perguntas: ponha `"interativo": False` no bloco `CONFIG` do topo do arquivo 
 
 | Pasta / arquivo | Status |
 |---|---|
-| `plaxis_soiltest_auto.py` | **Estável.** Só o que já rodou no PLAXIS real. Nos cíclicos, só comportamento drenado e controle por deformação. |
-| [`em_desenvolvimento/`](em_desenvolvimento/) | Cíclicos **não drenados** e **controle por tensão** (`plaxis_soiltest_auto_dev.py`) e a comparação com dados de laboratório, base da futura **calibração** |
+| `plaxis_soiltest_auto.py` | **Estável.** Tudo o que já rodou no PLAXIS real, inclusive cíclicos não drenados e controle por tensão (validados em 08/11/2026). |
+| [`em_desenvolvimento/`](em_desenvolvimento/) | Bateria de testes sem perguntas (`soiltest_bateria.py`) e comparação com dados de laboratório, base da futura **calibração** |
 | [`descoberta/`](descoberta/) | Scripts usados para mapear a API do SoilTest (atributos, modelos, drenagens). Somente referência. |
 | [`exemplos/`](exemplos/) | Saídas reais (CSV, log, resumo) das rodadas da galeria |
 
@@ -94,9 +97,11 @@ Quando um item em desenvolvimento for validado no PLAXIS real, ele passa para o 
 
 ## Pendências
 
-- [ ] Cíclicos não drenados (CDSS e triaxial cíclico) no PLAXIS real
-- [ ] Controle por tensão (`ShearStressAmplitude`, `AxialStressAmplitude`) no PLAXIS real
-- [ ] Consolidação K0 no DSS, CDSS e triaxial cíclico (no triaxial já validada)
-- [ ] Efeito do OCR na rigidez inicial (comparar com rodada normalmente adensada)
+- [x] Cíclicos não drenados (CDSS e triaxial cíclico) no PLAXIS real
+- [x] Controle por tensão (`ShearStressAmplitude`, `AxialStressAmplitude`) no PLAXIS real
+- [x] Consolidação K0 no DSS, CDSS e triaxial cíclico
+- [x] Efeito do OCR no triaxial do HS (pequeno: +3 % de rigidez inicial; o OCR do HS age no cap)
+- [x] Unidade do tempo nos cíclicos: a do projeto (dia)
+- [ ] Acúmulo de poropressão em ciclos com modelo contrátil (HS small, MCC, Soft Soil)
+- [ ] Efeito do OCR no edômetro e no CRS do HS e do MCC (modo σ'p)
 - [ ] Calibração automática contra ensaio de laboratório
-- [ ] Unidade do `Time` nos ensaios cíclicos (o eixo diz "dia", confirmar)
