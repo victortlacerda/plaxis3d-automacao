@@ -1,6 +1,9 @@
 # Histórico de versões
 
 ## Não lançado
+- `soiltest/`: Δu e tensão efetiva ao fim de cada ciclo no log dos ensaios cíclicos; bateria 2 (modelos contráteis em
+  ciclos e OCR no edômetro/CRS) rodada no PLAXIS real. O MCC com σ'p confere com κ e λ; nenhum dos 6 modelos acumula Δu
+  ciclo a ciclo.
 - `soiltest/`: cíclicos não drenados, controle por tensão e K0 no DSS/CDSS/triaxial cíclico validados no PLAXIS real
   (bateria de 08/11/2026) e liberados na versão estável. Corrigida a descrição da ordem dos pontos nos cíclicos
   (fase inicial sem carga, depois ciclos de zero a zero) e anotado que o triaxial cíclico por tensão começa em extensão.

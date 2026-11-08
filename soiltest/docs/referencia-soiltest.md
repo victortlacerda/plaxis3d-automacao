@@ -138,3 +138,16 @@ Bateria `soiltest_bateria.py`, 5 casos, sem erros:
 - **K0 no DSS, CDSS e triaxial cíclico:** aceito. DSS/CDSS: σ'y = AbsSigyyinit = 100, σ'x = 50. Triaxial cíclico: CellPressure = σ'x = 100, σ'y = 200. G e E iguais aos do isotrópico (LE).
 - **Ordem dos pontos nos cíclicos:** os primeiros `NumberOfStepsPerQuarterCycle` pontos são fase inicial (γ = 0 e tempo = 0); depois os ciclos começam em zero e terminam em zero. 5 ciclos × 20 = 421 pontos. Tempo final = ciclos × DurationPerCycle, na unidade de tempo do projeto (o projeto usa `UnitTime "day"`, logo **dia**).
 - **HS normalmente adensado × OCR = 2 (K0 = 0,5, σ3 = 100):** mesma resistência (272,877 kPa). Início da curva só um pouco mais rígido com OCR: q em ε_a = 0,15 % passa de 139,4 para 144,0 kPa (+3 %); em 1 %, de 228,0 para 231,7. No HS o pré-adensamento age sobretudo no cap (compressão volumétrica), não na rigidez de cisalhamento do triaxial; para ver o efeito do OCR no HS, usar edômetro ou CRS com σ'p.
+
+## Passo 12 (bateria 2 real, 08/11/2026): cíclicos com modelos contráteis e OCR no edômetro/CRS
+Cíclico não drenado por deformação, ±0,2 %, 10 ciclos, σ = 100 kPa, valores de teste do script. Δu ao fim de cada ciclo (deformação de volta a zero):
+- **HS small (ψ = 5°):** CDSS sobe a +14,9 kPa no 2º ciclo e depois inverte até −34,1 (σ'v de 100 → 134); triaxial cíclico vai a −143,5 kPa (p' 100 → 204). Contrai no início e depois **dilata**: com ψ > 0 o HS small gera poropressão negativa. Laços histeréticos reais (amortecimento 16 % no CDSS, 26 % no triaxial).
+- **MCC (normalmente adensado):** Δu salta no 1º ciclo (CDSS 3,78; triaxial 11,1 kPa) e **fica constante**: os ciclos seguintes ficam dentro da superfície de escoamento, em regime elástico, sem amortecimento.
+- **Soft Soil:** CDSS igual ao MCC (1,94 kPa constante); triaxial cíclico acumula devagar, cerca de +0,5 kPa por ciclo (5,5 → 10,2).
+- **Conclusão:** nenhum dos 6 modelos mapeados reproduz acúmulo progressivo de poropressão típico de ensaio cíclico (liquefação/degradação). Para isso são necessários modelos cíclicos próprios do PLAXIS (por exemplo UBC3D-PLM, PM4Sand, PM4Silt), ainda não mapeados neste projeto.
+
+Edômetro (carga até 400 kPa) e CRS (−10 %), sem pré-adensamento × σ'p = 100 kPa:
+- **MCC com σ'p = 100:** d(ε)/d(ln σ'v) = 0,0108 entre 25 e 50 kPa (teoria κ/(1 + e0) = 0,010) e 0,054–0,057 acima de 100 kPa (teoria λ/(1 + e0) = 0,050; cresce porque e diminui). Transição em σ'p, como esperado. ε em 400 kPa: 13,8 %.
+- **MCC sem pré-adensamento:** parte de tensão zero e vira lixo numérico (ε = 18 % já em 25 kPa; CRS chega a só 6,4 kPa em 10 %). **No MCC, sempre informar σ'p no edômetro e no CRS.**
+- **HS com σ'p = 100:** antes de 100 kPa deforma cerca de metade (inclinação 0,0008–0,0012 contra 0,0015–0,0021, recompressão mais rígida); acima de 100 kPa a inclinação é igual à do normalmente adensado (0,0029 e 0,0042). ε em 400 kPa: 0,743 % contra 0,930 %. Aqui o OCR do HS aparece claramente (no triaxial era só +3 %).
+- O CRS saiu drenado (Δu = 0) nos dois modelos.

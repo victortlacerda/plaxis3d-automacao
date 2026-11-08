@@ -11,6 +11,8 @@ Para trabalho, use `../plaxis_soiltest_auto.py`. Os cíclicos não drenados e o 
 
 ## Próximos passos
 
-1. Acúmulo de poropressão em ciclos: repetir a bateria com HS small, MCC e Soft Soil (modelos com contração plástica). O MC com ψ = 0 não acumula.
-2. Efeito do OCR no HS e no MCC pelo edômetro e pelo CRS (modo σ'p), onde o pré-adensamento aparece de fato.
-3. Calibração: ajustar parâmetros (por exemplo φ', E50ref, m) minimizando o erro contra o ensaio de laboratório, usando o script automático para simular e `soiltest_triaxial.py` para medir o erro.
+1. Calibração: ajustar parâmetros (por exemplo φ', E50ref, m) minimizando o erro contra o ensaio de laboratório, usando o script automático para simular e `soiltest_triaxial.py` para medir o erro.
+2. Acúmulo de poropressão cíclica: mapear os modelos cíclicos do PLAXIS (UBC3D-PLM, PM4Sand). Os 6 modelos atuais não acumulam Δu de forma progressiva (bateria 2).
+3. MCC e Soft Soil: usar σ'p por padrão no edômetro e no CRS.
+
+A bateria (`soiltest_bateria.py`) tem duas listas de casos: `RODAR = "1"` (MC, LE e HS: cíclicos, tensão, K0, OCR no triaxial) e `RODAR = "2"` (HS small, MCC e Soft Soil cíclicos; OCR no edômetro e no CRS).
