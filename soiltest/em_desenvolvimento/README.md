@@ -5,6 +5,7 @@ Nada aqui foi validado por completo no PLAXIS real. Para trabalho, use `../plaxi
 | Arquivo | O que é | Situação |
 |---|---|---|
 | `plaxis_soiltest_auto_dev.py` | O mesmo script da versão estável com `SOMENTE_VALIDADO = False`: libera **cíclicos não drenados** e **controle por tensão** no CDSS e no triaxial cíclico | Atributos existem na API; ainda não calculados no PLAXIS real |
+| `soiltest_bateria.py` | Roda sem perguntas, numa única execução, as rodadas pendentes: cíclicos não drenados, controle por tensão, K0 no DSS/CDSS/cíclico e HS sem pré-adensamento × OCR = 2. Grava `soiltest_saida/bateria_<data>.txt` | Testada no mock; falta rodar no PLAXIS |
 | `soiltest_triaxial.py` | Triaxial com comparação contra um CSV de laboratório (RMSE e R² de q × ε_a, ε_v e Δu) | Triaxial validado; comparação com laboratório testada só com dados fictícios (mock). É a base da calibração |
 | `soiltest_ensaios.py` | Edômetro, CRS e DSS com comparação contra laboratório | Superado pelo script automático para rodar os ensaios; mantido pela parte de comparação |
 
