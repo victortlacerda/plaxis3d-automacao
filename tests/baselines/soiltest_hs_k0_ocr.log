@@ -59,6 +59,7 @@ Corte de dilatancia no SoilTest: {'DilatancyCutOff': 'nao exposto no Material do
    Esperado (q_f Mohr-Coulomb): 541.876 kPa
 [OK ] restaurar Triaxial.PreconsolidationPressure = 0 -> 'OK'
    (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+Relatorio: <DIR>/soiltest_saida/auto_HS_D_<DATA>/relatorio.html
 
 3 grafico(s) em <DIR>/soiltest_saida/auto_HS_D_<DATA>/graficos
    triaxial_q_x_eps_a.png

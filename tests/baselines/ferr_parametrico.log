@@ -1,0 +1,314 @@
+Estudo parametrico: MC D variando phi em [28, 30, 32, 34, 36]
+
+############################################################
+# phi = 28
+############################################################
+[OK ] g_i.soilmat() -> <__main__.Mat object at 0x<END>>
+[OK ] Identification -> 'OK'
+[OK ] SoilModel = 2 -> Mohr-Coulomb (2)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+[OK ] cRef (cRef) = 5 -> 'OK'
+[OK ] phi (phi) = 28 -> 'OK'
+[OK ] psi (psi) = 0 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+================ Triaxial ================
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 187.572 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 193.625 kPa
+SoilTest fechado.
+
+############################################################
+# phi = 30
+############################################################
+Material 'PAR_MC_D' ja existe: reutilizando.
+[OK ] SoilModel = 2 -> Mohr-Coulomb (2)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+[OK ] cRef (cRef) = 5 -> 'OK'
+[OK ] phi (phi) = 30 -> 'OK'
+[OK ] psi (psi) = 0 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+================ Triaxial ================
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 209.724 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 217.321 kPa
+SoilTest fechado.
+
+############################################################
+# phi = 32
+############################################################
+Material 'PAR_MC_D' ja existe: reutilizando.
+[OK ] SoilModel = 2 -> Mohr-Coulomb (2)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+[OK ] cRef (cRef) = 5 -> 'OK'
+[OK ] phi (phi) = 32 -> 'OK'
+[OK ] psi (psi) = 0 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+================ Triaxial ================
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 234.003 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 243.499 kPa
+SoilTest fechado.
+
+############################################################
+# phi = 34
+############################################################
+Material 'PAR_MC_D' ja existe: reutilizando.
+[OK ] SoilModel = 2 -> Mohr-Coulomb (2)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+[OK ] cRef (cRef) = 5 -> 'OK'
+[OK ] phi (phi) = 34 -> 'OK'
+[OK ] psi (psi) = 0 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+================ Triaxial ================
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 260.680 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 272.520 kPa
+SoilTest fechado.
+
+############################################################
+# phi = 36
+############################################################
+Material 'PAR_MC_D' ja existe: reutilizando.
+[OK ] SoilModel = 2 -> Mohr-Coulomb (2)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+[OK ] cRef (cRef) = 5 -> 'OK'
+[OK ] phi (phi) = 36 -> 'OK'
+[OK ] psi (psi) = 0 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+================ Triaxial ================
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 290.074 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 304.810 kPa
+SoilTest fechado.
+
+Resumo:
+   valor=28; dilatacao max CD_100kPa=1,50; q teorico CD_100kPa=193,63; q_max CD_100kPa=187,57
+   valor=30; dilatacao max CD_100kPa=1,50; q teorico CD_100kPa=217,32; q_max CD_100kPa=209,72
+   valor=32; dilatacao max CD_100kPa=1,50; q teorico CD_100kPa=243,50; q_max CD_100kPa=234,00
+   valor=34; dilatacao max CD_100kPa=1,50; q teorico CD_100kPa=272,52; q_max CD_100kPa=260,68
+   valor=36; dilatacao max CD_100kPa=1,50; q teorico CD_100kPa=304,81; q_max CD_100kPa=290,07
+
+Relatorio: <DIR>/soiltest_saida/parametrico_MC_phi_<DATA>/relatorio.html
+Saida: <DIR>/soiltest_saida/parametrico_MC_phi_<DATA>
+Estudo parametrico: MC D variando phi em [28, 30, 32, 34, 36]
+
+############################################################
+# phi = 28
+############################################################
+[OK ] g_i.soilmat() -> <__main__.Mat object at 0x<END>>
+[OK ] Identification -> 'OK'
+[OK ] SoilModel = 2 -> Mohr-Coulomb (2)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+[OK ] cRef (cRef) = 5 -> 'OK'
+[OK ] phi (phi) = 28 -> 'OK'
+[OK ] psi (psi) = 0 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+================ Triaxial ================
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 187.572 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 193.625 kPa
+SoilTest fechado.
+
+############################################################
+# phi = 30
+############################################################
+Material 'PAR_MC_D' ja existe: reutilizando.
+[OK ] SoilModel = 2 -> Mohr-Coulomb (2)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+[OK ] cRef (cRef) = 5 -> 'OK'
+[OK ] phi (phi) = 30 -> 'OK'
+[OK ] psi (psi) = 0 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+================ Triaxial ================
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 209.724 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 217.321 kPa
+SoilTest fechado.
+
+############################################################
+# phi = 32
+############################################################
+Material 'PAR_MC_D' ja existe: reutilizando.
+[OK ] SoilModel = 2 -> Mohr-Coulomb (2)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+[OK ] cRef (cRef) = 5 -> 'OK'
+[OK ] phi (phi) = 32 -> 'OK'
+[OK ] psi (psi) = 0 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+================ Triaxial ================
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 234.003 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 243.499 kPa
+SoilTest fechado.
+
+############################################################
+# phi = 34
+############################################################
+Material 'PAR_MC_D' ja existe: reutilizando.
+[OK ] SoilModel = 2 -> Mohr-Coulomb (2)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+[OK ] cRef (cRef) = 5 -> 'OK'
+[OK ] phi (phi) = 34 -> 'OK'
+[OK ] psi (psi) = 0 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+================ Triaxial ================
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 260.680 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 272.520 kPa
+SoilTest fechado.
+
+############################################################
+# phi = 36
+############################################################
+Material 'PAR_MC_D' ja existe: reutilizando.
+[OK ] SoilModel = 2 -> Mohr-Coulomb (2)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 30000 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+[OK ] cRef (cRef) = 5 -> 'OK'
+[OK ] phi (phi) = 36 -> 'OK'
+[OK ] psi (psi) = 0 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+================ Triaxial ================
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 290.074 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 304.810 kPa
+SoilTest fechado.
+
+Resumo:
+   valor=28; dilatacao max CD_100kPa=1,50; q teorico CD_100kPa=193,63; q_max CD_100kPa=187,57
+   valor=30; dilatacao max CD_100kPa=1,50; q teorico CD_100kPa=217,32; q_max CD_100kPa=209,72
+   valor=32; dilatacao max CD_100kPa=1,50; q teorico CD_100kPa=243,50; q_max CD_100kPa=234,00
+   valor=34; dilatacao max CD_100kPa=1,50; q teorico CD_100kPa=272,52; q_max CD_100kPa=260,68
+   valor=36; dilatacao max CD_100kPa=1,50; q teorico CD_100kPa=304,81; q_max CD_100kPa=290,07
+
+Relatorio: <DIR>/soiltest_saida/parametrico_MC_phi_<DATA>/relatorio.html
+Saida: <DIR>/soiltest_saida/parametrico_MC_phi_<DATA>relatorio.html gerado

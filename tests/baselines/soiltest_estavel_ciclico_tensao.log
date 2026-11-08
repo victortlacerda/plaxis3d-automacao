@@ -25,6 +25,7 @@ ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
    Fim de cada ciclo: du = [4.00, 20.00, 36.00, 52.00] kPa; sigma'v = [100.00, 100.00, 100.00, 100.00] kPa
    Ultimo ciclo: G_sec = 11538.5 kPa; amplitude = 0.5000 % / 57.69 kPa; amortecimento = 0.50 %
    du max = 52.00 kPa; du min = 0.00 kPa
+Relatorio: <DIR>/soiltest_saida/auto_MC_D_<DATA>/relatorio.html
 
 5 grafico(s) em <DIR>/soiltest_saida/auto_MC_D_<DATA>/graficos
    cdss_tau_x_gamma.png

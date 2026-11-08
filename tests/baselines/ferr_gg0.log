@@ -1,0 +1,204 @@
+Curvas G/G0 e D: HSsmall D, sigma'v0 = 100 kPa, amplitudes [0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3] %
+[OK ] g_i.soilmat() -> <__main__.Mat object at 0x<END>>
+[OK ] Identification -> 'OK'
+[OK ] SoilModel = 4 -> HS small (4)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] E50ref (E50Ref) = 40000 -> 'OK'
+[OK ] Eoedref (EOedRef) = 40000 -> 'OK'
+[OK ] Eurref (EURRef) = 120000 -> 'OK'
+[OK ] m (PowerM) = 0.5 -> 'OK'
+[OK ] nuur (nuUR) = 0.2 -> 'OK'
+[OK ] pref (pRef) = 100 -> 'OK'
+[OK ] cref (cRef) = 1 -> 'OK'
+[OK ] phi (phi) = 35 -> 'OK'
+[OK ] psi (psi) = 5 -> 'OK'
+[OK ] G0ref (G0Ref) = 120000 -> 'OK'
+[OK ] gamma07 (gamma07) = 0.0002 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 4).
+HS small: G0 esperado = 120000 kPa; Gur = 50000 kPa (Gur/G0 = 0.417); gamma0.7 = 0.0002
+
+-- CDSS amplitude 0.0001 % --
+[OK ] CDSS gamma_0p0001pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.0001, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p0001pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.0003 % --
+[OK ] CDSS gamma_0p0003pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.0003, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p0003pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.001 % --
+[OK ] CDSS gamma_0p001pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.001, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p001pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.003 % --
+[OK ] CDSS gamma_0p003pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.003, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p003pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.01 % --
+[OK ] CDSS gamma_0p01pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.01, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p01pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.03 % --
+[OK ] CDSS gamma_0p03pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.03, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p03pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.1 % --
+[OK ] CDSS gamma_0p1pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.1, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p1pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.3 % --
+[OK ] CDSS gamma_0p3pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.3, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p3pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+SoilTest fechado.
+
+gamma (%) | G (kPa) | G/G0 sim | D sim (%) | G/G0 HSsmall | D Masing (%) | G/G0 Darendeli | D Darendeli (%)
+   1,000e-04 | 11538,4615 | 1,0000 | 0,4995 | 0,9981 | 0,0408 | 0,9954 | 0,8418
+   3,000e-04 | 11538,4615 | 1,0000 | 0,4995 | 0,9943 | 0,1222 | 0,9876 | 0,9179
+   0,0010 | 11538,4615 | 1,0000 | 0,4995 | 0,9811 | 0,4046 | 0,9633 | 1,1790
+   0,0030 | 11538,4615 | 1,0000 | 0,4995 | 0,9454 | 1,1913 | 0,9054 | 1,8844
+   0,0100 | 11538,4615 | 1,0000 | 0,4995 | 0,8386 | 3,7321 | 0,7599 | 3,9709
+   0,0300 | 11538,4615 | 1,0000 | 0,4995 | 0,6339 | 9,6067 | 0,5356 | 7,9341
+   0,1000 | 11538,4615 | 1,0000 | 0,4995 | 0,4167 | 21,9359 | 0,2761 | 13,8164
+   0,3000 | 11538,4615 | 1,0000 | 0,4995 | 0,4167 | 36,2227 | 0,1220 | 18,2860
+G0 simulado (menor amplitude) = 11538 kPa; esperado 120000 kPa
+
+Relatorio: <DIR>/soiltest_saida/gg0_HSsmall_<DATA>/relatorio.html
+Saida: <DIR>/soiltest_saida/gg0_HSsmall_<DATA>
+Curvas G/G0 e D: HSsmall D, sigma'v0 = 100 kPa, amplitudes [0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1, 0.3] %
+[OK ] g_i.soilmat() -> <__main__.Mat object at 0x<END>>
+[OK ] Identification -> 'OK'
+[OK ] SoilModel = 4 -> HS small (4)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] E50ref (E50Ref) = 40000 -> 'OK'
+[OK ] Eoedref (EOedRef) = 40000 -> 'OK'
+[OK ] Eurref (EURRef) = 120000 -> 'OK'
+[OK ] m (PowerM) = 0.5 -> 'OK'
+[OK ] nuur (nuUR) = 0.2 -> 'OK'
+[OK ] pref (pRef) = 100 -> 'OK'
+[OK ] cref (cRef) = 1 -> 'OK'
+[OK ] phi (phi) = 35 -> 'OK'
+[OK ] psi (psi) = 5 -> 'OK'
+[OK ] G0ref (G0Ref) = 120000 -> 'OK'
+[OK ] gamma07 (gamma07) = 0.0002 -> 'OK'
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 4).
+HS small: G0 esperado = 120000 kPa; Gur = 50000 kPa (Gur/G0 = 0.417); gamma0.7 = 0.0002
+
+-- CDSS amplitude 0.0001 % --
+[OK ] CDSS gamma_0p0001pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.0001, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p0001pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.0003 % --
+[OK ] CDSS gamma_0p0003pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.0003, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p0003pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.001 % --
+[OK ] CDSS gamma_0p001pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.001, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p001pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.003 % --
+[OK ] CDSS gamma_0p003pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.003, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p003pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.01 % --
+[OK ] CDSS gamma_0p01pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.01, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p01pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.03 % --
+[OK ] CDSS gamma_0p03pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.03, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p03pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.1 % --
+[OK ] CDSS gamma_0p1pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.1, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p1pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+
+-- CDSS amplitude 0.3 % --
+[OK ] CDSS gamma_0p3pct: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.3, NumberOfCycles=2, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS gamma_0p3pct -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00] kPa
+   G_sec = 11538 kPa; D = 0.50 %
+SoilTest fechado.
+
+gamma (%) | G (kPa) | G/G0 sim | D sim (%) | G/G0 HSsmall | D Masing (%) | G/G0 Darendeli | D Darendeli (%)
+   1,000e-04 | 11538,4615 | 1,0000 | 0,4995 | 0,9981 | 0,0408 | 0,9954 | 0,8418
+   3,000e-04 | 11538,4615 | 1,0000 | 0,4995 | 0,9943 | 0,1222 | 0,9876 | 0,9179
+   0,0010 | 11538,4615 | 1,0000 | 0,4995 | 0,9811 | 0,4046 | 0,9633 | 1,1790
+   0,0030 | 11538,4615 | 1,0000 | 0,4995 | 0,9454 | 1,1913 | 0,9054 | 1,8844
+   0,0100 | 11538,4615 | 1,0000 | 0,4995 | 0,8386 | 3,7321 | 0,7599 | 3,9709
+   0,0300 | 11538,4615 | 1,0000 | 0,4995 | 0,6339 | 9,6067 | 0,5356 | 7,9341
+   0,1000 | 11538,4615 | 1,0000 | 0,4995 | 0,4167 | 21,9359 | 0,2761 | 13,8164
+   0,3000 | 11538,4615 | 1,0000 | 0,4995 | 0,4167 | 36,2227 | 0,1220 | 18,2860
+G0 simulado (menor amplitude) = 11538 kPa; esperado 120000 kPa
+
+Relatorio: <DIR>/soiltest_saida/gg0_HSsmall_<DATA>/relatorio.html
+Saida: <DIR>/soiltest_saida/gg0_HSsmall_<DATA>relatorio.html gerado

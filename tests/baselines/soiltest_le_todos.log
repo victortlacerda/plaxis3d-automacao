@@ -74,6 +74,7 @@ ATENCAO: o SoilTest abriu o modelo 0 (esperado 1).
    (sem excesso de poropressao: grafico dss_du_x_gamma.png omitido)
    (sem excesso de poropressao: grafico cdss_du_x_tempo.png omitido)
    (sem excesso de poropressao: grafico cyctriaxial_du_x_tempo.png omitido)
+Relatorio: <DIR>/soiltest_saida/auto_LE_D_<DATA>/relatorio.html
 
 18 grafico(s) em <DIR>/soiltest_saida/auto_LE_D_<DATA>/graficos
    triaxial_q_x_eps_a.png
