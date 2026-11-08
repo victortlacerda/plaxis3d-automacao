@@ -6,6 +6,7 @@ explicadas no [glossário](../glossario.md). Os gráficos destas rodadas estão 
 | Pasta | Rodada |
 |---|---|
 | `LE_drenado_todos_ensaios/` | Linear Elastic drenado (E' = 30000 kPa, ν' = 0,3): triaxial, edômetro, CRS, DSS, CDSS e triaxial cíclico. Todos conferem com a teoria |
+| `ferramentas_20261108/` | Rodadas reais das ferramentas: auditoria dos 11 materiais do projeto, biblioteca (3 materiais da planilha modelo), paramétrico de φ' e curvas G/G0 do HS small. Cada pasta tem `relatorio.html` e `log.txt` |
 | `bateria_20261108_3/` | Bateria 3: σ'p padrão de 100 kPa no edômetro e no CRS do MCC e do Soft Soil, sem informar pré-adensamento |
 | `bateria_20261108_2/` | Bateria 2: cíclicos não drenados com HS small, MCC e Soft Soil; edômetro e CRS do HS e do MCC sem pré-adensamento × σ'p = 100 kPa |
 | `bateria_20261108/` | Bateria de 08/11/2026: cíclicos não drenados e controle por tensão (MC), K0 no DSS/CDSS/triaxial cíclico (LE), HS normalmente adensado × OCR = 2. Resumo em `resumo_bateria.txt` |

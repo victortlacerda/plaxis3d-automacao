@@ -156,3 +156,10 @@ Edômetro (carga até 400 kPa) e CRS (−10 %), sem pré-adensamento × σ'p = 1
 Sem informar pré-adensamento, o script aplica `PreconsolidationPressure` = 100 kPa (CONFIG `sigma_p_padrao_fases_kPa`) no Oedometer e no CRS desses dois modelos, e avisa no log.
 - MCC: resultado idêntico ao caso com σ'p informado (ε 13,84 % em 400 kPa; CRS 221,8 kPa em 10 %).
 - Soft Soil: d(ε)/d(ln σ'v) = 0,0195 antes de σ'p (κ* = 0,02) e 0,1000 depois (λ* = 0,10). ε 21,5 % em 400 kPa; CRS 131,9 kPa em 10 %.
+
+## Passo 14 (ferramentas, 08/11/2026, PLAXIS real)
+- **`g.close()`** (SoilTest) fecha a janela; a conexão cai junto (o retorno dá erro, esperado). Cada abertura seguinte volta a usar a porta 10001.
+- **Pesos específicos** do material no Input: `gammaUnsat` e `gammaSat` (aceitos por `setproperties`).
+- **Material reutilizado e alterado no Input** e reaberto no SoilTest: o SoilTest recebe os valores novos (paramétrico de φ' com q_max = q_f de MC para cada valor).
+- **Leitura dos materiais do projeto**: `g_i.Soils` lista os materiais; `Identification`, `echo()` (SoilModel e DrainageType com número) e os atributos por nome dão modelo, drenagem e parâmetros.
+- **HS small no CDSS**: G0 simulado 119 830 kPa (G0ref 120 000 em σ' = pref); G/G0 coincide com o backbone 1/(1 + 0,385 γ/γ0,7) até γ = 0,01 % usando **γ = γxy do CDSS**; acima de 0,03 % a plasticidade leva G abaixo do corte Gur/G0. Amortecimento segue Masing até 0,1 %.

@@ -1,0 +1,535 @@
+Auditoria: 11 material(is) no projeto
+
+============================================================
+MC_D_teste: Mohr-Coulomb / D
+============================================================
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 2
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 117.325 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 117.321 kPa
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 217.330 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 217.321 kPa
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=200, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   q_max simulado = 417.338 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 417.321 kPa
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.00 kPa; eps_v max = 0.9905 %
+   Esperado (eps_v = sigma_v/E_oed, E_oed = 40384.6 kPa): 0.9905 % no pico; simulado 0.9905 %
+SoilTest fechado.
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+
+============================================================
+LE_D_teste: Linear Elastic / D
+============================================================
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 1
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 4500.000 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q0 + E x eps_a (linear)): 4500.000 kPa
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 4500.000 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q0 + E x eps_a (linear)): 4500.000 kPa
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=200, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   q_max simulado = 4500.000 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q0 + E x eps_a (linear)): 4500.000 kPa
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.00 kPa; eps_v max = 0.9905 %
+   Esperado (eps_v = sigma_v/E_oed, E_oed = 40384.6 kPa): 0.9905 % no pico; simulado 0.9905 %
+SoilTest fechado.
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+
+============================================================
+HS_D_teste: Hardening Soil / D
+============================================================
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 3
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 138.360 kPa; dilatacao volumetrica maxima = 2.395 %
+   Esperado (q_f Mohr-Coulomb): 138.351 kPa
+   E50 (secante a 50% de q_f): simulado 26796 kPa | formula 28483 kPa
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 272.878 kPa; dilatacao volumetrica maxima = 2.212 %
+   Esperado (q_f Mohr-Coulomb): 272.859 kPa
+   E50 (secante a 50% de q_f): simulado 38535 kPa | formula 40000 kPa
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=200, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   q_max simulado = 541.911 kPa; dilatacao volumetrica maxima = 1.951 %
+   Esperado (q_f Mohr-Coulomb): 541.876 kPa
+   E50 (secante a 50% de q_f): simulado 55123 kPa | formula 56369 kPa
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.06 kPa; eps_v max = 0.9304 %
+SoilTest fechado.
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+
+============================================================
+HSsmall_D_teste: HS small / D
+============================================================
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 4
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 138.360 kPa; dilatacao volumetrica maxima = 2.392 %
+   Esperado (q_f Mohr-Coulomb): 138.351 kPa
+   E50 (secante a 50% de q_f): simulado 29476 kPa | formula 28483 kPa
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 272.878 kPa; dilatacao volumetrica maxima = 2.202 %
+   Esperado (q_f Mohr-Coulomb): 272.859 kPa
+   E50 (secante a 50% de q_f): simulado 41471 kPa | formula 40000 kPa
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=200, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   q_max simulado = 541.913 kPa; dilatacao volumetrica maxima = 1.932 %
+   Esperado (q_f Mohr-Coulomb): 541.876 kPa
+   E50 (secante a 50% de q_f): simulado 57750 kPa | formula 56369 kPa
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.05 kPa; eps_v max = 0.9146 %
+SoilTest fechado.
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+
+============================================================
+MCC_D_teste: Modified Cam-Clay / D
+============================================================
+   INFO: M = 1.20 equivale a φ'cs = 30.0° (compressão triaxial).
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 8
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 92.312 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q no estado critico (3 M s3/(3-M); o ensaio pode nao chegar la)): 100.000 kPa
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 184.624 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q no estado critico (3 M s3/(3-M); o ensaio pode nao chegar la)): 200.000 kPa
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=200, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   q_max simulado = 369.248 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q no estado critico (3 M s3/(3-M); o ensaio pode nao chegar la)): 400.000 kPa
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+   Modified Cam-Clay: sigma'p padrao de 100 kPa no Oedometer (sem ele o ensaio parte de tensao zero).
+[OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.06 kPa; eps_v max = 13.8424 %
+[OK ] restaurar Oedometer.PreconsolidationPressure = 0 -> 'OK'
+SoilTest fechado.
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+
+============================================================
+SS_D_teste: Soft Soil / D
+============================================================
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 5
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 76.338 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 76.335 kPa
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 149.537 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 149.531 kPa
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=200, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   q_max simulado = 295.934 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 295.922 kPa
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+   Soft Soil: sigma'p padrao de 100 kPa no Oedometer (sem ele o ensaio parte de tensao zero).
+[OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.05 kPa; eps_v max = 21.5037 %
+[OK ] restaurar Oedometer.PreconsolidationPressure = 0 -> 'OK'
+SoilTest fechado.
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+
+============================================================
+Aterro: Mohr-Coulomb / D
+============================================================
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 2
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 105.139 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 105.134 kPa
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 193.635 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 193.625 kPa
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=200, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   q_max simulado = 370.626 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 370.608 kPa
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.00 kPa; eps_v max = 1.9810 %
+   Esperado (eps_v = sigma_v/E_oed, E_oed = 20192.3 kPa): 1.9810 % no pico; simulado 1.9810 %
+SoilTest fechado.
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+
+============================================================
+Areia_media: Hardening Soil / D
+============================================================
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 3
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 123.297 kPa; dilatacao volumetrica maxima = 1.252 %
+   Esperado (q_f Mohr-Coulomb): 123.290 kPa
+   E50 (secante a 50% de q_f): simulado 23372 kPa | formula 24936 kPa
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 242.909 kPa; dilatacao volumetrica maxima = 1.092 %
+   Esperado (q_f Mohr-Coulomb): 242.896 kPa
+   E50 (secante a 50% de q_f): simulado 33516 kPa | formula 35000 kPa
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=200, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   q_max simulado = 482.136 kPa; dilatacao volumetrica maxima = 0.865 %
+   Esperado (q_f Mohr-Coulomb): 482.108 kPa
+   E50 (secante a 50% de q_f): simulado 47983 kPa | formula 49309 kPa
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.06 kPa; eps_v max = 1.0658 %
+SoilTest fechado.
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+
+============================================================
+Argila_mole: Soft Soil / UA
+============================================================
+   INFO: Undrained A: a resistência não drenada resulta dos parâmetros efetivos e do caminho de tensões; confira o su com um triaxial não drenado (a auditoria roda um).
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 5
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 73.198 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 73.196 kPa
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 137.330 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 137.327 kPa
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=200, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   q_max simulado = 265.598 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 265.590 kPa
+
+-- Triaxial CU_50kPa --
+[OK ] Triaxial CU_50kPa: Behaviour=Undrained, Consolidation=Isotropic, Direction=Compression, CellPressure=50, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CU_50kPa -> 'OK'
+   q_max simulado = 36.917 kPa; dilatacao volumetrica maxima = 0.000 %
+
+-- Triaxial CU_100kPa --
+[OK ] Triaxial CU_100kPa: Behaviour=Undrained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CU_100kPa -> 'OK'
+   q_max simulado = 69.436 kPa; dilatacao volumetrica maxima = 0.000 %
+
+-- Triaxial CU_200kPa --
+[OK ] Triaxial CU_200kPa: Behaviour=Undrained, Consolidation=Isotropic, Direction=Compression, CellPressure=200, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CU_200kPa -> 'OK'
+   q_max simulado = 134.475 kPa; dilatacao volumetrica maxima = 0.000 %
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+   Soft Soil: sigma'p padrao de 100 kPa no Oedometer (sem ele o ensaio parte de tensao zero).
+[OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.06 kPa; eps_v max = 22.7870 %
+[OK ] restaurar Oedometer.PreconsolidationPressure = 0 -> 'OK'
+SoilTest fechado.
+
+============================================================
+PAR_MC_D: Mohr-Coulomb / D
+============================================================
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 2
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 162.226 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 162.218 kPa
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 304.825 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 304.810 kPa
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=200, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   q_max simulado = 590.035 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (q_f Mohr-Coulomb): 589.994 kPa
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.00 kPa; eps_v max = 0.9905 %
+   Esperado (eps_v = sigma_v/E_oed, E_oed = 40384.6 kPa): 0.9905 % no pico; simulado 0.9905 %
+SoilTest fechado.
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+
+============================================================
+GG0_HSsmall_D: HS small / D
+============================================================
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 4
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 138.360 kPa; dilatacao volumetrica maxima = 2.392 %
+   Esperado (q_f Mohr-Coulomb): 138.351 kPa
+   E50 (secante a 50% de q_f): simulado 29476 kPa | formula 28483 kPa
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 272.878 kPa; dilatacao volumetrica maxima = 2.202 %
+   Esperado (q_f Mohr-Coulomb): 272.859 kPa
+   E50 (secante a 50% de q_f): simulado 41471 kPa | formula 40000 kPa
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=200, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   q_max simulado = 541.913 kPa; dilatacao volumetrica maxima = 1.932 %
+   Esperado (q_f Mohr-Coulomb): 541.876 kPa
+   E50 (secante a 50% de q_f): simulado 57750 kPa | formula 56369 kPa
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 400.05 kPa; eps_v max = 0.9146 %
+SoilTest fechado.
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+
+Relatorio: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\soiltest_saida\auditoria_20261108_134334\relatorio.html
+Saida: C:\Users\User\Documents\Projetos\Integração PLAXIS\soiltest\soiltest_saida\auditoria_20261108_134334

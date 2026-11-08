@@ -1,6 +1,12 @@
 # Histórico de versões
 
 ## Não lançado
+- `soiltest/`: relatório técnico HTML (`relatorio.html`, imprimível em PDF) em toda rodada do script principal.
+- `soiltest/`: ferramentas `soiltest_auditoria.py` (auditoria dos materiais do projeto), `soiltest_biblioteca.py`
+  (materiais a partir de planilha CSV), `soiltest_parametrico.py` (estudo paramétrico) e `soiltest_gg0.py`
+  (curvas G/G0 e amortecimento, com HS small teórico e Darendeli), validadas no PLAXIS real.
+- `soiltest/plaxis_soiltest_auto.py`: funções reutilizáveis `obter_input`, `abrir_soiltest`, `executar_ensaios` e
+  `fechar_soiltest` (fecha a janela do SoilTest pela API).
 - `soiltest/`: no MCC e no Soft Soil, edômetro e CRS usam σ'p padrão (100 kPa, ajustável em `sigma_p_padrao_fases_kPa`
   ou na pergunta do modo interativo) quando o pré-adensamento não é informado; edômetro volta a vir ligado nesses modelos.
 - `soiltest/`: Δu e tensão efetiva ao fim de cada ciclo no log dos ensaios cíclicos; bateria 2 (modelos contráteis em
