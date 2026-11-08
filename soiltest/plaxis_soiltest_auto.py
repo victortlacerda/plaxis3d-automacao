@@ -905,6 +905,16 @@ def checagem_ciclico(tipo, d, modelo, dren, p, comp, cfg_t):
     if m:
         out["ultimo_ciclo"] = m
         out["rotulo_modulo"] = rot
+    # Estado ao fim de cada ciclo (deformacao/tensao de volta a zero): mostra acumulo de poropressao ou queda
+    # da tensao efetiva. No CDSS nao drenado o SoilTest pode representar o volume constante pela tensao vertical.
+    spq = int(cfg_t["passos_por_quarto"])
+    fins = list(range(spq, n, n_ciclo))
+    if len(fins) > 1:
+        efetiva = "sig_v_kPa" if tipo == "CDSS" else "p_kPa"
+        out["fim_de_ciclo"] = {"du_kPa": [d["du_kPa"][i] for i in fins], efetiva: [d[efetiva][i] for i in fins]}
+        log("   Fim de cada ciclo: du = [{}] kPa; {} = [{}] kPa".format(
+            ", ".join("{:.2f}".format(d["du_kPa"][i]) for i in fins), "sigma'v" if tipo == "CDSS" else "p'",
+            ", ".join("{:.2f}".format(d[efetiva][i]) for i in fins)))
     try:
         if modelo == "LE" and dren in ("D", "UA", "NP") and p.get("ERef") and p.get("nu") is not None and m:
             G = p["ERef"] / (2 * (1 + p["nu"]))

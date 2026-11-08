@@ -22,6 +22,7 @@ ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
    Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
 [OK ] validate -> 'The material definition is valid.'
 [OK ] calculate CDSS CU_100kPa -> 'OK'
+   Fim de cada ciclo: du = [4.00, 20.00, 36.00, 52.00] kPa; sigma'v = [100.00, 100.00, 100.00, 100.00] kPa
    Ultimo ciclo: G_sec = 11538.5 kPa; amplitude = 0.5000 % / 57.69 kPa; amortecimento = 0.50 %
    du max = 52.00 kPa; du min = 0.00 kPa
 

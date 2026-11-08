@@ -55,6 +55,7 @@ ATENCAO: o SoilTest abriu o modelo 0 (esperado 1).
    Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
 [OK ] validate -> 'The material definition is valid.'
 [OK ] calculate CDSS CD_100kPa -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00, -0.00] kPa; sigma'v = [100.00, 100.00, 100.00, 100.00] kPa
    Ultimo ciclo: G_sec = 11538.5 kPa; amplitude = 0.5000 % / 57.69 kPa; amortecimento = 0.50 %
    Esperado (G = E/(2(1+nu)) (LE)): 11538.462 kPa
 
@@ -65,6 +66,7 @@ ATENCAO: o SoilTest abriu o modelo 0 (esperado 1).
    Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
 [OK ] validate -> 'The material definition is valid.'
 [OK ] calculate CycTriaxial CD_100kPa -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00, -0.00] kPa; p' = [150.00, 150.00, 150.00, 150.00] kPa
    Ultimo ciclo: E_sec = 30000.0 kPa; amplitude = 0.5000 % / 150.00 kPa; amortecimento = 0.00 %
    Esperado (E (LE, drenado)): 30000.000 kPa
    (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)

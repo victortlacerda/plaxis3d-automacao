@@ -22,7 +22,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() els
 SCRIPT = os.path.join(AQUI, "plaxis_soiltest_auto_dev.py")
 
 SEM = {"triaxial": {"rodar": False}, "oedometer": {"rodar": False}}
-CASOS = [
+CASOS_1 = [
     # (nome, modelo, drenagem, ajustes do CONFIG, o que verificar)
     ("1_ciclicos_nao_drenados", "MC", "D", dict(SEM, **{
         "valores": {"ERef": 30000, "nu": 0.3, "cRef": 5, "phi": 30, "psi": 0},
@@ -61,6 +61,32 @@ CASOS = [
 ]
 
 
+CIC_U = {"pressoes_kPa": [100], "comportamentos": ["Undrained"], "controle": "Strain", "amplitude": 0.2,
+         "ciclos": 10, "passos_por_quarto": 20}
+FASES = {"oedometer": {"rodar": True}, "crs": {"rodar": True, "fases": [{"Duration": 1, "Epsinc": -10, "Steps": 100}]}}
+CASOS_2 = [
+    # Item 1: acumulo de poropressao em ciclos com modelos que contraem (valores de teste do CONFIG)
+    ("5_HSsmall_ciclico_nao_drenado", "HSsmall", "D", dict(SEM, cdss=dict(CIC_U, rodar=True), triaxial_ciclico=dict(CIC_U, rodar=True)),
+     "Delta u (ou queda de sigma'v / p') acumulando de ciclo a ciclo"),
+    ("6_MCC_ciclico_nao_drenado", "MCC", "D", dict(SEM, cdss=dict(CIC_U, rodar=True), triaxial_ciclico=dict(CIC_U, rodar=True)),
+     "Delta u acumulando; MCC normalmente adensado deve contrair"),
+    ("7_SoftSoil_ciclico_nao_drenado", "SS", "D", dict(SEM, cdss=dict(CIC_U, rodar=True), triaxial_ciclico=dict(CIC_U, rodar=True)),
+     "Delta u acumulando"),
+    # Item 2: efeito do pre-adensamento no edometro e no CRS (sigma'p = 100 kPa x sem pre-adensamento)
+    ("8a_HS_edometro_NC", "HS", "D", dict(FASES, triaxial={"rodar": False}, preadensamento={"modo": "nenhum", "valor": 0}),
+     "Referencia normalmente adensada"),
+    ("8b_HS_edometro_pc100", "HS", "D", dict(FASES, triaxial={"rodar": False}, preadensamento={"modo": "pressao", "valor": 100}),
+     "Menos deformacao ate ~100 kPa (recompressao com Eur) e depois curva virgem"),
+    ("9a_MCC_edometro_NC", "MCC", "D", dict(FASES, triaxial={"rodar": False}, preadensamento={"modo": "nenhum", "valor": 0}),
+     "Referencia normalmente adensada"),
+    ("9b_MCC_edometro_pc100", "MCC", "D", dict(FASES, triaxial={"rodar": False}, preadensamento={"modo": "pressao", "valor": 100}),
+     "Inclinacao kappa ate ~100 kPa e lambda depois"),
+]
+BATERIAS = {"1": CASOS_1, "2": CASOS_2}
+RODAR = "2"          # qual bateria rodar ("1" = cicicos MC/tensao/K0/OCR triaxial; "2" = modelos contrateis e OCR no edometro)
+CASOS = BATERIAS[RODAR]
+
+
 def mesclar(base, ajustes):
     for k, v in ajustes.items():
         if isinstance(v, dict) and isinstance(base.get(k), dict) and k != "valores":
@@ -77,7 +103,7 @@ def main():
         os.environ["PLAXIS_PASSWORD"] = getpass.getpass("Senha do servidor do SoilTest (pedida uma vez so): ")
     with open(SCRIPT, "rb") as f:
         codigo = compile(f.read(), SCRIPT, "exec")
-    resumo = ["Bateria SoilTest - {}".format(datetime.datetime.now().isoformat(timespec="seconds")), ""]
+    resumo = ["Bateria SoilTest {} - {}".format(RODAR, datetime.datetime.now().isoformat(timespec="seconds")), ""]
     for nome, modelo, dren, ajustes, verificar in CASOS:
         print("\n" + "#" * 70 + "\n# CASO {}  ({} / {})\n# Verificar: {}\n".format(nome, modelo, dren, verificar) + "#" * 70)
         ns = {"__name__": "soiltest_auto", "__file__": SCRIPT, "__builtins__": __builtins__}
@@ -95,7 +121,8 @@ def main():
             saida = next((l.split("Saida:", 1)[1].strip() for l in reversed(linhas) if "Saida:" in l), "?")
             chave = [l for l in linhas if any(t in l for t in ("Tensoes iniciais", "q_max", "tau_max", "Ultimo ciclo",
                                                                  "du max", "Esperado", "Precons", "ERR", "ATENCAO",
-                                                                 "Aviso", "Versao estavel", "E50"))]
+                                                                 "Aviso", "Versao estavel", "E50", "Fim de cada ciclo",
+                                                                 "pontos; sigma_v"))]
             resumo += ["== {} ({} / {}) rc={}".format(nome, modelo, dren, rc), "   verificar: " + verificar,
                        "   saida: " + saida] + ["   " + l.strip() for l in chave] + [""]
         except Exception:
