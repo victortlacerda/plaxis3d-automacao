@@ -18,6 +18,18 @@ na pasta de cada caso. Os comandos enviados ao PLAXIS são os mesmos já validad
 2. Preencha a aba **Sapatas** de `sapatas_lote.xlsx` (a aba **Instruções** explica cada coluna).
 3. Rode `sapata_lote.py` pelo executor externo. A saída fica em `lote_<data>/` e o painel abre no navegador.
 
-## Status
-Testados com o mock (`tests/regressao.sh`); **ainda sem rodada no PLAXIS real**. Os fatores analíticos foram
-conferidos com tabelas de livro (Nc, Nq, Nγ para φ' = 20° e 30°).
+## Rodar sem digitar nada (pelo menu do PLAXIS)
+1. Em `ferramentas/auto_config.json`, indique o script e as respostas (uma por pergunta; "" = Enter).
+2. No PLAXIS 3D Input: **Expert > Run Python script > Open...** e escolha `ferramentas/executar_auto.py`.
+   (É preciso o PLAXIS ter um Python configurado em Expert > Python > Configure Python interpreter.)
+3. Tudo o que for impresso vai para o log indicado no `auto_config.json`.
+Pelo executor externo tudo continua funcionando como antes.
+
+## Status (08/11/2026)
+Rodados no **PLAXIS 3D 2024.2 real**:
+- `sapata_lote.py` com 2 casos (malha coarse): Exemplo 1 com carga (qu tangentes 905 kN/m², 3485 elementos) e
+  Exemplo 2 com 25 mm prescritos (2982 kN, 4111 elementos). Repetido: mesmo resultado.
+- `sapata_relatorio.py` (memorial do Exemplo 2) e `ferramentas/resumo_projeto.py` (painel HTML).
+- `sapata_sensibilidade.py`: malha very coarse (3056 kN) e coarse (2982 kN) concluídas; as rodadas medium e de
+  largura foram canceladas por **disco cheio** no C: e agora são descartadas automaticamente (LogInfo 254).
+Fatores analíticos conferidos com tabelas de livro (Nc, Nq, Nγ para φ' = 20° e 30°).
