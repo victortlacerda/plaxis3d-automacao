@@ -287,19 +287,147 @@ def setar_coarseness(poly, valor):
     return False
 
 
-try:
-    poly = g_i.Polygon_1
-except Exception:
-    poly = superficie
+# No PLAXIS 3D 2024.2 o coarseness da superfície fica no polígono do modo Mesh (Polygon_1_1), e não em
+# Polygon_1 (que devolve uma lista somente leitura). aplicar_coarseness() é a mesma rotina validada no
+# Exemplo 2 e no script interativo: grava em Polygon_1_N e confere lendo de volta do servidor.
+def _num_ou_lista(txt):
+    """Extrai os números que aparecem depois de 'CoarsenessFactor' num texto de echo()."""
+    import re
+    achados = []
+    for mt in re.finditer(r"CoarsenessFactor[^0-9\-+\n]*([-+]?[0-9]*\.?[0-9]+(?:[eE][-+]?[0-9]+)?)", txt):
+        achados.append(float(mt.group(1)))
+    return achados or None
 
-if not setar_coarseness(poly, COARSENESS_SAPATA):
+
+def ler_coarseness_servidor(nome):
+    """Lê o coarseness de um objeto buscado de novo em g_i (echo() vem do servidor)."""
+    try:
+        obj = getattr(g_i, nome)
+    except Exception:
+        return None
+    try:
+        v = _num_ou_lista(str(obj.echo()))
+        if v:
+            return v
+    except Exception:
+        pass
+    return _ler_lista(obj)
+
+
+def _confere(nome, valor):
+    lido = ler_coarseness_servidor(nome)
+    return bool(lido) and all(abs(v - valor) < 1e-9 for v in lido), lido
+
+
+def aplicar_coarseness(valor):
+    """
+    O coarseness de uma superfície fica nos polígonos do modo Mesh (Polygon_1_1, ...), e não em
+    Polygon_1. No log do Exemplo 1 o comando que funcionou foi 'set Polygon_1_1.CoarsenessFactor 0.1'.
+    Tenta (1) direto nos Polygon_1_N existentes e (2) por índice em Polygon_1.CoarsenessFactor[i].
+    Devolve True se algum caminho foi confirmado lendo de volta do servidor.
+    """
+    nomes = []
+    for j in range(1, 13):
+        nome = "Polygon_1_{}".format(j)
+        try:
+            getattr(g_i, nome).echo()
+            nomes.append(nome)
+        except Exception:
+            pass
+    print("    Polígonos do modo Mesh encontrados: {}".format(nomes or "nenhum"))
+
+    for nome in nomes:
+        print("    {}: coarseness atual = {}".format(nome, ler_coarseness_servidor(nome)))
+        for rotulo, f in (
+            ("atribuição direta", lambda n=nome: setattr(getattr(g_i, n), "CoarsenessFactor", valor)),
+            ("setproperties", lambda n=nome: g_i.setproperties(getattr(g_i, n), "CoarsenessFactor", valor)),
+        ):
+            try:
+                f()
+            except Exception as e:  # noqa
+                msg = str(e).strip().splitlines()
+                print("    - {} em {}: erro ({})".format(rotulo, nome, msg[0] if msg else repr(e)))
+                continue
+            ok, lido = _confere(nome, valor)
+            if ok:
+                print("    {}: coarseness = {}  (OK via '{}', conferido no servidor)".format(nome, lido, rotulo))
+                break
+            print("    - {} em {}: não confirmado (lido de volta: {})".format(rotulo, nome, lido))
+    if nomes and all(_confere(n, valor)[0] for n in nomes):
+        return True
+
+    # Caminho 2: lista em Polygon_1 (era assim no primeiro teste do Exemplo 1)
+    try:
+        poly = g_i.Polygon_1
+        antes = _ler_lista(poly)
+        print("    Polygon_1.CoarsenessFactor antes: {}".format(antes))
+        for i in range(len(antes) if antes else 1):
+            poly.CoarsenessFactor[i] = valor
+        ok, lido = _confere("Polygon_1", valor)
+        print("    Polygon_1.CoarsenessFactor depois: {} ({})".format(lido, "OK" if ok else "não confirmado"))
+        if ok and (not nomes or all(_confere(n, valor)[0] for n in nomes)):
+            return True
+    except Exception as e:  # noqa
+        msg = str(e).strip().splitlines()
+        print("    - por índice em Polygon_1: erro ({})".format(msg[0] if msg else repr(e)))
+
+    # Caminho 3: a MESMA sequência de tentativas do nichirvan_taher_exemplo1_modelo.py (a que funcionou no Exemplo 1),
+    # na mesma ordem, caso o índice só funcione depois das tentativas anteriores.
+    try:
+        poly = g_i.Polygon_1
+        n = len(_ler_lista(poly) or [1])
+
+        def _por_indice():
+            for i in range(n):
+                poly.CoarsenessFactor[i] = valor
+
+        for rotulo, f in (
+            ("setproperties escalar", lambda: g_i.setproperties(poly, "CoarsenessFactor", valor)),
+            ("atribuição escalar", lambda: setattr(poly, "CoarsenessFactor", valor)),
+            ("atribuição em lista", lambda: setattr(poly, "CoarsenessFactor", [valor] * n)),
+            ("setproperties em lista", lambda: g_i.setproperties(poly, "CoarsenessFactor", [valor] * n)),
+            ("por índice", _por_indice),
+        ):
+            try:
+                f()
+            except Exception as e:  # noqa
+                msg = str(e).strip().splitlines()
+                print("    - (sequência do Ex.1) {}: erro ({})".format(rotulo, msg[0] if msg else repr(e)))
+        for nome in (nomes or ["Polygon_1"]):
+            ok, lido = _confere(nome, valor)
+            print("    {}: coarseness após a sequência do Ex.1 = {} ({})".format(
+                nome, lido, "OK" if ok else "não confirmado"))
+            if ok:
+                return True
+    except Exception as e:  # noqa
+        msg = str(e).strip().splitlines()
+        print("    - sequência do Ex.1: erro ({})".format(msg[0] if msg else repr(e)))
+    return False
+
+
+
+
+ok_coarse = False
+try:
+    ok_coarse = aplicar_coarseness(COARSENESS_SAPATA)
+except Exception as e:  # noqa
+    print("    - coarseness: {}".format(str(e).strip().splitlines()[0]))
+if not ok_coarse:
+    try:
+        poly = g_i.Polygon_1
+    except Exception:
+        poly = superficie
+    ok_coarse = setar_coarseness(poly, COARSENESS_SAPATA)      # forma antiga, como último recurso
+if not ok_coarse:
     print("    (AVISO) não consegui alterar o coarseness da sapata por script.")
-    print("    Ajuste manualmente no modo Mesh (sapata -> Coarseness factor = {}) e gere a malha de novo."
+    print("    Ajuste manualmente no modo Mesh (Polygon_1_1 -> Coarseness factor = {}) e gere a malha de novo."
           .format(COARSENESS_SAPATA))
 
-g_i.mesh(TAMANHO_RELATIVO_MALHA)
-print("    Malha gerada (relative element size = {}). Veja a contagem de elementos no log do PLAXIS.".format(
-    TAMANHO_RELATIVO_MALHA))
+res_malha = g_i.mesh(TAMANHO_RELATIVO_MALHA)
+if res_malha not in (None, "", True):
+    print("    mesh ->", res_malha)
+print("    Malha gerada (relative element size = {}). Com 'fine' + coarseness 0,1 o esperado é ~23.855 elementos."
+      .format(TAMANHO_RELATIVO_MALHA))
 
 etapa("Selecionando nó em (0, 0, 0) para a curva carga x recalque")
 senha = obter_senha()
