@@ -87,5 +87,17 @@ estudo_lote() {
 estudo_lote
 if python3 "$RAIZ/estudos/sapata_analitico.py" > /dev/null; then echo "OK        analitico (valores de livro)"; else echo "DIFERE    analitico"; FALHAS=$((FALHAS+1)); fi
 
+# --- soiltest: calibracao contra laboratorio (ensaio sintetico, poucas avaliacoes, relogio falso)
+calibracao() {
+  local d; d="$(mktemp -d)"
+  cp "$RAIZ/soiltest/plaxis_soiltest_auto.py" "$RAIZ/soiltest/em_desenvolvimento/soiltest_calibracao.py" \
+     "$RAIZ/soiltest/dados_laboratorio_exemplo/lab_sintetico.csv" "$T/mock/calibrar_sintetico.py" "$d/"
+  ( cd "$d" && python3 "$T/mock/rodar_ferramenta.py" "$d/calibrar_sintetico.py" 2>&1 \
+      | normaliza "$d" | sed -E 's/_20[0-9]{6}_[0-9]{6}/_<DATA>/g; s/ at 0x[0-9a-f]+/ at 0x<END>/g' > "$d/saida.log"
+    ls "$d"/soiltest_saida/*/relatorio.html >/dev/null 2>&1 && echo "relatorio.html gerado" >> "$d/saida.log" )
+  compara "calibracao_sintetico.log" "$d/saida.log"; rm -rf "$d"
+}
+calibracao
+
 [ $GRAVAR -eq 1 ] && exit 0
 [ $FALHAS -eq 0 ] && echo "Tudo igual às linhas de base." || { echo "$FALHAS caso(s) mudaram."; exit 1; }

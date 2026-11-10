@@ -1,0 +1,54 @@
+Calibracao Hardening Soil contra 3 ensaio(s): SINT_CIU_50kPa (U, 50 kPa, 13 pontos), SINT_CIU_100kPa (U, 100 kPa, 13 pontos), SINT_CIU_200kPa (U, 200 kPa, 13 pontos)
+Parametros livres: E50ref [3000 a 80000], Eoed_E50 [0.5 a 1.5], Eur_E50 [2.2 a 8.0], m [0.3 a 1.0], cref [0.0 a 40.0], phi [26.0 a 38.0], psi [0.0 a 12.0], sigma_p [50.0 a 600.0]
+Laboratorio, envoltoria efetiva (q máximo): phi' = 34.8 graus, c' = 3.5 kPa
+Laboratorio, envoltoria efetiva (razão σ'1/σ'3 máxima): phi' = 34.8 graus, c' = 3.5 kPa
+Laboratorio, envoltoria efetiva (fim do ensaio): phi' = 34.8 graus, c' = 3.5 kPa
+Modo de troca de parametros: LENTO (reabre o SoilTest a cada avaliacao) (setproperties no Material do SoilTest falhou: Material do SoilTest sem o atributo de E50ref)
+[  1] amost erro 0.6958 (melhor 0.6958 na 1) E50ref=1.5e+04 Eoed_E50=1 Eur_E50=3 m=0.6 cref=13 phi=32 psi=3 sigma_p=250
+[  2] amost erro 0.7974 (melhor 0.6958 na 1) E50ref=2.217e+04 Eoed_E50=1.057 Eur_E50=7.978 m=0.8501 cref=5.527 phi=35.44 psi=4.989 sigma_p=536.3
+[  3] amost erro 0.7518 (melhor 0.6958 na 1) E50ref=5.013e+04 Eoed_E50=1.353 Eur_E50=5.099 m=0.4941 cref=30.82 phi=27.46 psi=2.538 sigma_p=422.7
+[  4] amost erro 1.1814 (melhor 0.6958 na 1) E50ref=7447 Eoed_E50=1.452 Eur_E50=6.647 m=0.7883 cref=27.29 phi=34.12 psi=8.72 sigma_p=102.2
+[  5] amost erro 0.9786 (melhor 0.6958 na 1) E50ref=2.619e+04 Eoed_E50=0.6662 Eur_E50=2.896 m=0.3371 cref=38.47 phi=28.52 psi=5.672 sigma_p=195.2
+[  6] amost erro 0.5007 (melhor 0.5007 na 6) E50ref=6.476e+04 Eoed_E50=0.5826 Eur_E50=4.393 m=0.9169 cref=7.011 phi=31.16 psi=7.199 sigma_p=279.4
+[  7] amost erro 0.7561 (melhor 0.5007 na 6) E50ref=7.503e+04 Eoed_E50=1.129 Eur_E50=3.313 m=0.6847 cref=19.16 phi=30.99 psi=1.13 sigma_p=333.6
+[  8] amost erro 1.2154 (melhor 0.5007 na 6) E50ref=4.402e+04 Eoed_E50=0.8405 Eur_E50=6.224 m=0.5955 cref=16.79 phi=37.16 psi=10.51 sigma_p=503.9
+[  9] refin erro 0.5007 (melhor 0.5007 na 6) E50ref=6.476e+04 Eoed_E50=0.5826 Eur_E50=4.393 m=0.9169 cref=7.011 phi=31.16 psi=7.199 sigma_p=279.4
+[ 10] refin erro 0.5007 (melhor 0.5007 na 6) E50ref=7.4e+04 Eoed_E50=0.5826 Eur_E50=4.393 m=0.9169 cref=7.011 phi=31.16 psi=7.199 sigma_p=279.4
+[ 11] refin erro 0.5007 (melhor 0.5007 na 6) E50ref=6.476e+04 Eoed_E50=0.7026 Eur_E50=4.393 m=0.9169 cref=7.011 phi=31.16 psi=7.199 sigma_p=279.4
+[ 12] refin erro 0.5007 (melhor 0.5007 na 6) E50ref=6.476e+04 Eoed_E50=0.5826 Eur_E50=5.089 m=0.9169 cref=7.011 phi=31.16 psi=7.199 sigma_p=279.4
+[ 13] refin erro 0.5007 (melhor 0.5007 na 6) E50ref=6.476e+04 Eoed_E50=0.5826 Eur_E50=4.393 m=0.8329 cref=7.011 phi=31.16 psi=7.199 sigma_p=279.4
+[ 14] refin erro 0.6077 (melhor 0.5007 na 6) E50ref=6.476e+04 Eoed_E50=0.5826 Eur_E50=4.393 m=0.9169 cref=11.81 phi=31.16 psi=7.199 sigma_p=279.4
+[ 15] refin erro 0.6059 (melhor 0.5007 na 6) E50ref=6.476e+04 Eoed_E50=0.5826 Eur_E50=4.393 m=0.9169 cref=7.011 phi=32.6 psi=7.199 sigma_p=279.4
+[ 16] refin erro 0.5007 (melhor 0.5007 na 6) E50ref=6.476e+04 Eoed_E50=0.5826 Eur_E50=4.393 m=0.9169 cref=7.011 phi=31.16 psi=8.639 sigma_p=279.4
+[ 17] refin erro 0.5007 (melhor 0.5007 na 6) E50ref=6.476e+04 Eoed_E50=0.5826 Eur_E50=4.393 m=0.9169 cref=7.011 phi=31.16 psi=7.199 sigma_p=345.4
+[ 18] refin erro 0.4180 (melhor 0.4180 na 18) E50ref=6.707e+04 Eoed_E50=0.6126 Eur_E50=4.567 m=0.8959 cref=2.211 phi=31.52 psi=7.559 sigma_p=295.9
+[ 19] refin erro 0.3807 (melhor 0.3807 na 19) E50ref=6.823e+04 Eoed_E50=0.6276 Eur_E50=4.654 m=0.8854 cref=0 phi=31.7 psi=7.739 sigma_p=304.2
+[ 20] refin erro 0.3727 (melhor 0.3727 na 20) E50ref=6.794e+04 Eoed_E50=0.6238 Eur_E50=4.633 m=0.888 cref=5.258 phi=29.86 psi=7.694 sigma_p=302.1
+[ 21] refin erro 0.2680 (melhor 0.2680 na 21) E50ref=6.953e+04 Eoed_E50=0.6445 Eur_E50=4.752 m=0.8735 cref=4.382 phi=28.49 psi=7.942 sigma_p=313.5
+[ 22] refin erro 0.4098 (melhor 0.2680 na 21) E50ref=6.913e+04 Eoed_E50=0.6393 Eur_E50=4.722 m=0.8772 cref=4.601 phi=30.63 psi=7.88 sigma_p=228.1
+[ 23] refin erro 0.3874 (melhor 0.2680 na 21) E50ref=7.022e+04 Eoed_E50=0.6535 Eur_E50=4.805 m=0.8672 cref=3.999 phi=30.5 psi=6.25 sigma_p=281.3
+[ 24] refin erro 0.3596 (melhor 0.2680 na 21) E50ref=7.159e+04 Eoed_E50=0.6712 Eur_E50=4.907 m=0.9598 cref=3.245 phi=30.33 psi=7.453 sigma_p=281.8
+[ 25] refin erro 0.3253 (melhor 0.2680 na 21) E50ref=7.329e+04 Eoed_E50=0.6934 Eur_E50=4.166 m=0.8866 cref=2.304 phi=30.12 psi=7.516 sigma_p=282.4
+
+Busca encerrada: 25 avaliacoes em 1.6 min. Melhor erro 0.2680 (avaliacao 21).
+
+Parametros calibrados (Hardening Soil):
+   nu_ur                        = 0.2  (fixo)
+   pref (kPa)                   = 100  (fixo)
+   E50ref (kPa)                 = 69527  (calibrado)
+   expoente m                   = 0.87355  (calibrado)
+   c' ref (kPa)                 = 4.3819  (calibrado)
+   phi' (graus)                 = 28.486  (calibrado)
+   psi (graus)                  = 7.9417  (calibrado)
+   Eoedref (kPa)                = 44808  (calibrado)
+   Eurref (kPa)                 = 3.3041e+05  (calibrado)
+   sigma_p (kPa)                = 313.47  (calibrado; em cada ensaio vale max(sigma_p, sigma3))
+
+Erro por ensaio (RMSE normalizado pelo q maximo do laboratorio):
+   SINT_CIU_50kPa q:  21.8 %   du:  16.5 %   q_max lab 90.2 / sim 104.1 kPa
+   SINT_CIU_100kPa q:  13.8 %   du:  12.6 %   q_max lab 167.2 / sim 191.0 kPa
+   SINT_CIU_200kPa q:   7.1 %   du:   8.6 %   q_max lab 321.0 / sim 357.3 kPa
+
+Relatorio: <DIR>/soiltest_saida/calibracao_HS_<DATA>/relatorio.html
+Saida: <DIR>/soiltest_saida/calibracao_HS_<DATA>
+relatorio.html gerado
