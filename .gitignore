@@ -20,3 +20,6 @@ __pycache__/
 ferramentas/auto_log.txt
 estudos/lote_*/
 estudos/sensibilidade_*/
+
+# ensaios reais de clientes nao entram no repositorio
+dados_laboratorio/
