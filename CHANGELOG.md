@@ -1,6 +1,9 @@
 # Histórico de versões
 
 ## Não lançado
+- `soiltest/em_desenvolvimento/soiltest_calibracao.py`: calibração automática de parâmetros (HS, MC) contra triaxiais
+  de laboratório em CSV, trocando parâmetros direto no SoilTest. Primeira rodada real (4 CIU, 280 avaliações em 37 min).
+  Aviso prévio de amolecimento pós-pico e de q máximo que não cresce com σ3; faixas padrão de m e Eur/E50 alargadas.
 - `estudos/`: lote de sapatas por planilha, sensibilidade de malha/domínio, métodos analíticos (Terzaghi, Meyerhof, Vesić, recalque elástico) e memorial em .docx/.html.
 - `ferramentas/resumo_projeto.py`: além do .txt, gera o painel `resumo_projeto.html`.
 - `sapata/plaxis_sapata_interativo.py`: o JSON passa a guardar todas as respostas (`entrada`); nenhum comando ao PLAXIS mudou.

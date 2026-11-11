@@ -121,7 +121,7 @@ As ferramentas rodam do mesmo jeito: escolha o arquivo no executor; cada uma tem
 |---|---|
 | `plaxis_soiltest_auto.py` | **Estável.** Tudo o que já rodou no PLAXIS real, inclusive cíclicos não drenados e controle por tensão (validados em 08/11/2026). |
 | `soiltest_auditoria.py`, `soiltest_biblioteca.py`, `soiltest_parametrico.py`, `soiltest_gg0.py` | **Estáveis.** Ferramentas validadas no PLAXIS real em 08/11/2026. |
-| [`em_desenvolvimento/`](em_desenvolvimento/) | Bateria de testes sem perguntas (`soiltest_bateria.py`) e comparação com dados de laboratório, base da futura **calibração** |
+| [`em_desenvolvimento/`](em_desenvolvimento/) | **Calibração automática** contra triaxiais de laboratório (`soiltest_calibracao.py`, já rodada contra ensaios reais) e bateria de testes sem perguntas (`soiltest_bateria.py`) |
 | [`descoberta/`](descoberta/) | Scripts usados para mapear a API do SoilTest (atributos, modelos, drenagens). Somente referência. |
 | [`exemplos/`](exemplos/) | Saídas reais (CSV, log, resumo) das rodadas da galeria |
 
@@ -141,5 +141,5 @@ Quando um item em desenvolvimento for validado no PLAXIS real, ele passa para o 
 - [ ] Mapear modelos cíclicos (UBC3D-PLM, PM4Sand): adiado, por decisão do projeto
 - [x] Relatório técnico HTML em toda rodada
 - [x] Ferramentas: auditoria, biblioteca de materiais, estudo paramétrico, curvas G/G0
-- [ ] Calibração automática contra ensaio de laboratório (aguardando ensaios reais em CSV)
+- [ ] Calibração automática contra ensaio de laboratório: em desenvolvimento, 1ª rodada real em 10/11/2026 (4 CIU)
 - [ ] MCP: por último, se for feito

@@ -163,3 +163,13 @@ Sem informar pré-adensamento, o script aplica `PreconsolidationPressure` = 100 
 - **Material reutilizado e alterado no Input** e reaberto no SoilTest: o SoilTest recebe os valores novos (paramétrico de φ' com q_max = q_f de MC para cada valor).
 - **Leitura dos materiais do projeto**: `g_i.Soils` lista os materiais; `Identification`, `echo()` (SoilModel e DrainageType com número) e os atributos por nome dão modelo, drenagem e parâmetros.
 - **HS small no CDSS**: G0 simulado 119 830 kPa (G0ref 120 000 em σ' = pref); G/G0 coincide com o backbone 1/(1 + 0,385 γ/γ0,7) até γ = 0,01 % usando **γ = γxy do CDSS**; acima de 0,03 % a plasticidade leva G abaixo do corte Gur/G0. Amortecimento segue Masing até 0,1 %.
+
+## Passo 15 (calibração contra triaxial CIU real, 10/11/2026, PLAXIS real)
+- **`g.Material.setproperties(...)` no SoilTest** aceita os parâmetros e eles valem na rodada seguinte, sem reabrir a janela (q no 3º passo caiu de 113,42 para 86,51 kPa com a rigidez pela metade). O calibrador usa isso ("modo rápido") e só reabre o SoilTest se o teste falhar.
+- **Custo:** ~8 s por avaliação de 4 triaxiais CIU com 60 passos; 280 avaliações em 37 min.
+- **Nome do material:** o PLAXIS remove hífens do `Identification` (`CAL_HS_AB-01` vira `CAL_HS_AB01`). Use nomes sem hífen.
+- **Erro limitado:** uma combinação de parâmetros deu erro 61 (simulação divergente). O erro de cada ensaio passou a ter teto (3,0) para não distorcer o Nelder-Mead.
+- **Ensaio real (solo residual raso, 4 CIU de 50 a 400 kPa):** HS ajustado com erro médio de 18 % do q máximo (q) e 2 a 8 % (Δu). Limites do modelo, não do script: (1) o HS não tem amolecimento, então nos CPs com queda pós-pico o ajuste passa entre pico e residual; (2) quando o q máximo não cresce com σ3 (variabilidade entre CPs), nenhum conjunto de parâmetros reproduz todos. O calibrador agora avisa esses dois casos antes da busca.
+- **Troca φ' × c':** com Δu e q livres, o ajuste achou φ' 26,4° e c' 33 kPa contra φ' 32° e c' 13 kPa do laudo; as duas envoltórias quase coincidem na faixa de p' ensaiada. Para projeto, fixar φ' e c' do laudo em `fixos` e calibrar só a rigidez é o caminho mais defensável.
+- **Faixas:** m e Eur/E50 terminaram no limite inferior (0,3 e 2,2); faixas padrão alargadas para m ≥ 0,1 e Eur/E50 ≥ 2,0.
+

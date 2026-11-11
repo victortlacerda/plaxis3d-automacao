@@ -43,8 +43,8 @@ CONFIG = {
     "livres": {
         "E50ref":   (3000, 80000, 15000),
         "Eoed_E50": (0.5, 1.5, 1.0),
-        "Eur_E50":  (2.2, 8.0, 3.0),
-        "m":        (0.3, 1.0, 0.6),
+        "Eur_E50":  (2.0, 8.0, 3.0),
+        "m":        (0.1, 1.0, 0.6),
         "cref":     (0.0, 40.0, 13.0),
         "phi":      (26.0, 38.0, 32.0),
         "psi":      (0.0, 12.0, 3.0),
@@ -148,6 +148,27 @@ def interpretar_lab(lab):
         crit["q máximo"].append((a[3], a[4])); crit["razão σ'1/σ'3 máxima"].append((b[3], b[4])); crit["fim do ensaio"].append((c[3], c[4]))
         linhas.append((nome, e["s3"], a[1], a[0], a[2], max(p[2] for p in pts), c[2]))
     return linhas, {k: envoltoria(v) for k, v in crit.items()}
+
+
+def checar_lab(lab, eps_max):
+    """Avisos sobre os dados de laboratorio que limitam o ajuste (lista de textos)."""
+    av = []
+    ens = sorted(lab.items(), key=lambda kv: kv[1]["s3"])
+    qmax = [(k, e["s3"], max(e["q"])) for k, e in ens if e["q"]]
+    for (k1, s1, q1), (k2, s2, q2) in zip(qmax, qmax[1:]):
+        if q2 < q1:
+            av.append("q max cai com sigma3: {} ({:g} kPa) tem q max {:.0f} kPa e {} ({:g} kPa) so {:.0f} kPa. "
+                      "Provavel variabilidade entre corpos de prova; nenhum modelo reproduz os dois juntos.".format(k1, s1, q1, k2, s2, q2))
+    for k, e in ens:
+        pts = [(ea, q) for ea, q in zip(e["eps"], e["q"]) if ea <= eps_max]
+        if not pts:
+            continue
+        i = max(range(len(pts)), key=lambda j: pts[j][1])
+        qp, qf = pts[i][1], pts[-1][1]
+        if qp > 0 and i < len(pts) - 1 and (qp - qf) / qp > 0.10:
+            av.append("{}: q cai {:.0f} % depois do pico (de {:.0f} a {:.0f} kPa ate eps_a = {:g} %). Amolecimento: HS e MC "
+                      "nao reproduzem; o ajuste fica entre o pico e o residual.".format(k, 100 * (qp - qf) / qp, qp, qf, eps_max))
+    return av
 
 
 # ------------------------------------------------------------------ parametros
@@ -396,6 +417,9 @@ def main():
     for k, v in envs.items():
         if v:
             log("Laboratorio, envoltoria efetiva ({}): phi' = {:.1f} graus, c' = {:.1f} kPa".format(k, v[0], v[1]))
+    avisos_lab = checar_lab(lab, cfg["eps_max_ajuste_pct"])
+    for a in avisos_lab:
+        log("ATENCAO (dados de laboratorio): " + a)
 
     de_unit = lambda u: {k: lim[k][0] + u[i] * (lim[k][1] - lim[k][0]) for i, k in enumerate(nomes_livres)}
     para_unit = lambda x: [(x[k] - lim[k][0]) / float(lim[k][1] - lim[k][0]) for k in nomes_livres]
@@ -531,7 +555,8 @@ def main():
         + A["html_tabela"](["Critério de ruptura", "φ' (graus)", "c' (kPa)"],
                            [(k, A["_num"](v[0], 1), A["_num"](v[1], 1)) for k, v in envs.items() if v]
                            + ([("informado no laudo", A["_num"](cfg["referencia_laudo"].get("phi"), 1), A["_num"](cfg["referencia_laudo"].get("c"), 1))] if cfg["referencia_laudo"] else []))
-        + '<p class="nota">Envoltórias efetivas por regressão nos pontos (s\', t) de cada corpo de prova, por critério de ruptura.</p>'),
+        + '<p class="nota">Envoltórias efetivas por regressão nos pontos (s\', t) de cada corpo de prova, por critério de ruptura.</p>'
+        + "".join('<p class="nota"><b>Atenção:</b> {}</p>'.format(A["_esc"](a)) for a in avisos_lab)),
         ("Parâmetros calibrados", A["html_tabela"](["Parâmetro", "Valor", "Origem"], tab_par)
          + '<p class="nota">Material gravado no PLAXIS Input como "{}". σ\'p é aplicada em cada ensaio como max(σ\'p, σ\'3). {}</p>'.format(
              A["_esc"](cfg["nome_material"]), ("<b>Atenção:</b> no limite da faixa de busca: " + ", ".join(na_borda) + ".") if na_borda else "")),
