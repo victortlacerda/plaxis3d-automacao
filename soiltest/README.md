@@ -63,6 +63,7 @@ em 08/11/2026, com saídas em [`exemplos/ferramentas_20261108/`](exemplos/ferram
 | `soiltest_auditoria.py` | Lê **todos os materiais do projeto aberto**, confere a coerência dos parâmetros (faixas usuais e regras de cada modelo: Eoed/E50, Eur/E50, G0 ≥ Gur, λ > κ, regra de Bolton para ψ...), roda triaxial e edômetro de cada um e entrega um relatório com ERRO / ALERTA / INFO. Pega erro de entrada antes de calcular o 3D. |
 | `soiltest_biblioteca.py` | Lê uma planilha CSV ([`materiais_modelo.csv`](materiais_modelo.csv)) e **cria ou atualiza os materiais no Input**, inclusive pesos específicos e qualquer atributo pelo nome. Opcionalmente confere cada material no SoilTest. |
 | `soiltest_parametrico.py` | **Estudo paramétrico**: varia um parâmetro numa faixa (ex.: φ' de 28 a 36°), roda os mesmos ensaios e sobrepõe as curvas, com tabela-resumo. |
+| `soiltest_campanha.py` | **Campanha de ensaios por planilha.** Cada linha de um CSV ([`campanha_modelo.csv`](campanha_modelo.csv)) é um ensaio num material: tipo, drenagem, tensões, deformação, K0, pré-adensamento, ciclos, carga do edômetro. Usa materiais que já estão no projeto ou cria os que faltam pela planilha de materiais; abre o SoilTest uma vez por material e entrega relatório e `campanha_resumo.csv` com uma linha por curva. Avisa quando um triaxial não drenado não tem pico (dilatância sem limite). Validada no PLAXIS real em 12/11/2026 (8 ensaios, 3 modelos) |
 | `soiltest_gg0.py` | **Curvas G/G0 e amortecimento × γ** pelo CDSS em várias amplitudes, comparadas com o backbone do HS small e com Darendeli (2001). Para análise dinâmica. |
 
 | Auditoria de materiais (resumo do relatório) | Relatório técnico de um material |
@@ -97,6 +98,7 @@ em 08/11/2026, com saídas em [`exemplos/ferramentas_20261108/`](exemplos/ferram
 | MC, cíclico não drenado por deformação | Δu oscila sem acumular; CDSS sem Δu | MC com ψ = 0 não tem tendência volumétrica no cisalhamento |
 | MCC edômetro com σ'p = 100 kPa | inclinação 0,0108 antes e 0,054 depois de σ'p | κ/(1 + e0) = 0,010 e λ/(1 + e0) = 0,050 |
 | Soft Soil edômetro com σ'p padrão (100 kPa) | inclinação 0,0195 antes e 0,1000 depois de σ'p | κ* = 0,02 e λ* = 0,10 |
+| Campanha por planilha: HS, Soft Soil e MC criados da planilha de materiais, 8 ensaios | q_max 123,297 / 242,909 / 482,136 kPa; DSS τ 27,888 / 51,362 kPa; CDSS G 5769,2 kPa; triaxial cíclico E 15 000 kPa | q_f MC 123,290 / 242,896 / 482,108; τ = c cos φ + σ'v sen φ; G = E/2(1+ν); E |
 | HS edômetro com σ'p = 100 kPa | metade da deformação antes de σ'p; mesma inclinação depois | recompressão mais rígida, curva virgem igual |
 
 O histórico completo das descobertas (nomes de atributos, sinais, armadilhas de cada modelo) está em
@@ -121,6 +123,7 @@ As ferramentas rodam do mesmo jeito: escolha o arquivo no executor; cada uma tem
 |---|---|
 | `plaxis_soiltest_auto.py` | **Estável.** Tudo o que já rodou no PLAXIS real, inclusive cíclicos não drenados e controle por tensão (validados em 08/11/2026). |
 | `soiltest_auditoria.py`, `soiltest_biblioteca.py`, `soiltest_parametrico.py`, `soiltest_gg0.py` | **Estáveis.** Ferramentas validadas no PLAXIS real em 08/11/2026. |
+| `soiltest_campanha.py` + `campanha_modelo.csv` | **Estável.** Validada no PLAXIS real em 12/11/2026. |
 | [`em_desenvolvimento/`](em_desenvolvimento/) | **Calibração automática** contra triaxiais de laboratório (`soiltest_calibracao.py`, já rodada contra ensaios reais), **interpretação de ensaios triaxiais** de laboratório e do SoilTest, como em laudo ([`em_desenvolvimento/interpretacao/`](em_desenvolvimento/interpretacao/)) e bateria de testes sem perguntas (`soiltest_bateria.py`) |
 | [`descoberta/`](descoberta/) | Scripts usados para mapear a API do SoilTest (atributos, modelos, drenagens). Somente referência. |
 | [`exemplos/`](exemplos/) | Saídas reais (CSV, log, resumo) das rodadas da galeria |
@@ -143,5 +146,6 @@ Quando um item em desenvolvimento for validado no PLAXIS real, ele passa para o 
 - [x] Ferramentas: auditoria, biblioteca de materiais, estudo paramétrico, curvas G/G0
 - [ ] Interpretação de triaxiais (UU, CIU/CAU, CID/CAD) como em laudo: em desenvolvimento, testada offline com ensaios sintéticos
 - [ ] Calibração automática contra ensaio de laboratório: em desenvolvimento, 1ª rodada real em 10/11/2026 (4 CIU)
-- [ ] Campanha de ensaios por planilha e uso de material do projeto: em desenvolvimento, testado offline
+- [x] Campanha de ensaios por planilha (validada no PLAXIS real em 12/11/2026)
+- [ ] Usar material do projeto no script principal: em `em_desenvolvimento/plaxis_soiltest_auto_dev.py`, falta a rodada real
 - [ ] MCP: por último, se for feito

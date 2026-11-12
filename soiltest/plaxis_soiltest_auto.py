@@ -1256,7 +1256,8 @@ def classe_diferenca(simulado, esperado, tol=2.0):
     except Exception:
         return "", ""
     cls = "ok" if abs(d) <= tol else "alerta"
-    return '<span class="{}">{}</span>'.format(cls, _num(d, 2) + " %"), d
+    txt = "0,00" if abs(d) < 0.005 else _num(d, 2)      # evita "-3,7e-07 %" quando bate com a teoria
+    return '<span class="{}">{}</span>'.format(cls, txt + " %"), d
 
 
 def relatorio_auto(pasta, titulo, resumo, gerados):

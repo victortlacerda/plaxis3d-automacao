@@ -76,12 +76,12 @@ ferramenta ferr_gg0 soiltest_gg0.py
 ferramenta ferr_biblioteca soiltest_biblioteca.py
 ferramenta ferr_auditoria soiltest_auditoria.py 2:0:Aterro 8:0:Argila 5:2:Errada
 
-# --- soiltest: campanha por planilha e material do projeto (em desenvolvimento)
+# --- soiltest: campanha por planilha (estável) e material do projeto (em desenvolvimento)
 campanha() {  # nome  script_de_entrada  [MODELO:DREN:nome ...]
   local d n="$1" sc="$2"; shift 2; d="$(mktemp -d)"
-  cp "$RAIZ/soiltest/plaxis_soiltest_auto.py" "$RAIZ/soiltest/materiais_modelo.csv" "$d/"; mkdir "$d/em"
-  cp "$RAIZ/soiltest/em_desenvolvimento/plaxis_soiltest_auto_dev.py" "$RAIZ/soiltest/em_desenvolvimento/soiltest_campanha.py" \
-     "$RAIZ/soiltest/em_desenvolvimento/campanha_modelo.csv" "$T/dados/campanha_erros.csv" "$T/mock/campanha_existentes.py" "$d/em/"
+  mkdir "$d/em"
+  cp "$RAIZ/soiltest/plaxis_soiltest_auto.py" "$RAIZ/soiltest/materiais_modelo.csv" "$RAIZ/soiltest/soiltest_campanha.py" \
+     "$RAIZ/soiltest/campanha_modelo.csv" "$T/dados/campanha_erros.csv" "$T/mock/campanha_existentes.py" "$d/em/"
   ( cd "$d/em" && python3 "$T/mock/rodar_ferramenta.py" "$d/em/$sc" "$@" 2>&1 \
       | normaliza "$d" | sed -E 's/\(20[0-9]{2}-[0-9-]+T[0-9:]+\)/(<DATA>)/; s/_20[0-9]{6}_[0-9]{6}/_<DATA>/g; s/ at 0x[0-9a-f]+/ at 0x<END>/g' > "$d/saida.log"
     cat "$d"/em/soiltest_saida/*/campanha_resumo.csv >> "$d/saida.log" 2>/dev/null

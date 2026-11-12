@@ -1,0 +1,13 @@
+﻿linha;material;modelo;drenagem;ensaio;configuracao;curva;grandeza;simulado;teorico;extra;obs
+1;Areia_media;Hardening Soil;D;Triaxial;CD | 50/100/200 kPa;CD_50kPa;q máx (kPa);123,2968;123,2895;E50 23372 kPa;CD padrao
+1;Areia_media;Hardening Soil;D;Triaxial;CD | 50/100/200 kPa;CD_100kPa;q máx (kPa);242,9093;242,8955;E50 33516 kPa;CD padrao
+1;Areia_media;Hardening Soil;D;Triaxial;CD | 50/100/200 kPa;CD_200kPa;q máx (kPa);482,1364;482,1075;E50 47983 kPa;CD padrao
+2;Areia_media;Hardening Soil;D;Triaxial;CU | 100 kPa | K0 auto | OCR 2;CU_100kPa;q máx (kPa);687,6034;;;CU com K0 automatico (Jaky) e OCR 2
+3;Areia_media;Hardening Soil;D;Edometro;até 800 kPa;-;ε_v máx (%);1,3353;;σ'v máx 800,1 kPa;carga ate 800 e descarga ate 200
+4;Argila_mole;Soft Soil;UA;Triaxial;CU | 50/100 kPa | K0 0,6;CU_50kPa;q máx (kPa);49,9062;;;CU com K0 informado
+4;Argila_mole;Soft Soil;UA;Triaxial;CU | 50/100 kPa | K0 0,6;CU_100kPa;q máx (kPa);95,1909;;;CU com K0 informado
+5;Argila_mole;Soft Soil;UA;Edometro;até 400 kPa;-;ε_v máx (%);29,5412;;σ'v máx 400,1 kPa;
+6;Aterro;Mohr-Coulomb;D;DSS;CD | 50/100 kPa;CD_50kPa;τ máx (kPa);27,8883;27,8883;;
+6;Aterro;Mohr-Coulomb;D;DSS;CD | 50/100 kPa;CD_100kPa;τ máx (kPa);51,3619;51,3619;;
+7;Aterro;Mohr-Coulomb;D;CDSS (cisalhamento simples ciclico);CU | 100 kPa | ± 0,2 % | 5 ciclos;CU_100kPa;G_sec último ciclo (kPa);5769,2310;;amortecimento 0,00 %;CDSS nao drenado
+8;Aterro;Mohr-Coulomb;D;Triaxial ciclico;CD | 100 kPa | ± 30 kPa | 3 ciclos;CD_100kPa;E_sec último ciclo (kPa);15000,0000;;amortecimento 0,00 %;controle por tensao

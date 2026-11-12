@@ -194,3 +194,12 @@ Sem informar pré-adensamento, o script aplica `PreconsolidationPressure` = 100 
   drenado; se não der para ler, decide pela poropressão). O SoilTest guarda uma curva por ensaio, por isso a leitura
   acumula numa pasta fixa. **Ainda não rodado no PLAXIS real**; a conexão a um SoilTest aberto à mão depende do servidor
   de scripts dele estar ativo (no passo 1 ele respondeu na porta 10000).
+
+## Passo 16 (campanha por planilha, 12/11/2026, PLAXIS real)
+- Uma janela do SoilTest por material roda em sequência ensaios de tipos diferentes (triaxial, edômetro, DSS, CDSS, triaxial cíclico) sem reabrir; o pré-adensamento de cada ensaio é restaurado a 0 depois dele.
+- Ler um material do projeto funciona pelo mesmo caminho da auditoria (SoilModel, DrainageType e atributos por alias); K0nc e Rf vêm preenchidos pelo PLAXIS (0,4554 e 0,9 no HS com φ' 33°).
+- Edômetro com fases de carga dobrando a partir de 25 kPa até 800 e descarga até 200: 7 fases × 10 passos + 1 = 71 pontos; σ'v máx 800,12 kPa.
+- HS não drenado com ψ = 3°, K0 e OCR 2: q passa de 687 kPa em 10 % e continua subindo (dilatância sem limite no não drenado). A campanha agora avisa quando q cresce mais de 5 % nos últimos 20 % da deformação de um CU.
+- Soft Soil edômetro com σ'p = 50 kPa até 400 kPa: ε_v = 29,5 % (λ* ln(400/50) = 25 % depois de σ'p, mais a recompressão).
+- MC: DSS τ_max = c cos φ + σ'v sen φ exato; CDSS em ±0,2 % e triaxial cíclico em ±30 kPa ficam elásticos (G = E/2(1+ν) = 5769,2 kPa; E = 15 000 kPa; amortecimento 0).
+
