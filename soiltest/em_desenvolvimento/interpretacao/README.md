@@ -93,8 +93,21 @@ Em `soiltest_saida/extracao_<material>_<data>/` (extrator) ou `soiltest_saida/in
 - **Envoltória:** regressão em (s, t), t = m + s·tan α, com sen φ = tan α e c = m / cos φ; M = 6 sen φ'/(3 − sen φ').
   Quando c < 0, mostra também φ com c = 0.
 - **Alertas:** amolecimento pós-pico (> 10 %), q máximo que não cresce com σ'3c, R² < 0,95, c negativo, CP que
-  não chega a ε_a limite, CIU sem Δu, Su muito variável no UU, não drenado sem pico (q ainda sobe no fim: material
-  dilatante; use σ'1/σ'3 ou ε_a limite, ou ψ = 0 / corte de dilatância no PLAXIS).
+  não chega a ε_a limite, CIU sem Δu, Su muito variável no UU, não drenado sem pico (q ainda sobe no fim).
+
+### Ensaio não drenado sem pico (por que q sobe sem limite)
+
+No ensaio **simulado**, é o comportamento conhecido do **Hardening Soil** (e do Mohr-Coulomb e do HS small) **com ângulo
+de dilatância ψ > 0 em análise não drenada**: o material tenta aumentar de volume ao cisalhar, mas sem drenagem o volume
+não pode mudar; a poropressão cai sem parar (Δu cada vez mais negativo, A_f < 0), a tensão efetiva média cresce e q sobe
+sem limite. Não é erro do PLAXIS nem do script: é uma limitação do modelo, que **superestima a resistência não drenada**.
+Para evitar, no material: ψ = 0, corte de dilatância (dilatancy cut-off, com e_max) ou Undrained B (Su direto).
+
+No ensaio de **laboratório**, o mesmo sinal (q subindo até o fim, A_f < 0) indica solo dilatante (areia densa, argila
+muito pré-adensada), limitado na prática pela cavitação ou pela contrapressão.
+
+Nos dois casos, q máximo e fim do ensaio dependem só de onde o ensaio parou: a envoltória **total** desses critérios não
+tem significado físico, a **efetiva** continua válida. Use σ'1/σ'3 máxima ou ε_a limite.
 
 ## 5. Situação
 

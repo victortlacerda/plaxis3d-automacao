@@ -343,11 +343,23 @@ def interpretar_serie(nome, cps, cfg):
             sem_pico.append("{} (q {:.0f} → {:.0f} kPa de {:g} a {:g} %{})".format(
                 c["nome"], q_80, q_fim, alvo, e_fim, ", A_f = {:.2f}".format(d["A"]) if d.get("A") is not None else ""))
     if sem_pico:
+        if cps[0]["fonte"] == "simulação":
+            causa = ("CAUSA: é o comportamento conhecido do Hardening Soil (e de outros modelos, como Mohr-Coulomb e HS small) "
+                     "com ângulo de dilatância ψ > 0 em análise não drenada. O material tenta aumentar de volume ao "
+                     "cisalhar, mas sem drenagem o volume não pode mudar; então a poropressão cai sem parar (Δu cada vez "
+                     "mais negativo, A_f < 0), a tensão efetiva média cresce e q sobe sem limite. Não é erro de cálculo "
+                     "do PLAXIS nem do script: é uma limitação do modelo, que superestima a resistência não drenada. "
+                     "COMO EVITAR no material: ψ = 0, corte de dilatância (dilatancy cut-off, com e_max) ou Undrained B "
+                     "(Su direto).")
+        else:
+            causa = ("CAUSA provável: solo dilatante (areia densa, argila muito pré-adensada): ao cisalhar ele tende a "
+                     "expandir, e sem drenagem a poropressão cai (Δu negativo, A_f < 0) e q continua subindo até o limite "
+                     "da cavitação ou da contrapressão do ensaio.")
         res["alertas"].append(
-            "Não drenado sem pico: q ainda cresce no fim do ensaio em {}. A resistência pelo q máximo e pelo fim do ensaio "
-            "depende só de onde o ensaio parou (a envoltória total desses critérios não tem significado físico). Use σ'1/σ'3 "
-            "máxima ou ε_a limite; A_f negativo indica dilatância. No PLAXIS: ψ = 0, corte de dilatância ou Undrained B."
-            .format("; ".join(sem_pico)))
+            "Não drenado sem pico: q ainda cresce no fim do ensaio em {}. {} CONSEQUÊNCIA: a resistência pelo q máximo e "
+            "pelo fim do ensaio depende só de onde o ensaio parou, e a envoltória total desses critérios não tem "
+            "significado físico; a envoltória efetiva continua válida. Use os critérios σ'1/σ'3 máxima ou ε_a limite."
+            .format("; ".join(sem_pico), causa))
 
     # q maximo deve crescer com sigma3 nos ensaios adensados
     if tipo != "UU":
