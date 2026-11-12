@@ -1,0 +1,151 @@
+Laboratorio: lab_interpretacao_sintetico.csv (15 CP(s))
+Simulacao: <DIR>/soiltest/exemplos/HS_K0_OCR2 (3 CP(s))
+
+Serie SINT_UU (UU, laboratório, 3 CP(s))
+   UU_100: sigma3c = 100 kPa, q max = 80.00 kPa em eps_a = 5 %, Su = 40.00 kPa
+   UU_200: sigma3c = 200 kPa, q max = 80.00 kPa em eps_a = 5 %, Su = 40.00 kPa
+   UU_300: sigma3c = 300 kPa, q max = 80.00 kPa em eps_a = 5 %, Su = 40.00 kPa
+   envoltoria total    (q máximo): c = 40.00 kPa, phi = 0.00 graus, R2 = 1.0000
+   envoltoria total    (ε_a limite): c = 40.00 kPa, phi = 0.00 graus, R2 = 1.0000
+   envoltoria total    (fim do ensaio): c = 40.00 kPa, phi = 0.00 graus, R2 = 1.0000
+
+Serie SINT_CIU (CIU, laboratório, 3 CP(s))
+   CIU_50: sigma3c = 50 kPa, q max = 84.15 kPa em eps_a = 5 %, A_f = 0.300
+   CIU_100: sigma3c = 100 kPa, q max = 146.65 kPa em eps_a = 5 %, A_f = 0.300
+   CIU_200: sigma3c = 200 kPa, q max = 271.65 kPa em eps_a = 5 %, A_f = 0.300
+   envoltoria total    (q máximo): c = 7.22 kPa, phi = 22.62 graus, R2 = 1.0000
+   envoltoria total    (σ'1/σ'3 máxima): c = 7.22 kPa, phi = 22.62 graus, R2 = 1.0000
+   envoltoria total    (ε_a limite): c = 7.22 kPa, phi = 22.62 graus, R2 = 1.0000
+   envoltoria total    (fim do ensaio): c = 7.22 kPa, phi = 22.62 graus, R2 = 1.0000
+   envoltoria efetiva  (q máximo): c = 10.00 kPa, phi = 30.00 graus, R2 = 1.0000
+   envoltoria efetiva  (σ'1/σ'3 máxima): c = 10.00 kPa, phi = 30.00 graus, R2 = 1.0000
+   envoltoria efetiva  (ε_a limite): c = 10.00 kPa, phi = 30.00 graus, R2 = 1.0000
+   envoltoria efetiva  (fim do ensaio): c = 10.00 kPa, phi = 30.00 graus, R2 = 1.0000
+
+Serie SINT_CAU (CAU, laboratório, 3 CP(s))
+   CAU_50: sigma3c = 50 kPa, q max = 105.70 kPa em eps_a = 5 %, A_f = 0.200
+   CAU_100: sigma3c = 100 kPa, q max = 186.65 kPa em eps_a = 5 %, A_f = 0.200
+   CAU_200: sigma3c = 200 kPa, q max = 348.55 kPa em eps_a = 5 %, A_f = 0.200
+   envoltoria total    (q máximo): c = 7.64 kPa, phi = 26.57 graus, R2 = 1.0000
+   envoltoria total    (σ'1/σ'3 máxima): c = 7.64 kPa, phi = 26.57 graus, R2 = 1.0000
+   envoltoria total    (ε_a limite): c = 7.64 kPa, phi = 26.57 graus, R2 = 1.0000
+   envoltoria total    (fim do ensaio): c = 7.64 kPa, phi = 26.57 graus, R2 = 1.0000
+   envoltoria efetiva  (q máximo): c = 10.00 kPa, phi = 30.00 graus, R2 = 1.0000
+   envoltoria efetiva  (σ'1/σ'3 máxima): c = 10.00 kPa, phi = 30.00 graus, R2 = 1.0000
+   envoltoria efetiva  (ε_a limite): c = 10.00 kPa, phi = 30.00 graus, R2 = 1.0000
+   envoltoria efetiva  (fim do ensaio): c = 10.00 kPa, phi = 30.00 graus, R2 = 1.0000
+
+Serie SINT_CID (CID, laboratório, 3 CP(s))
+   CID_50: sigma3c = 50 kPa, q max = 134.64 kPa em eps_a = 5 %, psi pico = 8.00, psi medio = 6.63 graus
+   CID_100: sigma3c = 100 kPa, q max = 234.64 kPa em eps_a = 5 %, psi pico = 8.00, psi medio = 6.63 graus
+   CID_200: sigma3c = 200 kPa, q max = 434.64 kPa em eps_a = 5 %, psi pico = 8.00, psi medio = 6.63 graus
+   envoltoria efetiva  (q máximo): c = 10.00 kPa, phi = 30.00 graus, R2 = 1.0000
+   envoltoria efetiva  (σ'1/σ'3 máxima): c = 10.00 kPa, phi = 30.00 graus, R2 = 1.0000
+   envoltoria efetiva  (ε_a limite): c = 10.00 kPa, phi = 30.00 graus, R2 = 1.0000
+   envoltoria efetiva  (fim do ensaio): c = 10.00 kPa, phi = 30.00 graus, R2 = 1.0000
+
+Serie SINT_PROBLEMAS (CIU, laboratório, 3 CP(s))
+   PROB_50: sigma3c = 50 kPa, q max = 84.15 kPa em eps_a = 5 %, A_f = 0.300
+   PROB_100: sigma3c = 100 kPa, q max = 146.65 kPa em eps_a = 5 %, A_f = 0.300
+   PROB_200: sigma3c = 200 kPa, q max = 108.66 kPa em eps_a = 5 %, A_f = 0.300
+   envoltoria total    (q máximo): c = 43.59 kPa, phi = 4.34 graus, R2 = 0.1521
+   envoltoria total    (σ'1/σ'3 máxima): c = 43.59 kPa, phi = 4.34 graus, R2 = 0.1521
+   envoltoria total    (ε_a limite): c = 34.28 kPa, phi = 2.95 graus, R2 = 0.1209
+   envoltoria total    (fim do ensaio): c = 34.28 kPa, phi = 2.95 graus, R2 = 0.1209
+   envoltoria efetiva  (q máximo): c = 48.64 kPa, phi = 3.30 graus, R2 = 0.0811
+   envoltoria efetiva  (σ'1/σ'3 máxima): c = 48.64 kPa, phi = 3.30 graus, R2 = 0.0811
+   envoltoria efetiva  (ε_a limite): c = 37.90 kPa, phi = 2.09 graus, R2 = 0.0563
+   envoltoria efetiva  (fim do ensaio): c = 37.90 kPa, phi = 2.09 graus, R2 = 0.0563
+   ATENCAO: PROB_50: amolecimento pós-pico, q cai 25 % (de 84.2 kPa em ε_a = 5 % para 63.1 kPa no fim). Os critérios dão resistências diferentes; escolha o critério conforme o uso (pico ou pós-pico).
+   ATENCAO: PROB_100: amolecimento pós-pico, q cai 25 % (de 146.7 kPa em ε_a = 5 % para 110.0 kPa no fim). Os critérios dão resistências diferentes; escolha o critério conforme o uso (pico ou pós-pico).
+   ATENCAO: PROB_200: amolecimento pós-pico, q cai 25 % (de 108.7 kPa em ε_a = 5 % para 81.5 kPa no fim). Os critérios dão resistências diferentes; escolha o critério conforme o uso (pico ou pós-pico).
+   ATENCAO: q máximo não cresce com σ'3c: PROB_100 (100 kPa) tem 146.7 kPa e PROB_200 (200 kPa) só 108.7 kPa. Provável variabilidade entre corpos de prova; a envoltória fica distorcida.
+   ATENCAO: Envoltória total com ajuste ruim (R² abaixo de 0.95): q máximo 0.152; σ'1/σ'3 máxima 0.152; ε_a limite 0.121; fim do ensaio 0.121.
+   ATENCAO: Envoltória efetiva com ajuste ruim (R² abaixo de 0.95): q máximo 0.081; σ'1/σ'3 máxima 0.081; ε_a limite 0.056; fim do ensaio 0.056.
+
+Serie SIM HS_K0_OCR2 (CAD, simulação, 3 CP(s))
+   triaxial_CD_50kPa: sigma3c = 50 kPa, q max = 138.36 kPa em eps_a = 2.25 %, psi pico = 5.00, psi medio = 4.57 graus
+   triaxial_CD_100kPa: sigma3c = 100 kPa, q max = 272.88 kPa em eps_a = 3.15 %, psi pico = 5.00, psi medio = 4.41 graus
+   triaxial_CD_200kPa: sigma3c = 200 kPa, q max = 541.91 kPa em eps_a = 4.35 %, psi pico = 5.00, psi medio = 4.26 graus
+   envoltoria efetiva  (q máximo): c = 1.00 kPa, phi = 35.00 graus, R2 = 1.0000
+   envoltoria efetiva  (σ'1/σ'3 máxima): c = 1.00 kPa, phi = 35.00 graus, R2 = 1.0000
+   envoltoria efetiva  (ε_a limite): c = 1.00 kPa, phi = 35.00 graus, R2 = 1.0000
+   envoltoria efetiva  (fim do ensaio): c = 1.00 kPa, phi = 35.00 graus, R2 = 1.0000
+
+Saida: <DIR>/saida
+   41 grafico(s), parametros.csv, interpretacao.json, relatorio.html, log.txt
+
+Conferencia contra o gabarito
+OK     SINT_CIU efetiva q máximo c': obtido 10.0000 esperado 10.0000
+OK     SINT_CIU efetiva q máximo phi': obtido 30.0000 esperado 30.0000
+OK     SINT_CIU efetiva σ'1/σ'3 máxima c': obtido 10.0000 esperado 10.0000
+OK     SINT_CIU efetiva σ'1/σ'3 máxima phi': obtido 30.0000 esperado 30.0000
+OK     SINT_CIU efetiva ε_a limite c': obtido 10.0000 esperado 10.0000
+OK     SINT_CIU efetiva ε_a limite phi': obtido 30.0000 esperado 30.0000
+OK     SINT_CIU efetiva fim do ensaio c': obtido 10.0000 esperado 10.0000
+OK     SINT_CIU efetiva fim do ensaio phi': obtido 30.0000 esperado 30.0000
+OK     SINT_CAU efetiva q máximo c': obtido 10.0000 esperado 10.0000
+OK     SINT_CAU efetiva q máximo phi': obtido 30.0000 esperado 30.0000
+OK     SINT_CAU efetiva σ'1/σ'3 máxima c': obtido 10.0000 esperado 10.0000
+OK     SINT_CAU efetiva σ'1/σ'3 máxima phi': obtido 30.0000 esperado 30.0000
+OK     SINT_CAU efetiva ε_a limite c': obtido 10.0000 esperado 10.0000
+OK     SINT_CAU efetiva ε_a limite phi': obtido 30.0000 esperado 30.0000
+OK     SINT_CAU efetiva fim do ensaio c': obtido 10.0000 esperado 10.0000
+OK     SINT_CAU efetiva fim do ensaio phi': obtido 30.0000 esperado 30.0000
+OK     SINT_CID efetiva q máximo c': obtido 10.0000 esperado 10.0000
+OK     SINT_CID efetiva q máximo phi': obtido 30.0000 esperado 30.0000
+OK     SINT_CID efetiva σ'1/σ'3 máxima c': obtido 10.0000 esperado 10.0000
+OK     SINT_CID efetiva σ'1/σ'3 máxima phi': obtido 30.0000 esperado 30.0000
+OK     SINT_CID efetiva ε_a limite c': obtido 10.0000 esperado 10.0000
+OK     SINT_CID efetiva ε_a limite phi': obtido 30.0000 esperado 30.0000
+OK     SINT_CID efetiva fim do ensaio c': obtido 10.0000 esperado 10.0000
+OK     SINT_CID efetiva fim do ensaio phi': obtido 30.0000 esperado 30.0000
+OK     SIM HS_K0_OCR2 efetiva q máximo c': obtido 0.9998 esperado 1.0000
+OK     SIM HS_K0_OCR2 efetiva q máximo phi': obtido 35.0012 esperado 35.0000
+OK     SIM HS_K0_OCR2 efetiva σ'1/σ'3 máxima c': obtido 0.9998 esperado 1.0000
+OK     SIM HS_K0_OCR2 efetiva σ'1/σ'3 máxima phi': obtido 35.0012 esperado 35.0000
+OK     SIM HS_K0_OCR2 efetiva ε_a limite c': obtido 1.0000 esperado 1.0000
+OK     SIM HS_K0_OCR2 efetiva ε_a limite phi': obtido 35.0000 esperado 35.0000
+OK     SIM HS_K0_OCR2 efetiva fim do ensaio c': obtido 1.0000 esperado 1.0000
+OK     SIM HS_K0_OCR2 efetiva fim do ensaio phi': obtido 35.0000 esperado 35.0000
+OK     SINT_UU total q máximo c_u: obtido 40.0000 esperado 40.0000
+OK     SINT_UU total q máximo phi_u: obtido 0.0000 esperado 0.0000
+OK     SINT_UU total ε_a limite c_u: obtido 40.0000 esperado 40.0000
+OK     SINT_UU total ε_a limite phi_u: obtido 0.0000 esperado 0.0000
+OK     SINT_UU total fim do ensaio c_u: obtido 40.0000 esperado 40.0000
+OK     SINT_UU total fim do ensaio phi_u: obtido 0.0000 esperado 0.0000
+OK     SINT_UU Su medio: obtido 40.0000 esperado 40.0000
+OK     CIU_50 A_f: obtido 0.3000 esperado 0.3000
+OK     CIU_50 q_f: obtido 84.1506 esperado 84.1506
+OK     CIU_100 A_f: obtido 0.3000 esperado 0.3000
+OK     CIU_100 q_f: obtido 146.6506 esperado 146.6506
+OK     CIU_200 A_f: obtido 0.3000 esperado 0.3000
+OK     CIU_200 q_f: obtido 271.6506 esperado 271.6506
+OK     CAU_50 A_f: obtido 0.2000 esperado 0.2000
+OK     CAU_50 q_f: obtido 105.6960 esperado 105.6960
+OK     CAU_100 A_f: obtido 0.2000 esperado 0.2000
+OK     CAU_100 q_f: obtido 186.6483 esperado 186.6483
+OK     CAU_200 A_f: obtido 0.2000 esperado 0.2000
+OK     CAU_200 q_f: obtido 348.5531 esperado 348.5531
+OK     CID_50 psi pico: obtido 8.0000 esperado 8.0000
+OK     CID_50 psi medio: obtido 6.6325 esperado 6.6325
+OK     CID_100 psi pico: obtido 8.0000 esperado 8.0000
+OK     CID_100 psi medio: obtido 6.6325 esperado 6.6325
+OK     CID_200 psi pico: obtido 8.0000 esperado 8.0000
+OK     CID_200 psi medio: obtido 6.6325 esperado 6.6325
+OK     triaxial_CD_50kPa psi pico: obtido 5.0010 esperado 5.0000
+OK     triaxial_CD_50kPa reconhecido como CAD (esperado CAD)
+OK     triaxial_CD_100kPa psi pico: obtido 5.0016 esperado 5.0000
+OK     triaxial_CD_100kPa reconhecido como CAD (esperado CAD)
+OK     triaxial_CD_200kPa psi pico: obtido 5.0022 esperado 5.0000
+OK     triaxial_CD_200kPa reconhecido como CAD (esperado CAD)
+OK     alerta 'amolecimento pós-pico' na serie SINT_PROBLEMAS
+OK     alerta 'q máximo não cresce' na serie SINT_PROBLEMAS
+OK     alerta 'ajuste ruim' na serie SINT_PROBLEMAS
+OK     serie SINT_UU sem alertas
+OK     serie SINT_CIU sem alertas
+OK     serie SINT_CAU sem alertas
+OK     serie SINT_CID sem alertas
+relatorio.html gerado
+41 PNG(s)
+main = 0, falhas = 0

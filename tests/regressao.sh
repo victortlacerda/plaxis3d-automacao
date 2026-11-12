@@ -99,5 +99,13 @@ calibracao() {
 }
 calibracao
 
+# --- soiltest: interpretacao de triaxiais (CPs sinteticos com resposta conhecida + simulacao HS_K0_OCR2)
+interpretacao() {
+  local d; d="$(mktemp -d)"
+  python3 "$T/mock/interpretar_sintetico.py" "$RAIZ" "$d" 2>&1 | normaliza "$d" | normaliza "$RAIZ" > "$d/saida.log"
+  compara "interpretacao_sintetico.log" "$d/saida.log"; rm -rf "$d"
+}
+interpretacao
+
 [ $GRAVAR -eq 1 ] && exit 0
 [ $FALHAS -eq 0 ] && echo "Tudo igual às linhas de base." || { echo "$FALHAS caso(s) mudaram."; exit 1; }
