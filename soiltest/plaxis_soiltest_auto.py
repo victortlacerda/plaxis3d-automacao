@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 plaxis_soiltest_auto.py  -  Fluxo completo: modelo + parametros -> material no PLAXIS 3D Input -> SoilTest -> ensaios -> saida.
+Tambem roda os ensaios num material que JA ESTA no projeto (primeira pergunta, ou CONFIG["material_existente"]).
 
 Modelos: Mohr-Coulomb (drenado, nao drenado A/B/C, non-porous), Linear Elastic (drenado, A, C, non-porous),
 Hardening Soil e HS small (drenado, A, B), Modified Cam-Clay e Soft Soil (drenado, A).
@@ -40,6 +41,9 @@ SOMENTE_VALIDADO = False
 # =========================== CONFIG (valores de TESTE) ===========================
 CONFIG = {
     "interativo": True,                # True: pergunta tudo no console
+    # Material que JA EXISTE no projeto aberto (nome em Identification). Vazio = criar um material novo com
+    # "modelo", "drenagem" e "valores". Com nome, modelo, drenagem e parametros sao lidos do proprio material.
+    "material_existente": "",
     "modelo": "HS",                    # MC | LE | HS | HSsmall | MCC | SS
     "drenagem": "D",                   # D | UA | UB | UC | NP (as validas dependem do modelo)
     "valores": {},                     # sobrescreve valores de teste quando interativo=False. Ex.: {"phi": 33, "cref": 2}
@@ -372,19 +376,54 @@ def perguntar_ciclico(cfg_t, nome_pressao, dren, chave_extra, rotulo_extra):
     cfg_t["duracao_por_ciclo"] = ler_numero("Duracao por ciclo", cfg_t["duracao_por_ciclo"])
 
 
-def perguntar(cfg):
+def escolher_material_existente(cfg, gi):
+    """Lista os materiais do projeto e deixa escolher um. Devolve True se escolheu (cfg preenchido)."""
+    lidos = []
+    for mat in listar_materiais(gi):
+        try:
+            ident, modelo, dren, valores, nome_mod, nome_dr = ler_material_existente(mat)
+        except Exception:
+            continue
+        lidos.append((ident, modelo, dren, valores, nome_mod, nome_dr))
+    validos = [x for x in lidos if x[1] and x[2]]
+    if not validos:
+        print("  Nenhum material do projeto com modelo suportado ({}). Vamos criar um novo.".format(", ".join(MODELOS)))
+        return False
+    for x in lidos:
+        if not (x[1] and x[2]):
+            print("  (ignorado: {} - {} / {}, modelo nao suportado por este script)".format(x[0], x[4], x[5]))
+    opcoes = [(x[0], "{}  ({} / {})".format(x[0], MODELOS[x[1]]["nome"], DRENAGENS[x[2]]["rotulo"])) for x in validos]
+    padrao = cfg.get("material_existente") if any(o[0] == cfg.get("material_existente") for o in opcoes) else opcoes[0][0]
+    nome = escolher("Material do projeto", opcoes, padrao)
+    ident, modelo, dren, valores, _nm, _nd = next(x for x in validos if x[0] == nome)
+    cfg["material_existente"], cfg["modelo"], cfg["drenagem"], cfg["valores"] = ident, modelo, dren, valores
+    print("  " + ", ".join("{} = {}".format(k, fmt_num(v)) for k, v in valores.items() if v is not None))
+    return True
+
+
+def perguntar(cfg, gi=None):
     print("\n=== Entrada de dados (Enter mantem o valor entre colchetes) ===")
     print("    Siglas e simbolos (q, eps_a, CD/CU, OCR...): veja o glossario.md gravado na pasta de saida.")
-    cfg["modelo"] = escolher("Modelo constitutivo", [(k, v["nome"]) for k, v in MODELOS.items()], cfg["modelo"])
+    existente = False
+    if gi is not None:
+        origem = escolher("Material", [("novo", "criar um material novo (digitar modelo e parametros)"),
+                                       ("projeto", "usar um material que ja esta no projeto aberto")],
+                          "projeto" if cfg.get("material_existente") else "novo")
+        existente = origem == "projeto" and escolher_material_existente(cfg, gi)
+    if not existente:
+        cfg["material_existente"] = ""
+        cfg["modelo"] = escolher("Modelo constitutivo", [(k, v["nome"]) for k, v in MODELOS.items()], cfg["modelo"])
     m = MODELOS[cfg["modelo"]]
-    padrao = cfg["drenagem"] if cfg["drenagem"] in m["dren"] else m["dren"][0]
-    cfg["drenagem"] = escolher("Tipo de drenagem do material", [(d, DRENAGENS[d]["rotulo"]) for d in m["dren"]], padrao)
     dren = cfg["drenagem"]
-    print("\n  Parametros do material:")
-    cfg["valores"] = {}
-    for chave, _al, rotulo, padrao_v in parametros(cfg["modelo"], dren):
-        cfg["valores"][chave] = ler_numero(rotulo, padrao_v)
-    if cfg["modelo"] in ("HS", "HSsmall"):
+    if not existente:
+        padrao = cfg["drenagem"] if cfg["drenagem"] in m["dren"] else m["dren"][0]
+        cfg["drenagem"] = escolher("Tipo de drenagem do material", [(d, DRENAGENS[d]["rotulo"]) for d in m["dren"]], padrao)
+        dren = cfg["drenagem"]
+        print("\n  Parametros do material:")
+        cfg["valores"] = {}
+        for chave, _al, rotulo, padrao_v in parametros(cfg["modelo"], dren):
+            cfg["valores"][chave] = ler_numero(rotulo, padrao_v)
+    if cfg["modelo"] in ("HS", "HSsmall") and not existente:
         dil = cfg["dilatancy_cutoff"]
         dil["ligar"] = sim_nao("Ligar corte de dilatancia (dilatancy cut-off)?", dil["ligar"])
         if dil["ligar"]:
@@ -469,6 +508,64 @@ def definir_com_candidatos(mat, atributo, candidatos, marca):
             return True
         log("    {}={!r} aceito, mas o echo mostra {}".format(atributo, c, r))
     return False
+
+
+def listar_materiais(gi):
+    """Materiais de solo do projeto aberto no Input (lista de objetos)."""
+    for lista in ("Soils", "Materials"):
+        try:
+            mats = [m for m in getattr(gi, lista)]
+            if mats:
+                return mats
+        except Exception:
+            continue
+    return []
+
+
+def _nome_norm(n):
+    return str(n).replace("-", "").strip().lower()      # o PLAXIS remove hifens do Identification
+
+
+def achar_material(gi, nome):
+    """Material do projeto pelo nome (Identification). Devolve o objeto ou None."""
+    alvo = _nome_norm(nome)
+    for m in listar_materiais(gi):
+        try:
+            if _nome_norm(valor(m.Identification)) == alvo:
+                return m
+        except Exception:
+            continue
+    return None
+
+
+def ler_material_existente(mat):
+    """(nome, modelo, drenagem, valores) de um material do projeto; modelo/drenagem None se nao suportados."""
+    ident = str(valor(mat.Identification))
+    sm = linha_echo(mat, "SoilModel")
+    dr = linha_echo(mat, "DrainageType")
+    modelo = next((k for k, v in MODELOS.items() if sm and v["numero"] == sm[1]), None)
+    dren = next((k for k, v in DRENAGENS.items() if dr and v["nomes"][1] == dr[1]), None)
+    if modelo and dren not in MODELOS[modelo]["dren"]:
+        dren = None                                       # combinacao que este script nao roda (ex.: Soft Soil Undrained B)
+    valores = {}
+    if modelo and dren:
+        for chave, aliases, _r, _v in parametros(modelo, dren):
+            attr = achar_attr(mat, aliases)
+            valores[chave] = None
+            if attr is None:
+                continue
+            try:
+                valores[chave] = float(valor(getattr(mat, attr)))
+            except Exception:
+                pass
+            if chave in ("K0nc", "Rf") and valores[chave] is not None and valores[chave] <= 0:
+                valores[chave] = None                     # sem valor proprio: o PLAXIS usa o padrao
+    return ident, modelo, dren, valores, (sm[0] if sm else "?"), (dr[0] if dr else "?")
+
+
+def descrever_material(ident, modelo, dren, valores):
+    log("Material do projeto: {} ({} / {})".format(ident, MODELOS[modelo]["nome"], DRENAGENS[dren]["rotulo"]))
+    log("   " + ", ".join("{} = {}".format(k, fmt_num(v)) for k, v in valores.items() if v is not None))
 
 
 def criar_material(g, ident, modelo, dren, valores, dil):
@@ -844,7 +941,25 @@ def checagem_triaxial(d, modelo, dren, p, pressao, comp, tri, ext):
             out["esperado"] = {"descricao": esp[0], "kPa": esp[1]}
     except Exception as e:
         log("   (checagem teorica ignorada: {})".format(e))
+    if comp == "Undrained":
+        av = alerta_sem_pico(d["eps_a_pct"], d["q_kPa"])
+        if av:
+            out["alerta_sem_pico"] = av
     return out
+
+
+def alerta_sem_pico(eps_a, q):
+    """Nao drenado cujo q ainda cresce no fim (> 5 % nos ultimos 20 % da deformacao): resistencia sem limite."""
+    try:
+        eps = [abs(float(e)) for e in eps_a]
+        q = [float(v) for v in q]
+        i80 = min(range(len(eps)), key=lambda i: abs(eps[i] - 0.8 * eps[-1]))
+        if q[i80] > 0 and q[-1] > 1.05 * q[i80]:
+            return ("q ainda cresce no fim ({:.0f} para {:.0f} kPa entre {:.1f} e {:.1f} %): resistencia nao drenada sem "
+                    "limite. Com psi > 0 use psi = 0, corte de dilatancia ou Undrained B").format(q[i80], q[-1], eps[i80], eps[-1])
+    except Exception:
+        return ""
+    return ""
 
 
 def checagem_fases(d, modelo, dren, p):
@@ -1402,6 +1517,8 @@ def executar_ensaios(g, cfg, modelo, dren, p, ctx, pasta, resumo):
                     chk = checagem_triaxial(d, modelo, dren, p, pr, comp, cfg_t, ext)
                     log("   q_max simulado = {:.3f} kPa; dilatacao volumetrica maxima = {:.3f} %".format(
                         chk["q_max_kPa"], chk["dilatacao_max_pct"]))
+                    if chk.get("alerta_sem_pico"):
+                        log("   ATENCAO: " + chk["alerta_sem_pico"])
                 elif tipo == "DSS":
                     chk = checagem_dss(d, modelo, dren, p, pr, comp, ext)
                     log("   tau_max simulado = {:.3f} kPa; dilatacao volumetrica maxima = {:.3f} %".format(
@@ -1432,8 +1549,24 @@ def executar_ensaios(g, cfg, modelo, dren, p, ctx, pasta, resumo):
 # ------------------------------------------------------------------ principal
 def main():
     cfg = CONFIG
+    gi = obter_input(cfg)
+    if gi is None:
+        return 1
     if cfg["interativo"]:
-        cfg = perguntar(cfg)
+        cfg = perguntar(cfg, gi)
+    mat_existente = None
+    if cfg.get("material_existente"):
+        mat_existente = achar_material(gi, cfg["material_existente"])
+        if mat_existente is None:
+            log("Material '{}' nao encontrado no projeto. Materiais: {}".format(
+                cfg["material_existente"], ", ".join(str(valor(m.Identification)) for m in listar_materiais(gi))))
+            return 1
+        ident, modelo_l, dren_l, valores_l, nome_mod, nome_dr = ler_material_existente(mat_existente)
+        if not (modelo_l and dren_l):
+            log("Material '{}' usa {} / {}, que este script nao suporta (modelos: {}).".format(
+                ident, nome_mod, nome_dr, ", ".join(v["nome"] for v in MODELOS.values())))
+            return 1
+        cfg["modelo"], cfg["drenagem"], cfg["valores"] = modelo_l, dren_l, valores_l
     modelo, dren = cfg["modelo"], cfg["drenagem"]
     if modelo not in MODELOS:
         raise ValueError("modelo deve ser um de {}".format(list(MODELOS)))
@@ -1441,7 +1574,7 @@ def main():
         raise ValueError("drenagem {} invalida para {}; use uma de {}".format(dren, modelo, MODELOS[modelo]["dren"]))
     info = MODELOS[modelo]
     valores = {c: cfg["valores"].get(c, v) for c, _a, _r, v in parametros(modelo, dren)}
-    dil = cfg["dilatancy_cutoff"] if modelo in ("HS", "HSsmall") else None
+    dil = cfg["dilatancy_cutoff"] if modelo in ("HS", "HSsmall") and mat_existente is None else None
     if dren == "NP":
         for t in COM_PRESSOES:
             cfg[CHAVE_CFG[t]]["comportamentos"] = ["Drained"]
@@ -1473,23 +1606,26 @@ def main():
     if pre["modo"] != "nenhum":
         log("Pre-adensamento: {} = {}.".format(pre["modo"], pre["valor"]))
 
-    gi = obter_input(cfg)
-    if gi is None:
-        return 1
-
-    ident = "{}_{}_teste".format(modelo, dren)
-    mat = criar_material(gi, ident, modelo, dren, valores, dil)
-    if mat is None:
-        log("Material nao criado. Ha projeto aberto no Input?")
-        return 1
+    if mat_existente is not None:
+        mat = mat_existente
+        descrever_material(str(valor(mat.Identification)), modelo, dren, valores)
+        titulo = "{} | {}".format(str(valor(mat.Identification)), titulo)
+    else:
+        ident = "{}_{}_teste".format(modelo, dren)
+        mat = criar_material(gi, ident, modelo, dren, valores, dil)
+        if mat is None:
+            log("Material nao criado. Ha projeto aberto no Input?")
+            return 1
     g, porta = abrir_soiltest(gi, mat, cfg["espera_soiltest_s"], cfg["porta_input"], modelo)
     if g is None:
         return 1
     estado_corte = propagar_corte(g, dil) if dil and dil.get("ligar") else None
 
-    pasta = os.path.join(AQUI, "soiltest_saida", "auto_{}_{}_{}".format(modelo, dren, datetime.datetime.now().strftime("%Y%m%d_%H%M%S")))
+    rotulo_pasta = "{}_{}".format(modelo, dren) if mat_existente is None else re.sub(r"[^\w]+", "_", str(valor(mat.Identification)))
+    pasta = os.path.join(AQUI, "soiltest_saida", "auto_{}_{}".format(rotulo_pasta, datetime.datetime.now().strftime("%Y%m%d_%H%M%S")))
     os.makedirs(pasta, exist_ok=True)
     resumo = {"modelo": modelo, "drenagem": dren, "parametros": valores, "porta_soiltest": porta,
+              "material_existente": cfg.get("material_existente") or None,
               "consolidacao": dict(cons, K0_usado=k0), "preadensamento": pre,
               "dilatancy_cutoff": dict(dil or {}, SoilTest=estado_corte)}
     ctx = {"modelo": modelo, "dren": dren, "consolidacao": cons, "k0": k0, "preadensamento": pre, "pc_usados": set(),

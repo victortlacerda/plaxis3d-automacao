@@ -943,7 +943,25 @@ def checagem_triaxial(d, modelo, dren, p, pressao, comp, tri, ext):
             out["esperado"] = {"descricao": esp[0], "kPa": esp[1]}
     except Exception as e:
         log("   (checagem teorica ignorada: {})".format(e))
+    if comp == "Undrained":
+        av = alerta_sem_pico(d["eps_a_pct"], d["q_kPa"])
+        if av:
+            out["alerta_sem_pico"] = av
     return out
+
+
+def alerta_sem_pico(eps_a, q):
+    """Nao drenado cujo q ainda cresce no fim (> 5 % nos ultimos 20 % da deformacao): resistencia sem limite."""
+    try:
+        eps = [abs(float(e)) for e in eps_a]
+        q = [float(v) for v in q]
+        i80 = min(range(len(eps)), key=lambda i: abs(eps[i] - 0.8 * eps[-1]))
+        if q[i80] > 0 and q[-1] > 1.05 * q[i80]:
+            return ("q ainda cresce no fim ({:.0f} para {:.0f} kPa entre {:.1f} e {:.1f} %): resistencia nao drenada sem "
+                    "limite. Com psi > 0 use psi = 0, corte de dilatancia ou Undrained B").format(q[i80], q[-1], eps[i80], eps[-1])
+    except Exception:
+        return ""
+    return ""
 
 
 def checagem_fases(d, modelo, dren, p):
@@ -1501,6 +1519,8 @@ def executar_ensaios(g, cfg, modelo, dren, p, ctx, pasta, resumo):
                     chk = checagem_triaxial(d, modelo, dren, p, pr, comp, cfg_t, ext)
                     log("   q_max simulado = {:.3f} kPa; dilatacao volumetrica maxima = {:.3f} %".format(
                         chk["q_max_kPa"], chk["dilatacao_max_pct"]))
+                    if chk.get("alerta_sem_pico"):
+                        log("   ATENCAO: " + chk["alerta_sem_pico"])
                 elif tipo == "DSS":
                     chk = checagem_dss(d, modelo, dren, p, pr, comp, ext)
                     log("   tau_max simulado = {:.3f} kPa; dilatacao volumetrica maxima = {:.3f} %".format(

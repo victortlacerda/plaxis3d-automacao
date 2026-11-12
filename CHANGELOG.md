@@ -5,7 +5,8 @@
   (material × ensaio × tensões × drenagem × K0 × pré-adensamento × ciclos), com materiais do projeto aberto ou
   criados pela planilha de materiais; relatório e `campanha_resumo.csv` com uma linha por curva; alerta de
   triaxial não drenado sem pico. Diferença com a teoria abaixo de 0,005 % aparece como 0,00 % (antes em notação científica).
-- `plaxis_soiltest_auto_dev.py`: opção de usar um material que já está no projeto (menu ou `material_existente`).
+- `soiltest/plaxis_soiltest_auto.py`: opção de usar um material que já está no projeto (menu ou `material_existente`),
+  validada no PLAXIS real em 12/11/2026; alerta quando um triaxial não drenado não tem pico (q ainda crescendo no fim).
 - `soiltest/em_desenvolvimento/interpretacao/`: ferramenta própria para extrair e interpretar triaxiais reais e
   simulados, separada do calibrador. `soiltest_extrair.py` puxa os ensaios do PLAXIS SoilTest (material do projeto ou
   janela aberta, inclusive só lendo a curva já calculada) e faz o relatório; `soiltest_interpretacao.py` interpreta

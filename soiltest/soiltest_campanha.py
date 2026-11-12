@@ -337,23 +337,17 @@ def linhas_resultado(A, e, modelo, dren, resumo):
     return out
 
 
-def alerta_sem_pico(sub, curva):
-    """Triaxial nao drenado cujo q ainda cresce no fim (>5 % nos ultimos 20 % da deformacao): resistencia sem limite."""
+def alerta_sem_pico(A, sub, curva):
+    """Le a curva CU gravada e usa o alerta do plaxis_soiltest_auto (q ainda crescendo no fim)."""
     cam = os.path.join(sub, "triaxial_{}.csv".format(curva))
-    if not curva.startswith("CU") or not os.path.isfile(cam):
+    if not curva.startswith("CU") or not os.path.isfile(cam) or "alerta_sem_pico" not in A:
         return ""
     try:
         with open(cam, encoding="utf-8") as f:
             rows = list(csv.DictReader(f, delimiter=";"))
-        eps = [abs(float(r["eps_a_pct"])) for r in rows]
-        q = [float(r["q_kPa"]) for r in rows]
-        i80 = min(range(len(eps)), key=lambda i: abs(eps[i] - 0.8 * eps[-1]))
-        if q[i80] > 0 and q[-1] > 1.05 * q[i80]:
-            return ("q ainda cresce no fim ({:.0f} para {:.0f} kPa entre {:.1f} e {:.1f} %): resistência não drenada sem "
-                    "limite; com ψ > 0 use ψ = 0, corte de dilatância ou Undrained B").format(q[i80], q[-1], eps[i80], eps[-1])
+        return A["alerta_sem_pico"]([r["eps_a_pct"] for r in rows], [r["q_kPa"] for r in rows])
     except Exception:
         return ""
-    return ""
 
 
 # ------------------------------------------------------------------ principal
@@ -475,9 +469,8 @@ def main():
                                '<a href="{}">relatório</a>'.format(A["_esc"](rel))))
             for curva, grand, sim, esp, extra in res:
                 if tipo == "Triaxial":
-                    av = alerta_sem_pico(sub, curva)
+                    av = alerta_sem_pico(A, sub, curva)
                     if av:
-                        log("   ATENCAO {}: {}".format(curva, av))
                         extra = (extra + "; " if extra else "") + "ATENÇÃO: " + av
                 dif = A["classe_diferenca"](sim, esp)[0] if esp is not None else ""
                 tabela.append((e["linha"], ident, nome_ens, descrever(e), curva, "{}: {}".format(grand, A["_num"](sim, 2)),

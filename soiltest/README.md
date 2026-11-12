@@ -22,7 +22,7 @@ e gráficos e **confere os resultados com a solução teórica** quando ela exis
 
 Tudo abaixo vem de rodadas **reais** no PLAXIS 3D 2024.2 (as saídas completas estão em [`exemplos/`](exemplos/)).
 
-**Entrada de dados no console:** menus numerados, Enter aceita o padrão, vírgula decimal aceita, resposta inválida
+**Entrada de dados no console:** a primeira pergunta é criar um material novo ou **usar um que já está no projeto** (lista os materiais com modelo e drenagem e lê os parâmetros dele); menus numerados, Enter aceita o padrão, vírgula decimal aceita, resposta inválida
 repete a pergunta.
 
 ![Perguntas](imagens/term_perguntas.png)
@@ -147,5 +147,5 @@ Quando um item em desenvolvimento for validado no PLAXIS real, ele passa para o 
 - [ ] Interpretação de triaxiais (UU, CIU/CAU, CID/CAD) como em laudo: em desenvolvimento, testada offline com ensaios sintéticos
 - [ ] Calibração automática contra ensaio de laboratório: em desenvolvimento, 1ª rodada real em 10/11/2026 (4 CIU)
 - [x] Campanha de ensaios por planilha (validada no PLAXIS real em 12/11/2026)
-- [ ] Usar material do projeto no script principal: em `em_desenvolvimento/plaxis_soiltest_auto_dev.py`, falta a rodada real
+- [x] Usar material que já está no projeto no script principal (validado no PLAXIS real em 12/11/2026)
 - [ ] MCP: por último, se for feito

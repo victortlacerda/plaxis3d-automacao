@@ -202,4 +202,5 @@ Sem informar pré-adensamento, o script aplica `PreconsolidationPressure` = 100 
 - HS não drenado com ψ = 3°, K0 e OCR 2: q passa de 687 kPa em 10 % e continua subindo (dilatância sem limite no não drenado). A campanha agora avisa quando q cresce mais de 5 % nos últimos 20 % da deformação de um CU.
 - Soft Soil edômetro com σ'p = 50 kPa até 400 kPa: ε_v = 29,5 % (λ* ln(400/50) = 25 % depois de σ'p, mais a recompressão).
 - MC: DSS τ_max = c cos φ + σ'v sen φ exato; CDSS em ±0,2 % e triaxial cíclico em ±30 kPa ficam elásticos (G = E/2(1+ν) = 5769,2 kPa; E = 15 000 kPa; amortecimento 0).
+- Material do projeto no script principal (12/11/2026): a lista de `g_i.Soils` traz nome, modelo e drenagem de cada material; o script lê os parâmetros e roda os 6 ensaios sem recriar nada (Areia_media: mesmos q_max da campanha, 123,297 / 242,909 / 482,136 kPa). HS drenado com ψ = 3° em CU isotrópico: q de 637 / 776 / 995 kPa em 15 %, ainda subindo; o alerta de "sem pico" passou para o script principal.
 
