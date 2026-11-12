@@ -192,8 +192,9 @@ Sem informar pré-adensamento, o script aplica `PreconsolidationPressure` = 100 
 - **Extrator (`soiltest_extrair.py`):** usa as funções do `_auto` (`abrir_soiltest`, `executar_ensaios`, `ler_triaxial`).
   No modo só leitura, lê `Triaxial.Results` da janela e a configuração em `CellPressure` e `Behaviour` (0 ou "Drained" =
   drenado; se não der para ler, decide pela poropressão). O SoilTest guarda uma curva por ensaio, por isso a leitura
-  acumula numa pasta fixa. **Ainda não rodado no PLAXIS real**; a conexão a um SoilTest aberto à mão depende do servidor
-  de scripts dele estar ativo (no passo 1 ele respondeu na porta 10000).
+  acumula numa pasta fixa. Modo `"material"` **rodado no PLAXIS real em 12/11/2026** (Areia_media, HS: CID devolve c' = 1,
+  φ' = 33°, ψ = 3°; SoilTest na porta 10002). Os modos `"aberto"` ainda não; dependem do servidor de scripts da
+  janela estar ativo (no passo 1 ele respondeu na porta 10000).
 
 ## Passo 16 (campanha por planilha, 12/11/2026, PLAXIS real)
 - Uma janela do SoilTest por material roda em sequência ensaios de tipos diferentes (triaxial, edômetro, DSS, CDSS, triaxial cíclico) sem reabrir; o pré-adensamento de cada ensaio é restaurado a 0 depois dele.

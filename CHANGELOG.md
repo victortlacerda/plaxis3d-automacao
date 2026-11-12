@@ -1,6 +1,8 @@
 # Histórico de versões
 
 ## Não lançado
+- Interpretação de ensaios: extrator rodado no PLAXIS real (modo material, CID devolve os parâmetros do material);
+  novo alerta "não drenado sem pico" (q ainda sobe no fim, A_f < 0) e série sintética dilatante no teste.
 - `soiltest/soiltest_campanha.py` (estável, validada no PLAXIS real em 12/11/2026): campanha de ensaios virtuais definida numa planilha CSV
   (material × ensaio × tensões × drenagem × K0 × pré-adensamento × ciclos), com materiais do projeto aberto ou
   criados pela planilha de materiais; relatório e `campanha_resumo.csv` com uma linha por curva; alerta de
