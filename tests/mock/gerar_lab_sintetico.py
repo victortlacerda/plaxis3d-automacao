@@ -16,6 +16,7 @@ Construcao (convencao de laboratorio: compressao +, q = sigma1 - sigma3, du = ex
   ate 10 % (taxa do angulo de dilatancia de pico) e a taxa cai linearmente a zero em 15 % (estado critico).
       d eps_v / d eps_a = -2 sin psi / (1 - sin psi)     (contracao +)
 - PROBLEMAS: serie CIU com amolecimento pos-pico e com q maximo que cai com sigma3 (para os alertas).
+- DILATANTE: CIU sem pico (q sobe ate o fim, du negativo), para o alerta de nao drenado sem pico.
 Nada aqui e dado real.
 """
 import json
@@ -112,6 +113,13 @@ def gerar(pasta):
             mult = forma(e) if e <= EPS_F else 1.0 - 0.25 * min(1.0, (e - EPS_F) / 10.0)
             linhas.append(";".join([nome, "CIU", "SINT_PROBLEMAS", "U", f(s3), f(e), f(qp * mult), "",
                                     f(A_CIU * qp * forma(e)), "", ""]))
+
+    # DILATANTE: CIU de areia densa sem drenagem, q sobe ate o fim e du fica negativo (sem pico)
+    for s3 in (50.0, 100.0, 200.0):
+        nome = "DIL_{:g}".format(s3)
+        for e in EPS:
+            q = s3 * (0.08 * e)
+            linhas.append(";".join([nome, "CIU", "SINT_DILATANTE", "U", f(s3), f(e), f(q), "", f(-0.3 * q), "", ""]))
 
     cam = os.path.join(pasta, "lab_interpretacao_sintetico.csv")
     with open(cam, "w", encoding="utf-8") as fh:

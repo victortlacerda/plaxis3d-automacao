@@ -62,6 +62,9 @@ for trecho in ("amolecimento pós-pico", "q máximo não cresce", "ajuste ruim")
     ok = trecho in al
     falhas += 0 if ok else 1
     print("{:6s} alerta '{}' na serie SINT_PROBLEMAS".format("OK" if ok else "FALHA", trecho))
+ok = "Não drenado sem pico" in " ".join(res["SINT_DILATANTE"]["alertas"])
+falhas += 0 if ok else 1
+print("{:6s} alerta 'Não drenado sem pico' na serie SINT_DILATANTE".format("OK" if ok else "FALHA"))
 for s in ("SINT_UU", "SINT_CIU", "SINT_CAU", "SINT_CID"):
     ok = not res[s]["alertas"]
     falhas += 0 if ok else 1

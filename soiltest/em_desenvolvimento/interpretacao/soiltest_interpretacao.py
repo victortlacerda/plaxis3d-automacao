@@ -329,6 +329,26 @@ def interpretar_serie(nome, cps, cfg):
                                       .format(cp["nome"], 100 * queda, qp["q"], qp["eps"], qf["q"]))
         res["cps"].append(item)
 
+    # nao drenado sem pico: q ainda sobe no fim (material dilatante sem drenagem, du cada vez mais negativo)
+    sem_pico = []
+    for c in res["cps"]:
+        cp = next(x for x in cps if x["nome"] == c["nome"])
+        if c["tipo"] not in ("CIU", "CAU", "UU") or len(cp["eps"]) < 3:
+            continue
+        e_fim, q_fim = cp["eps"][-1], cp["q"][-1]
+        alvo = 0.8 * e_fim
+        q_80 = next(q for e, q in zip(cp["eps"], cp["q"]) if e >= alvo)
+        if q_fim >= max(cp["q"]) - 1e-9 and q_80 > 0 and (q_fim - q_80) / q_80 > 0.05:
+            d = c["ruptura"]["q máximo"] or {}
+            sem_pico.append("{} (q {:.0f} → {:.0f} kPa de {:g} a {:g} %{})".format(
+                c["nome"], q_80, q_fim, alvo, e_fim, ", A_f = {:.2f}".format(d["A"]) if d.get("A") is not None else ""))
+    if sem_pico:
+        res["alertas"].append(
+            "Não drenado sem pico: q ainda cresce no fim do ensaio em {}. A resistência pelo q máximo e pelo fim do ensaio "
+            "depende só de onde o ensaio parou (a envoltória total desses critérios não tem significado físico). Use σ'1/σ'3 "
+            "máxima ou ε_a limite; A_f negativo indica dilatância. No PLAXIS: ψ = 0, corte de dilatância ou Undrained B."
+            .format("; ".join(sem_pico)))
+
     # q maximo deve crescer com sigma3 nos ensaios adensados
     if tipo != "UU":
         lst = [(c["nome"], c["s3c"], c["ruptura"]["q máximo"]["q"]) for c in res["cps"] if c["ruptura"].get("q máximo")]

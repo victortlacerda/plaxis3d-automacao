@@ -1,4 +1,4 @@
-Laboratorio: lab_interpretacao_sintetico.csv (15 CP(s))
+Laboratorio: lab_interpretacao_sintetico.csv (18 CP(s))
 Simulacao: <DIR>/soiltest/exemplos/HS_K0_OCR2 (3 CP(s))
 
 Serie SINT_UU (UU, laboratório, 3 CP(s))
@@ -63,6 +63,20 @@ Serie SINT_PROBLEMAS (CIU, laboratório, 3 CP(s))
    ATENCAO: Envoltória total com ajuste ruim (R² abaixo de 0.95): q máximo 0.152; σ'1/σ'3 máxima 0.152; ε_a limite 0.121; fim do ensaio 0.121.
    ATENCAO: Envoltória efetiva com ajuste ruim (R² abaixo de 0.95): q máximo 0.081; σ'1/σ'3 máxima 0.081; ε_a limite 0.056; fim do ensaio 0.056.
 
+Serie SINT_DILATANTE (CIU, laboratório, 3 CP(s))
+   DIL_50: sigma3c = 50 kPa, q max = 80.00 kPa em eps_a = 20 %, A_f = -0.300
+   DIL_100: sigma3c = 100 kPa, q max = 160.00 kPa em eps_a = 20 %, A_f = -0.300
+   DIL_200: sigma3c = 200 kPa, q max = 320.00 kPa em eps_a = 20 %, A_f = -0.300
+   envoltoria total    (q máximo): c = 0.00 kPa, phi = 26.39 graus, R2 = 1.0000
+   envoltoria total    (σ'1/σ'3 máxima): c = 0.00 kPa, phi = 26.39 graus, R2 = 1.0000
+   envoltoria total    (ε_a limite): c = 0.00 kPa, phi = 22.02 graus, R2 = 1.0000
+   envoltoria total    (fim do ensaio): c = 0.00 kPa, phi = 26.39 graus, R2 = 1.0000
+   envoltoria efetiva  (q máximo): c = 0.00 kPa, phi = 20.54 graus, R2 = 1.0000
+   envoltoria efetiva  (σ'1/σ'3 máxima): c = 0.00 kPa, phi = 20.54 graus, R2 = 1.0000
+   envoltoria efetiva  (ε_a limite): c = 0.00 kPa, phi = 17.83 graus, R2 = 1.0000
+   envoltoria efetiva  (fim do ensaio): c = 0.00 kPa, phi = 20.54 graus, R2 = 1.0000
+   ATENCAO: Não drenado sem pico: q ainda cresce no fim do ensaio em DIL_50 (q 70 → 80 kPa de 16 a 20 %, A_f = -0.30); DIL_100 (q 140 → 160 kPa de 16 a 20 %, A_f = -0.30); DIL_200 (q 280 → 320 kPa de 16 a 20 %, A_f = -0.30). A resistência pelo q máximo e pelo fim do ensaio depende só de onde o ensaio parou (a envoltória total desses critérios não tem significado físico). Use σ'1/σ'3 máxima ou ε_a limite; A_f negativo indica dilatância. No PLAXIS: ψ = 0, corte de dilatância ou Undrained B.
+
 Serie SIM HS_K0_OCR2 CAD (CAD, simulação, 3 CP(s))
    triaxial_CD_50kPa: sigma3c = 50 kPa, q max = 138.36 kPa em eps_a = 2.25 %, psi pico = 5.00, psi medio = 4.57 graus
    triaxial_CD_100kPa: sigma3c = 100 kPa, q max = 272.88 kPa em eps_a = 3.15 %, psi pico = 5.00, psi medio = 4.41 graus
@@ -73,7 +87,7 @@ Serie SIM HS_K0_OCR2 CAD (CAD, simulação, 3 CP(s))
    envoltoria efetiva  (fim do ensaio): c = 1.00 kPa, phi = 35.00 graus, R2 = 1.0000
 
 Saida: <DIR>/saida
-   41 grafico(s), parametros.csv, interpretacao.json, relatorio.html, log.txt
+   50 grafico(s), parametros.csv, interpretacao.json, relatorio.html, log.txt
 
 Conferencia contra o gabarito
 OK     SINT_CIU efetiva q máximo c': obtido 10.0000 esperado 10.0000
@@ -142,10 +156,11 @@ OK     triaxial_CD_200kPa reconhecido como CAD (esperado CAD)
 OK     alerta 'amolecimento pós-pico' na serie SINT_PROBLEMAS
 OK     alerta 'q máximo não cresce' na serie SINT_PROBLEMAS
 OK     alerta 'ajuste ruim' na serie SINT_PROBLEMAS
+OK     alerta 'Não drenado sem pico' na serie SINT_DILATANTE
 OK     serie SINT_UU sem alertas
 OK     serie SINT_CIU sem alertas
 OK     serie SINT_CAU sem alertas
 OK     serie SINT_CID sem alertas
 relatorio.html gerado
-41 PNG(s)
+50 PNG(s)
 main = 0, falhas = 0

@@ -93,13 +93,18 @@ Em `soiltest_saida/extracao_<material>_<data>/` (extrator) ou `soiltest_saida/in
 - **Envoltória:** regressão em (s, t), t = m + s·tan α, com sen φ = tan α e c = m / cos φ; M = 6 sen φ'/(3 − sen φ').
   Quando c < 0, mostra também φ com c = 0.
 - **Alertas:** amolecimento pós-pico (> 10 %), q máximo que não cresce com σ'3c, R² < 0,95, c negativo, CP que
-  não chega a ε_a limite, CIU sem Δu, Su muito variável no UU.
+  não chega a ε_a limite, CIU sem Δu, Su muito variável no UU, não drenado sem pico (q ainda sobe no fim: material
+  dilatante; use σ'1/σ'3 ou ε_a limite, ou ψ = 0 / corte de dilatância no PLAXIS).
 
 ## 5. Situação
 
 - Testado offline: CPs sintéticos com resposta conhecida (70 conferências) e a simulação `../../exemplos/HS_K0_OCR2`
   (devolve c' = 1 kPa, φ' = 35° e ψ = 5° do material). Extrator testado no mock do PLAXIS nos modos material,
   K0, aberto e só leitura.
-- **Falta rodar no PLAXIS real** (`soiltest_extrair.py`) e com um laudo real.
+- **Rodado no PLAXIS 3D 2024.2 (12/11/2026), modo `"material"`**, com a Areia_media (HS drenado): os CID devolvem
+  c' = 1 kPa, φ' = 33° e ψ = 3° do material pelos quatro critérios (R² = 1) e q máximo igual ao de Mohr-Coulomb a
+  0,01 kPa. Os CIU da mesma areia (ψ > 0) não têm pico: q sobe até o fim e A_f < 0; a envoltória efetiva continua
+  φ' = 33°, mas a total pelo q máximo não tem significado. Daí o alerta "não drenado sem pico".
+- Falta: rodar com um laudo real e os modos `"aberto"`.
 - Próximos: laboratório × simulação no mesmo gráfico; edômetro (Cc, Cr, σ'p por Casagrande e Pacheco Silva, cv) e DSS;
   entrada em .xlsx.
