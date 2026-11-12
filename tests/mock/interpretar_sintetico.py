@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(RAIZ, "tests", "mock"))
 import gerar_lab_sintetico as G  # noqa: E402
 
 csv_lab, gab = G.gerar(PASTA)
-cam = os.path.join(RAIZ, "soiltest", "em_desenvolvimento", "soiltest_interpretacao.py")
+cam = os.path.join(RAIZ, "soiltest", "em_desenvolvimento", "interpretacao", "soiltest_interpretacao.py")
 I = {"__name__": "interpretacao", "__file__": cam, "__builtins__": __builtins__}
 with open(cam, "rb") as f:
     exec(compile(f.read(), cam, "exec"), I, I)
@@ -36,7 +36,7 @@ def confere(rotulo, obtido, esperado, tol):
 
 print("")
 print("Conferencia contra o gabarito")
-for serie in ("SINT_CIU", "SINT_CAU", "SINT_CID", "SIM HS_K0_OCR2"):
+for serie in ("SINT_CIU", "SINT_CAU", "SINT_CID", "SIM HS_K0_OCR2 CAD"):
     c_esp, phi_esp = (1.0, 35.0) if serie.startswith("SIM") else (gab["c_ef"], gab["phi_ef"])
     for crit, e in res[serie]["envoltorias"]["efetiva"].items():
         confere("{} efetiva {} c'".format(serie, crit), e["c"], c_esp, 0.01)
@@ -52,7 +52,7 @@ for serie, a_esp in (("SINT_CIU", gab["A_CIU"]), ("SINT_CAU", gab["A_CAU"])):
 for cp in res["SINT_CID"]["cps"]:
     confere("{} psi pico".format(cp["nome"]), cp["dilatancia"]["psi_pico"], gab["psi_pico"], 0.01)
     confere("{} psi medio".format(cp["nome"]), cp["dilatancia"]["psi_medio"], gab["psi_medio"], 0.01)
-for cp in res["SIM HS_K0_OCR2"]["cps"]:
+for cp in res["SIM HS_K0_OCR2 CAD"]["cps"]:
     confere("{} psi pico".format(cp["nome"]), cp["dilatancia"]["psi_pico"], 5.0, 0.05)
     tipo_ok = cp["tipo"] == "CAD"
     falhas += 0 if tipo_ok else 1

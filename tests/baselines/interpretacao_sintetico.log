@@ -63,7 +63,7 @@ Serie SINT_PROBLEMAS (CIU, laboratório, 3 CP(s))
    ATENCAO: Envoltória total com ajuste ruim (R² abaixo de 0.95): q máximo 0.152; σ'1/σ'3 máxima 0.152; ε_a limite 0.121; fim do ensaio 0.121.
    ATENCAO: Envoltória efetiva com ajuste ruim (R² abaixo de 0.95): q máximo 0.081; σ'1/σ'3 máxima 0.081; ε_a limite 0.056; fim do ensaio 0.056.
 
-Serie SIM HS_K0_OCR2 (CAD, simulação, 3 CP(s))
+Serie SIM HS_K0_OCR2 CAD (CAD, simulação, 3 CP(s))
    triaxial_CD_50kPa: sigma3c = 50 kPa, q max = 138.36 kPa em eps_a = 2.25 %, psi pico = 5.00, psi medio = 4.57 graus
    triaxial_CD_100kPa: sigma3c = 100 kPa, q max = 272.88 kPa em eps_a = 3.15 %, psi pico = 5.00, psi medio = 4.41 graus
    triaxial_CD_200kPa: sigma3c = 200 kPa, q max = 541.91 kPa em eps_a = 4.35 %, psi pico = 5.00, psi medio = 4.26 graus
@@ -100,14 +100,14 @@ OK     SINT_CID efetiva ε_a limite c': obtido 10.0000 esperado 10.0000
 OK     SINT_CID efetiva ε_a limite phi': obtido 30.0000 esperado 30.0000
 OK     SINT_CID efetiva fim do ensaio c': obtido 10.0000 esperado 10.0000
 OK     SINT_CID efetiva fim do ensaio phi': obtido 30.0000 esperado 30.0000
-OK     SIM HS_K0_OCR2 efetiva q máximo c': obtido 0.9998 esperado 1.0000
-OK     SIM HS_K0_OCR2 efetiva q máximo phi': obtido 35.0012 esperado 35.0000
-OK     SIM HS_K0_OCR2 efetiva σ'1/σ'3 máxima c': obtido 0.9998 esperado 1.0000
-OK     SIM HS_K0_OCR2 efetiva σ'1/σ'3 máxima phi': obtido 35.0012 esperado 35.0000
-OK     SIM HS_K0_OCR2 efetiva ε_a limite c': obtido 1.0000 esperado 1.0000
-OK     SIM HS_K0_OCR2 efetiva ε_a limite phi': obtido 35.0000 esperado 35.0000
-OK     SIM HS_K0_OCR2 efetiva fim do ensaio c': obtido 1.0000 esperado 1.0000
-OK     SIM HS_K0_OCR2 efetiva fim do ensaio phi': obtido 35.0000 esperado 35.0000
+OK     SIM HS_K0_OCR2 CAD efetiva q máximo c': obtido 0.9998 esperado 1.0000
+OK     SIM HS_K0_OCR2 CAD efetiva q máximo phi': obtido 35.0012 esperado 35.0000
+OK     SIM HS_K0_OCR2 CAD efetiva σ'1/σ'3 máxima c': obtido 0.9998 esperado 1.0000
+OK     SIM HS_K0_OCR2 CAD efetiva σ'1/σ'3 máxima phi': obtido 35.0012 esperado 35.0000
+OK     SIM HS_K0_OCR2 CAD efetiva ε_a limite c': obtido 1.0000 esperado 1.0000
+OK     SIM HS_K0_OCR2 CAD efetiva ε_a limite phi': obtido 35.0000 esperado 35.0000
+OK     SIM HS_K0_OCR2 CAD efetiva fim do ensaio c': obtido 1.0000 esperado 1.0000
+OK     SIM HS_K0_OCR2 CAD efetiva fim do ensaio phi': obtido 35.0000 esperado 35.0000
 OK     SINT_UU total q máximo c_u: obtido 40.0000 esperado 40.0000
 OK     SINT_UU total q máximo phi_u: obtido 0.0000 esperado 0.0000
 OK     SINT_UU total ε_a limite c_u: obtido 40.0000 esperado 40.0000

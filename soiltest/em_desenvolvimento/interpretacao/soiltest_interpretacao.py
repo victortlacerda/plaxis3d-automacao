@@ -29,7 +29,9 @@ criterio), interpretacao.json, relatorio.html e log.txt.
 
 COMO RODAR: nao precisa do PLAXIS. Pelo Executar_script_PLAXIS.bat (edite o CONFIG) ou no terminal:
     python soiltest_interpretacao.py lab.csv [pasta_do_auto ...]
-Precisa do plaxis_soiltest_auto.py na mesma pasta ou na pasta acima (relatorio e rotulos).
+Precisa do plaxis_soiltest_auto.py nesta pasta ou numa das duas acima (soiltest/), so pelo relatorio.
+Para puxar os ensaios direto do PLAXIS SoilTest, use o soiltest_extrair.py (mesma pasta), que chama este script.
+Modelo do CSV de laboratorio: modelo_entrada_laboratorio.csv (mesma pasta).
 """
 import csv
 import datetime
@@ -45,7 +47,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() els
 
 # =========================== CONFIG ===========================
 CONFIG = {
-    "lab_csv": os.path.join(AQUI, "dados_laboratorio", "lab.csv"),   # "" para nao ler laboratorio
+    "lab_csv": os.path.join(AQUI, "dados_laboratorio", "lab.csv"),   # "" para nao ler laboratorio (modelo: modelo_entrada_laboratorio.csv)
     "pastas_simulacao": [],             # pastas de saida do plaxis_soiltest_auto.py (cada uma vira uma serie)
     "descricao": "",                    # texto livre do relatorio (amostra, obra, laudo)
     "eps_limite_pct": 15.0,             # criterio "eps_a limite" (ruptura convencional sem pico)
@@ -68,13 +70,16 @@ def log(msg=""):
 
 
 def carregar_auto():
-    for nome in ("plaxis_soiltest_auto.py", os.path.join("..", "plaxis_soiltest_auto.py"), "plaxis_soiltest_auto_dev.py"):
+    for nome in ("plaxis_soiltest_auto.py", os.path.join("..", "plaxis_soiltest_auto.py"),
+                 os.path.join("..", "..", "plaxis_soiltest_auto.py")):
         cam = os.path.normpath(os.path.join(AQUI, nome))
         if os.path.isfile(cam):
             break
     else:
         raise FileNotFoundError("Nao achei plaxis_soiltest_auto.py nesta pasta nem na pasta acima.")
     ns = {"__name__": "soiltest_auto", "__file__": cam, "__builtins__": __builtins__}
+    if "g_i" in globals():
+        ns["g_i"], ns["s_i"] = globals()["g_i"], globals().get("s_i")
     with open(cam, "rb") as f:
         exec(compile(f.read(), cam, "exec"), ns, ns)
     return ns
@@ -151,9 +156,11 @@ def _q_inicial(eps, q):
     return None
 
 
-def ler_simulacao(pasta):
-    """Le os triaxiais de uma pasta de saida do plaxis_soiltest_auto.py (uma serie)."""
-    serie = "SIM " + os.path.basename(os.path.normpath(pasta))
+def ler_simulacao(pasta, serie=None, total=False):
+    """Le os triaxiais de uma pasta (saida do plaxis_soiltest_auto.py ou do soiltest_extrair.py). Uma serie por tipo
+    de ensaio: "<serie> CIU", "<serie> CID" etc.
+    total=True: material em tensoes totais (Undrained C); os ensaios CU viram UU (sem du)."""
+    serie = serie or "SIM " + os.path.basename(os.path.normpath(pasta))
     cps = []
     for cam in sorted(glob.glob(os.path.join(pasta, "triaxial_C[DU]_*.csv"))):
         cols = {}
@@ -170,7 +177,9 @@ def ler_simulacao(pasta):
         tipo = ("CAU" if aniso else "CIU") if cu else ("CAD" if aniso else "CID")
         nome = os.path.splitext(os.path.basename(cam))[0]
         du = [v or 0.0 for v in cols["du_kPa"]] if cu else [0.0] * len(cols["eps_a_pct"])
-        cps.append(_cp(nome, tipo, serie, "simulação", s3c, cols["eps_a_pct"], cols["q_kPa"], du,
+        if total and cu:
+            tipo, du = "UU", None
+        cps.append(_cp(nome, tipo, "{} {}".format(serie, tipo), "simulação", s3c, cols["eps_a_pct"], cols["q_kPa"], du,
                        None if cu else cols.get("ev_pct")))
     if not cps:
         log("ATENCAO: nenhum triaxial_CD_*/triaxial_CU_*.csv em {}".format(pasta))
@@ -592,7 +601,7 @@ def gravar_csv_parametros(caminho, lin):
             f.write(";".join(str(x) if not isinstance(x, float) else "{:.4f}".format(x) for x in [v if v is not None else "" for v in l]) + "\n")
 
 
-def relatorio(A, pasta, res, figs, cfg, entradas):
+def relatorio(A, pasta, res, figs, cfg, entradas, secoes_extra=None, titulo=None, ferramenta="soiltest_interpretacao.py"):
     sec = []
     sec.append(("Entradas", A["html_tabela"](["Item", "Valor"], entradas + [
         ("ε_a limite", "{:g} %".format(cfg["eps_limite_pct"])), ("Critério dos círculos de Mohr", cfg["criterio_principal"]),
@@ -633,11 +642,12 @@ def relatorio(A, pasta, res, figs, cfg, entradas):
             h += '<div class="figs">{}</div>'.format(imgs)
         sec.append(("Série {} ({}, {})".format(s["serie"], s["tipo"], s["fonte"]), h))
     cam = os.path.join(pasta, "relatorio.html")
-    A["relatorio_html"](cam, "Interpretação de ensaios triaxiais", cfg.get("descricao") or "", sec)
+    sec = sec[:1] + list(secoes_extra or []) + sec[1:]
+    A["relatorio_html"](cam, titulo or "Interpretação de ensaios triaxiais", cfg.get("descricao") or "", sec)
     with open(cam, encoding="utf-8") as f:
         txt = f.read()
     with open(cam, "w", encoding="utf-8") as f:
-        f.write(txt.replace("plaxis_soiltest_auto.py em", "soiltest_interpretacao.py em"))
+        f.write(txt.replace("plaxis_soiltest_auto.py em", "{} em".format(ferramenta)))
     return cam
 
 
@@ -666,6 +676,9 @@ def resumo_log(res):
                 extra += ", psi pico = {:.2f}, psi medio = {:.2f} graus".format(it["dilatancia"]["psi_pico"], it["dilatancia"]["psi_medio"])
             log("   {}: sigma3c = {:g} kPa, q max = {:.2f} kPa em eps_a = {:g} %{}".format(it["nome"], it["s3c"], d.get("q", 0), d.get("eps", 0), extra))
         for chave in ("total", "efetiva"):
+            if s["envoltorias"][chave] and not any(s["envoltorias"][chave].values()):
+                log("   envoltoria {:8s}: sem pontos suficientes (menos de 2 CPs)".format(chave))
+                continue
             for crit, e in s["envoltorias"][chave].items():
                 if e:
                     log("   envoltoria {:8s} ({}): c = {:.2f} kPa, phi = {:.2f} graus, R2 = {:.4f}".format(chave, crit, e["c"], e["phi"], e["r2"]))
@@ -702,14 +715,20 @@ def main(argv=None):
     if not cps:
         log("Nenhum ensaio para interpretar.")
         return 1
+    gerar_saidas(A, cps, cfg, pasta, entradas)
+    return 0
+
+
+def gerar_saidas(A, cps, cfg, pasta, entradas, secoes_extra=None, titulo=None, ferramenta="soiltest_interpretacao.py", extra_json=None):
+    """Interpreta os CPs e grava graficos/, parametros.csv, interpretacao.json, relatorio.html e log.txt. Devolve res."""
     res = interpretar(cps, cfg)
     resumo_log(res)
     figs = graficos(res, cps, pasta, cfg)
     gravar_csv_parametros(os.path.join(pasta, "parametros.csv"), tabela_parametros(res))
     with open(os.path.join(pasta, "interpretacao.json"), "w", encoding="utf-8") as f:
-        json.dump(_limpo({"config": cfg, "series": res}), f, indent=1, ensure_ascii=False)
+        json.dump(_limpo(dict({"config": cfg, "series": res}, **(extra_json or {}))), f, indent=1, ensure_ascii=False)
     try:
-        relatorio(A, pasta, res, figs, cfg, entradas)
+        relatorio(A, pasta, res, figs, cfg, entradas, secoes_extra, titulo, ferramenta)
     except Exception:
         log("Relatorio nao gerado:\n" + traceback.format_exc())
     log("")
@@ -717,7 +736,7 @@ def main(argv=None):
     log("   {} grafico(s), parametros.csv, interpretacao.json, relatorio.html, log.txt".format(sum(len(v) for v in figs.values())))
     with open(os.path.join(pasta, "log.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(_linhas_log) + "\n")
-    return 0
+    return res
 
 
 if __name__ == "__main__":
