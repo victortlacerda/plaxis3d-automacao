@@ -1,0 +1,38 @@
+---- execucao com o triaxial de 50 kPa calculado na janela ----
+Conectado ao SoilTest na porta 10001.
+Triaxial lido da janela: CU_50kPa (41 pontos, q max = 98.77 kPa)
+
+Serie SoilTest PLAXIS CIU (CIU, simulação, 1 CP(s))
+   triaxial_CU_50kPa: sigma3c = 50 kPa, q max = 98.77 kPa em eps_a = 20 %, A_f = 0.333
+   envoltoria total   : sem pontos suficientes (menos de 2 CPs)
+   envoltoria efetiva : sem pontos suficientes (menos de 2 CPs)
+   ATENCAO: Série com 1 CP(s): a envoltória precisa de ao menos 2 e o laudo usa 3 ou mais.
+
+Saida: <DIR>/saida_leitura
+   9 grafico(s), parametros.csv, interpretacao.json, relatorio.html, log.txt
+---- execucao com o triaxial de 100 kPa calculado na janela ----
+Conectado ao SoilTest na porta 10001.
+Triaxial lido da janela: CU_100kPa (41 pontos, q max = 195.12 kPa)
+
+Serie SoilTest PLAXIS CIU (CIU, simulação, 2 CP(s))
+   triaxial_CU_50kPa: sigma3c = 50 kPa, q max = 98.77 kPa em eps_a = 20 %, A_f = 0.333
+   triaxial_CU_100kPa: sigma3c = 100 kPa, q max = 195.12 kPa em eps_a = 20 %, A_f = 0.333
+   envoltoria total    (q máximo): c = 0.70 kPa, phi = 29.39 graus, R2 = 1.0000
+   envoltoria total    (σ'1/σ'3 máxima): c = 0.70 kPa, phi = 29.39 graus, R2 = 1.0000
+   envoltoria total    (ε_a limite): c = 0.93 kPa, phi = 29.19 graus, R2 = 1.0000
+   envoltoria total    (fim do ensaio): c = 0.70 kPa, phi = 29.39 graus, R2 = 1.0000
+   envoltoria efetiva  (q máximo): c = 1.33 kPa, phi = 46.83 graus, R2 = 1.0000
+   envoltoria efetiva  (σ'1/σ'3 máxima): c = 1.33 kPa, phi = 46.83 graus, R2 = 1.0000
+   envoltoria efetiva  (ε_a limite): c = 1.74 kPa, phi = 46.27 graus, R2 = 1.0000
+   envoltoria efetiva  (fim do ensaio): c = 1.33 kPa, phi = 46.83 graus, R2 = 1.0000
+   ATENCAO: Série com 2 CP(s): a envoltória precisa de ao menos 2 e o laudo usa 3 ou mais.
+
+Saida: <DIR>/saida_leitura
+   9 grafico(s), parametros.csv, interpretacao.json, relatorio.html, log.txt
+arquivo: saida_leitura/interpretacao.json
+arquivo: saida_leitura/log.txt
+arquivo: saida_leitura/parametros.csv
+arquivo: saida_leitura/relatorio.html
+arquivo: saida_leitura/ensaios/triaxial_CU_100kPa.csv
+arquivo: saida_leitura/ensaios/triaxial_CU_50kPa.csv
+PNGs: 9

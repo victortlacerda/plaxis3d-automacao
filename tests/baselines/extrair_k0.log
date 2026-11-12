@@ -1,0 +1,58 @@
+Material: Argila (Mohr-Coulomb, D)
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+Consolidacao K0 = 1.000
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=K0, Direction=Compression, CellPressure=50, MaximumStrain=20, Steps=40
+[OK ] K0: K0=1.0
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   (checagem teorica ignorada: float division by zero)
+   q_max simulado = 98.765 kPa; dilatacao volumetrica maxima = 2.000 %
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=K0, Direction=Compression, CellPressure=100, MaximumStrain=20, Steps=40
+[OK ] K0: K0=1.0
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   (checagem teorica ignorada: float division by zero)
+   q_max simulado = 195.122 kPa; dilatacao volumetrica maxima = 2.000 %
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=K0, Direction=Compression, CellPressure=200, MaximumStrain=20, Steps=40
+[OK ] K0: K0=1.0
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   (checagem teorica ignorada: float division by zero)
+   q_max simulado = 380.952 kPa; dilatacao volumetrica maxima = 2.000 %
+SoilTest fechado.
+
+Serie Argila PLAXIS CID (CID, simulação, 3 CP(s))
+   triaxial_CD_50kPa: sigma3c = 50 kPa, q max = 98.77 kPa em eps_a = 20 %, psi pico = 2.73, psi medio = 2.73 graus
+   triaxial_CD_100kPa: sigma3c = 100 kPa, q max = 195.12 kPa em eps_a = 20 %, psi pico = 2.73, psi medio = 2.73 graus
+   triaxial_CD_200kPa: sigma3c = 200 kPa, q max = 380.95 kPa em eps_a = 20 %, psi pico = 2.73, psi medio = 2.73 graus
+   envoltoria efetiva  (q máximo): c = 1.72 kPa, phi = 28.97 graus, R2 = 1.0000
+   envoltoria efetiva  (σ'1/σ'3 máxima): c = 1.72 kPa, phi = 28.97 graus, R2 = 1.0000
+   envoltoria efetiva  (ε_a limite): c = 2.26 kPa, phi = 28.63 graus, R2 = 1.0000
+   envoltoria efetiva  (fim do ensaio): c = 1.72 kPa, phi = 28.97 graus, R2 = 1.0000
+
+Saida: <DIR>/saida_k0
+   6 grafico(s), parametros.csv, interpretacao.json, relatorio.html, log.txt
+arquivo: saida_k0/interpretacao.json
+arquivo: saida_k0/log.txt
+arquivo: saida_k0/parametros.csv
+arquivo: saida_k0/relatorio.html
+arquivo: saida_k0/ensaios/triaxial_CD_100kPa.csv
+arquivo: saida_k0/ensaios/triaxial_CD_200kPa.csv
+arquivo: saida_k0/ensaios/triaxial_CD_50kPa.csv
+PNGs: 6

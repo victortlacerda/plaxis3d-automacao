@@ -107,5 +107,15 @@ interpretacao() {
 }
 interpretacao
 
+# --- soiltest: extrator do SoilTest + interpretacao (mock do PLAXIS; material "Argila" Mohr-Coulomb drenado)
+extrair() {  # caso: material | k0 | aberto | leitura
+  local d; d="$(mktemp -d)"
+  cp "$RAIZ/soiltest/plaxis_soiltest_auto.py" "$RAIZ"/soiltest/em_desenvolvimento/interpretacao/*.py "$T/mock/extrair_mock.py" "$d/"
+  ( cd "$d" && EXTRAIR_CASO="$1" python3 "$T/mock/rodar_ferramenta.py" "$d/extrair_mock.py" 2:0:Argila 2>&1 \
+      | normaliza "$d" | sed -E 's/_20[0-9]{6}_[0-9]{6}/_<DATA>/g; s/ at 0x[0-9a-f]+/ at 0x<END>/g' > "$d/saida.log" )
+  compara "extrair_$1.log" "$d/saida.log"; rm -rf "$d"
+}
+for caso in material k0 aberto leitura; do extrair "$caso"; done
+
 [ $GRAVAR -eq 1 ] && exit 0
 [ $FALHAS -eq 0 ] && echo "Tudo igual às linhas de base." || { echo "$FALHAS caso(s) mudaram."; exit 1; }

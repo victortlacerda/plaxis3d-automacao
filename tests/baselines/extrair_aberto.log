@@ -1,0 +1,48 @@
+Conectado ao SoilTest na porta 10001.
+
+================ Triaxial ================
+
+-- Triaxial CU_50kPa --
+[OK ] Triaxial CU_50kPa: Behaviour=Undrained, Consolidation=Isotropic, Direction=Compression, CellPressure=50, MaximumStrain=20, Steps=40
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CU_50kPa -> 'OK'
+   q_max simulado = 98.765 kPa; dilatacao volumetrica maxima = 2.000 %
+
+-- Triaxial CU_100kPa --
+[OK ] Triaxial CU_100kPa: Behaviour=Undrained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=20, Steps=40
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CU_100kPa -> 'OK'
+   q_max simulado = 195.122 kPa; dilatacao volumetrica maxima = 2.000 %
+
+-- Triaxial CU_200kPa --
+[OK ] Triaxial CU_200kPa: Behaviour=Undrained, Consolidation=Isotropic, Direction=Compression, CellPressure=200, MaximumStrain=20, Steps=40
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CU_200kPa -> 'OK'
+   q_max simulado = 380.952 kPa; dilatacao volumetrica maxima = 2.000 %
+
+Serie SoilTest PLAXIS CIU (CIU, simulação, 3 CP(s))
+   triaxial_CU_50kPa: sigma3c = 50 kPa, q max = 98.77 kPa em eps_a = 20 %, A_f = 0.333
+   triaxial_CU_100kPa: sigma3c = 100 kPa, q max = 195.12 kPa em eps_a = 20 %, A_f = 0.333
+   triaxial_CU_200kPa: sigma3c = 200 kPa, q max = 380.95 kPa em eps_a = 20 %, A_f = 0.333
+   envoltoria total    (q máximo): c = 1.72 kPa, phi = 28.97 graus, R2 = 1.0000
+   envoltoria total    (σ'1/σ'3 máxima): c = 1.72 kPa, phi = 28.97 graus, R2 = 1.0000
+   envoltoria total    (ε_a limite): c = 2.26 kPa, phi = 28.63 graus, R2 = 1.0000
+   envoltoria total    (fim do ensaio): c = 1.72 kPa, phi = 28.97 graus, R2 = 1.0000
+   envoltoria efetiva  (q máximo): c = 3.18 kPa, phi = 45.66 graus, R2 = 1.0000
+   envoltoria efetiva  (σ'1/σ'3 máxima): c = 3.18 kPa, phi = 45.66 graus, R2 = 1.0000
+   envoltoria efetiva  (ε_a limite): c = 4.11 kPa, phi = 44.76 graus, R2 = 0.9999
+   envoltoria efetiva  (fim do ensaio): c = 3.18 kPa, phi = 45.66 graus, R2 = 1.0000
+
+Saida: <DIR>/saida_aberto
+   9 grafico(s), parametros.csv, interpretacao.json, relatorio.html, log.txt
+arquivo: saida_aberto/interpretacao.json
+arquivo: saida_aberto/log.txt
+arquivo: saida_aberto/parametros.csv
+arquivo: saida_aberto/relatorio.html
+arquivo: saida_aberto/ensaios/triaxial_CU_100kPa.csv
+arquivo: saida_aberto/ensaios/triaxial_CU_200kPa.csv
+arquivo: saida_aberto/ensaios/triaxial_CU_50kPa.csv
+PNGs: 9
