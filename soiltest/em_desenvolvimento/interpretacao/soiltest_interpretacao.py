@@ -352,9 +352,16 @@ def interpretar_serie(nome, cps, cfg):
                      "COMO EVITAR no material: ψ = 0, corte de dilatância (dilatancy cut-off, com e_max) ou Undrained B "
                      "(Su direto).")
         else:
-            causa = ("CAUSA provável: solo dilatante (areia densa, argila muito pré-adensada): ao cisalhar ele tende a "
-                     "expandir, e sem drenagem a poropressão cai (Δu negativo, A_f < 0) e q continua subindo até o limite "
-                     "da cavitação ou da contrapressão do ensaio.")
+            causa = ("CAUSAS POSSÍVEIS (confira no laudo): "
+                     "(1) solo dilatante (areia densa, argila muito pré-adensada): ao cisalhar ele tende a expandir, e sem "
+                     "drenagem a poropressão cai (Δu negativo, A_f < 0) e q continua subindo até o limite da cavitação ou "
+                     "da contrapressão do ensaio; "
+                     "(2) corpo de prova não saturado (B de Skempton baixo): parte do acréscimo de tensão é absorvida pelo "
+                     "ar dos vazios, o Δu medido fica pequeno ou negativo sem que o solo seja dilatante e a resistência "
+                     "parece maior do que é; confira se B ≥ 0,95 antes do cisalhamento; "
+                     "(3) velocidade de cisalhamento alta demais: a poropressão não tem tempo de se equalizar no corpo de "
+                     "prova, o transdutor na base mede um Δu que não representa o interior (em geral menor) e a curva sai "
+                     "distorcida; confira a velocidade usada contra a calculada pelo t100 do adensamento.")
         res["alertas"].append(
             "Não drenado sem pico: q ainda cresce no fim do ensaio em {}. {} CONSEQUÊNCIA: a resistência pelo q máximo e "
             "pelo fim do ensaio depende só de onde o ensaio parou, e a envoltória total desses critérios não tem "

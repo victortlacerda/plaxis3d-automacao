@@ -103,8 +103,16 @@ não pode mudar; a poropressão cai sem parar (Δu cada vez mais negativo, A_f <
 sem limite. Não é erro do PLAXIS nem do script: é uma limitação do modelo, que **superestima a resistência não drenada**.
 Para evitar, no material: ψ = 0, corte de dilatância (dilatancy cut-off, com e_max) ou Undrained B (Su direto).
 
-No ensaio de **laboratório**, o mesmo sinal (q subindo até o fim, A_f < 0) indica solo dilatante (areia densa, argila
-muito pré-adensada), limitado na prática pela cavitação ou pela contrapressão.
+No ensaio de **laboratório**, o mesmo sinal (q subindo até o fim, A_f < 0) tem três causas possíveis, a conferir no laudo:
+
+1. **Solo dilatante** (areia densa, argila muito pré-adensada): ao cisalhar ele tende a expandir; sem drenagem a
+   poropressão cai (Δu negativo, A_f < 0) e q sobe até o limite da cavitação ou da contrapressão do ensaio.
+2. **Corpo de prova não saturado** (B de Skempton baixo): parte do acréscimo de tensão é absorvida pelo ar dos vazios,
+   o Δu medido fica pequeno ou negativo sem que o solo seja dilatante e a resistência parece maior do que é.
+   Confira se B ≥ 0,95 antes do cisalhamento.
+3. **Velocidade de cisalhamento alta demais**: a poropressão não tem tempo de se equalizar no corpo de prova, o
+   transdutor na base mede um Δu que não representa o interior (em geral menor) e a curva sai distorcida. Confira a
+   velocidade usada contra a calculada pelo t100 do adensamento.
 
 Nos dois casos, q máximo e fim do ensaio dependem só de onde o ensaio parou: a envoltória **total** desses critérios não
 tem significado físico, a **efetiva** continua válida. Use σ'1/σ'3 máxima ou ε_a limite.
