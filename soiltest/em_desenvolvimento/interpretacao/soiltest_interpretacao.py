@@ -345,17 +345,19 @@ def interpretar_serie(nome, cps, cfg):
     if sem_pico:
         if cps[0]["fonte"] == "simulação":
             causa = ("CAUSA: é o comportamento conhecido do Hardening Soil (e de outros modelos, como Mohr-Coulomb e HS small) "
-                     "com ângulo de dilatância ψ > 0 em análise não drenada. O material tenta aumentar de volume ao "
-                     "cisalhar, mas sem drenagem o volume não pode mudar; então a poropressão cai sem parar (Δu cada vez "
-                     "mais negativo, A_f < 0), a tensão efetiva média cresce e q sobe sem limite. Não é erro de cálculo "
+                     "com ângulo de dilatância ψ > 0 em análise não drenada{}. O material tenta aumentar de volume ao "
+                     "cisalhar, mas sem drenagem o volume não pode mudar; então, depois do pico de poropressão, Δu passa a "
+                     "cair sem parar (A_f diminui e pode ficar negativo), a tensão efetiva média cresce e q sobe sem "
+                     "limite. Mesmo um ψ pequeno basta: a subida só fica mais lenta. Não é erro de cálculo "
                      "do PLAXIS nem do script: é uma limitação do modelo, que superestima a resistência não drenada. "
                      "COMO EVITAR no material: ψ = 0, corte de dilatância (dilatancy cut-off, com e_max) ou Undrained B "
-                     "(Su direto).")
+                     "(Su direto).").format(
+                         " (este material tem ψ = {}°)".format("{:.2f}".format(cfg["psi_material"]).replace(".", ",")) if cfg.get("psi_material") else "")
         else:
             causa = ("CAUSAS POSSÍVEIS (confira no laudo): "
                      "(1) solo dilatante (areia densa, argila muito pré-adensada): ao cisalhar ele tende a expandir, e sem "
-                     "drenagem a poropressão cai (Δu negativo, A_f < 0) e q continua subindo até o limite da cavitação ou "
-                     "da contrapressão do ensaio; "
+                     "drenagem a poropressão cai depois do pico de Δu (A_f diminui e pode ficar negativo) e q continua "
+                     "subindo até o limite da cavitação ou da contrapressão do ensaio; "
                      "(2) corpo de prova não saturado (B de Skempton baixo): parte do acréscimo de tensão é absorvida pelo "
                      "ar dos vazios, o Δu medido fica pequeno ou negativo sem que o solo seja dilatante e a resistência "
                      "parece maior do que é; confira se B ≥ 0,95 antes do cisalhamento; "
@@ -367,6 +369,23 @@ def interpretar_serie(nome, cps, cfg):
             "pelo fim do ensaio depende só de onde o ensaio parou, e a envoltória total desses critérios não tem "
             "significado físico; a envoltória efetiva continua válida. Use os critérios σ'1/σ'3 máxima ou ε_a limite."
             .format("; ".join(sem_pico), causa))
+
+    # du negativo na ruptura sem o alerta de sem pico (ex.: patamar ou subida lenta de q com sucao no CP)
+    ja = {x.split(" (")[0] for x in sem_pico}
+    negativos = ["{} (Δu_f = {:.1f} kPa, A_f = {:.2f})".format(c["nome"], c["ruptura"]["q máximo"]["du"], c["ruptura"]["q máximo"]["A"])
+                 for c in res["cps"] if c["tipo"] in ("CIU", "CAU") and c["nome"] not in ja and c["ruptura"].get("q máximo")
+                 and c["ruptura"]["q máximo"].get("A") is not None and c["ruptura"]["q máximo"]["du"] < 0]
+    if negativos:
+        if cps[0]["fonte"] == "simulação":
+            extra = "No modelo, isso vem de ψ > 0 (veja o ângulo de dilatância do material)."
+        else:
+            extra = ("No laboratório, confira também se o corpo de prova estava saturado (B ≥ 0,95) e se a velocidade de "
+                     "cisalhamento permitia equalizar a poropressão (t100 do adensamento): os dois também produzem Δu "
+                     "baixo ou negativo sem que o solo seja dilatante.")
+        res["alertas"].append(
+            "Δu negativo na ruptura (q máximo) em {}: o corpo de prova terminou com sucção, sinal de tendência de dilatação "
+            "(areia densa, argila pré-adensada). A resistência não drenada desses CPs depende do quanto a poropressão caiu; "
+            "compare os critérios q máximo e σ'1/σ'3 máxima. {}".format("; ".join(negativos), extra))
 
     # q maximo deve crescer com sigma3 nos ensaios adensados
     if tipo != "UU":

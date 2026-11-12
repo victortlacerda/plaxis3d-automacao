@@ -92,7 +92,7 @@ Em `soiltest_saida/extracao_<material>_<data>/` (extrator) ou `soiltest_saida/in
 - **Critérios de ruptura:** q máximo, σ'1/σ'3 máxima, ε_a limite (padrão 15 %) e fim do ensaio.
 - **Envoltória:** regressão em (s, t), t = m + s·tan α, com sen φ = tan α e c = m / cos φ; M = 6 sen φ'/(3 − sen φ').
   Quando c < 0, mostra também φ com c = 0.
-- **Alertas:** amolecimento pós-pico (> 10 %), q máximo que não cresce com σ'3c, R² < 0,95, c negativo, CP que
+- **Alertas:** Δu negativo na ruptura (CP terminou com sucção), amolecimento pós-pico (> 10 %), q máximo que não cresce com σ'3c, R² < 0,95, c negativo, CP que
   não chega a ε_a limite, CIU sem Δu, Su muito variável no UU, não drenado sem pico (q ainda sobe no fim).
 
 ### Ensaio não drenado sem pico (por que q sobe sem limite)
@@ -126,6 +126,12 @@ tem significado físico, a **efetiva** continua válida. Use σ'1/σ'3 máxima o
   c' = 1 kPa, φ' = 33° e ψ = 3° do material pelos quatro critérios (R² = 1) e q máximo igual ao de Mohr-Coulomb a
   0,01 kPa. Os CIU da mesma areia (ψ > 0) não têm pico: q sobe até o fim e A_f < 0; a envoltória efetiva continua
   φ' = 33°, mas a total pelo q máximo não tem significado. Daí o alerta "não drenado sem pico".
-- Falta: rodar com um laudo real e os modos `"aberto"`.
+- **Modo `"aberto"` só leitura rodado no PLAXIS real (12/11/2026):** o servidor de scripts da janela do SoilTest
+  respondeu na porta 10001; quatro curvas calculadas à mão (50 a 400 kPa) foram lidas e acumuladas, e saíram **idênticas
+  byte a byte** às do modo `"material"` com a mesma configuração.
+- **Laudo real × simulação no mesmo relatório (12/11/2026):** CIU de 4 CPs contra o material calibrado (HS, Undrained A).
+  Daí vieram o alerta de Δu negativo na ruptura e a correção do texto do "sem pico" (com ψ pequeno, A_f ainda pode
+  ser positivo no fim: o que caracteriza é Δu caindo depois do pico).
+- Falta: modo `"aberto"` rodando os ensaios (`rodar_ensaios = True`).
 - Próximos: laboratório × simulação no mesmo gráfico; edômetro (Cc, Cr, σ'p por Casagrande e Pacheco Silva, cv) e DSS;
   entrada em .xlsx.

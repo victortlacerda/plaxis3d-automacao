@@ -1,6 +1,9 @@
 # Histórico de versões
 
 ## Não lançado
+- Interpretação de ensaios: modo "aberto" (leitura da janela do SoilTest) validado no PLAXIS real; alerta novo de Δu
+  negativo na ruptura; texto do "não drenado sem pico" corrigido (Δu cai depois do pico, A_f pode seguir positivo) e
+  com o ψ do material quando o extrator o conhece.
 - Interpretação de ensaios: extrator rodado no PLAXIS real (modo material, CID devolve os parâmetros do material);
   novo alerta "não drenado sem pico" (q ainda sobe no fim, A_f < 0) e série sintética dilatante no teste.
 - `soiltest/soiltest_campanha.py` (estável, validada no PLAXIS real em 12/11/2026): campanha de ensaios virtuais definida numa planilha CSV

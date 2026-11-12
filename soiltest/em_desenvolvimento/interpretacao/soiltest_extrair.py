@@ -264,7 +264,8 @@ def main():
 
     # interpretacao
     I["CONFIG"].update({k: cfg[k] for k in ("eps_limite_pct", "criterio_principal", "queda_pos_pico", "r2_minimo", "descricao")})
-    icfg = dict(I["CONFIG"], lab_csv=cfg["lab_csv"], pastas_simulacao=[pasta_ens], pasta_saida=pasta)
+    icfg = dict(I["CONFIG"], lab_csv=cfg["lab_csv"], pastas_simulacao=[pasta_ens], pasta_saida=pasta,
+                psi_material=p.get("psi"))
     serie = "{} PLAXIS".format(ident)
     cps = I["ler_simulacao"](pasta_ens, serie=serie, total=(dren == "UC"))
     entradas = [("Material", "{} ({}{})".format(ident, nome_mod, ", " + A["DRENAGENS"][dren]["rotulo"] if dren else "")),
