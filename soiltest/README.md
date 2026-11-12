@@ -121,7 +121,7 @@ As ferramentas rodam do mesmo jeito: escolha o arquivo no executor; cada uma tem
 |---|---|
 | `plaxis_soiltest_auto.py` | **Estável.** Tudo o que já rodou no PLAXIS real, inclusive cíclicos não drenados e controle por tensão (validados em 08/11/2026). |
 | `soiltest_auditoria.py`, `soiltest_biblioteca.py`, `soiltest_parametrico.py`, `soiltest_gg0.py` | **Estáveis.** Ferramentas validadas no PLAXIS real em 08/11/2026. |
-| [`em_desenvolvimento/`](em_desenvolvimento/) | **Calibração automática** contra triaxiais de laboratório (`soiltest_calibracao.py`, já rodada contra ensaios reais), **interpretação de triaxiais** UU/CIU/CAU/CID/CAD como em laudo (`soiltest_interpretacao.py`, laboratório e simulação) e bateria de testes sem perguntas (`soiltest_bateria.py`) |
+| [`em_desenvolvimento/`](em_desenvolvimento/) | **Calibração automática** contra triaxiais de laboratório (`soiltest_calibracao.py`, já rodada contra ensaios reais), **interpretação de ensaios triaxiais** de laboratório e do SoilTest, como em laudo ([`em_desenvolvimento/interpretacao/`](em_desenvolvimento/interpretacao/)) e bateria de testes sem perguntas (`soiltest_bateria.py`) |
 | [`descoberta/`](descoberta/) | Scripts usados para mapear a API do SoilTest (atributos, modelos, drenagens). Somente referência. |
 | [`exemplos/`](exemplos/) | Saídas reais (CSV, log, resumo) das rodadas da galeria |
 

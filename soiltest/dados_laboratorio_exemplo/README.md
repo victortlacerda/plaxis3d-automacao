@@ -16,7 +16,7 @@ Formato do CSV (separador `;`, vírgula ou ponto decimal), uma linha por ponto:
 | `du_kPa` | excesso de poropressão (ensaio `U`) |
 | `ev_pct` | deformação volumétrica, contração positiva (ensaio `D`) |
 
-### Colunas opcionais (interpretador `soiltest_interpretacao.py`)
+### Colunas opcionais (interpretação de ensaios, `../em_desenvolvimento/interpretacao/`)
 
 Um CSV sem estas colunas continua valendo igual. Elas servem para outros tipos de ensaio e para agrupar CPs:
 
@@ -38,4 +38,4 @@ CP1;CIU;SP01_5m;U;100;2,0;85,3;31,2;;300
 CP4;UU;SP01_5m;U;150;3,0;62,0;;;
 ```
 
-Um exemplo completo, com resposta conhecida, é gerado por `tests/mock/gerar_lab_sintetico.py`.
+Modelo para preencher: `../em_desenvolvimento/interpretacao/modelo_entrada_laboratorio.csv`.
