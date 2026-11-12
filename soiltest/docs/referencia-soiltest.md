@@ -176,3 +176,17 @@ Sem informar pré-adensamento, o script aplica `PreconsolidationPressure` = 100 
 - **Ruído numérico perto de m = 0,1:** avaliações quase idênticas alternam erro 0,165 e 0,186, e a curva de 50 kPa tem um degrau (q cai de 98 para 70 kPa em ε_a ≈ 0,6 % e volta). Um ótimo no limite e ao lado de instabilidade numérica não é confiável; conferir a sensibilidade fixando m (0,3 ou 0,5) antes de usar em projeto.
 - **Sensibilidade a m (φ' e c' fixos; rigidez, ψ e σ'p livres; 140 avaliações por valor):** m = 0,1 → erro 0,165; m = 0,3 → 0,191; m = 0,5 → 0,205. A piora com m = 0,3 é do tamanho do ruído numérico visto perto de m = 0,1 (~0,02). Os outros parâmetros mudam pouco (E50ref 52,5 / 47,9 / 45,0 MPa; Eur 378 / 383 / 340 MPa; σ'p 340 / 329 / 338 kPa). Entre 50 e 400 kPa as três calibrações dão E50 parecido; a diferença está **abaixo** da menor tensão ensaiada (em σ'3 = 20 kPa: 47 / 35 / 26 MPa), justamente onde os ensaios não informam. Conclusão geral: o triaxial só define m dentro da faixa de σ3 ensaiada; para tensões baixas (fundação rasa), a escolha de m é decisão de projeto e pede ensaio em σ3 menor ou retroanálise.
 
+## Interpretação de triaxiais (`em_desenvolvimento/soiltest_interpretacao.py`, 11/11/2026, offline)
+- **Convenções:** compressão +, q = σ1 − σ3, Δu acréscimo +, ε_v contração +. Tensões totais relativas à contrapressão:
+  σ3 = σ'3c (pressão de câmara no UU), σ1 = σ3 + q; efetivas σ'3 = σ3 − Δu, σ'1 = σ'3 + q.
+- **Saídas do `_auto` como ensaio:** `sig_a_kPa` e `sig_r_kPa` são efetivas; σ'3c = `sig_r_kPa` do passo 0. CU → CIU/CAU,
+  CD → CID/CAD; consolidação K0 se reconhece pelo q > 0 no passo 0 (no `HS_K0_OCR2`, q0 = σ'3c).
+- **Critérios de ruptura:** q máximo, σ'1/σ'3 máxima, ε_a limite (padrão 15 %, interpolado) e fim do ensaio; o ponto
+  em ε_a = 0 não conta.
+- **Envoltória:** regressão t = m + s·tan α em (s, t); sen φ = tan α, c = m / cos φ; M = 6 sen φ' / (3 − sen φ').
+  Mesma conta do calibrador (resultado idêntico no `lab_sintetico.csv`: φ' = 34,8°, c' = 3,5 kPa).
+- **A de Skempton:** A_f = Δu_f / (q_f − q0), com q0 do adensamento anisotrópico (CAU).
+- **Dilatância (triaxial):** sen ψ = −(dε_v/dε_a) / (2 − dε_v/dε_a). ψ de pico = maior taxa entre pontos
+  consecutivos; ψ médio = secante da contração máxima ao ε_v mínimo seguinte.
+- **Conferido com a simulação HS (c' = 1, φ' = 35°, ψ = 5°, K0 = 0,5):** a interpretação devolve c' = 1,00 kPa,
+  φ' = 35,00° pelos quatro critérios e ψ de pico = 5,00°; o corte de dilatância aparece como ε_v constante no fim.

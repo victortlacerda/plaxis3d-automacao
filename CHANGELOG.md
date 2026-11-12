@@ -1,6 +1,11 @@
 # Histórico de versões
 
 ## Não lançado
+- `soiltest/em_desenvolvimento/soiltest_interpretacao.py`: interpretação de triaxiais UU, CIU/CAU e CID/CAD (laboratório
+  e saídas do script automático) em tensão total e efetiva, com envoltórias por quatro critérios, A de Skempton,
+  dilatância, trajetórias, círculos de Mohr, alertas e relatório. CSV de laboratório ganha colunas opcionais `tipo`,
+  `serie`, `sigma1_kPa` e `u0_kPa` (formato antigo continua válido). Teste offline com CPs sintéticos de resposta
+  conhecida (`tests/mock/gerar_lab_sintetico.py`).
 - `soiltest/em_desenvolvimento/soiltest_calibracao.py`: calibração automática de parâmetros (HS, MC) contra triaxiais
   de laboratório em CSV, trocando parâmetros direto no SoilTest. Primeira rodada real (4 CIU, 280 avaliações em 37 min).
   Aviso prévio de amolecimento pós-pico e de q máximo que não cresce com σ3; faixas padrão de m e Eur/E50 alargadas.
