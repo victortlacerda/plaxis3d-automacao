@@ -1,0 +1,113 @@
+Campanha SoilTest: 7 linha(s) em <DIR>/em/campanha_erros.csv
+   linha 2: IGNORADA (OCR nao se aplica ao Oedometer (parte de tensao zero): use preadensamento = sigma_p)
+   linha 6: IGNORADA (ensaio 'vane' desconhecido (use: triaxial, edometro, crs, dss, cdss, triaxial_ciclico))
+   linha 7: IGNORADA (comportamento 'X' invalido (D, U ou DU))
+
+======================================================================
+Aterro-01 (Mohr-Coulomb / Drained; origem: projeto) - 1 ensaio(s)
+======================================================================
+   ERef = 0, nu = 0, cRef = 0, phi = 0, psi = 0
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+#### linha 1: Aterro-01 - Triaxial (CD+CU | 50/100 kPa)
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50.0, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   (checagem teorica ignorada: float division by zero)
+   q_max simulado = 98.361 kPa; dilatacao volumetrica maxima = 1.500 %
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100.0, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   (checagem teorica ignorada: float division by zero)
+   q_max simulado = 193.548 kPa; dilatacao volumetrica maxima = 1.500 %
+
+-- Triaxial CU_50kPa --
+[OK ] Triaxial CU_50kPa: Behaviour=Undrained, Consolidation=Isotropic, Direction=Compression, CellPressure=50.0, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CU_50kPa -> 'OK'
+   q_max simulado = 98.361 kPa; dilatacao volumetrica maxima = 1.500 %
+
+-- Triaxial CU_100kPa --
+[OK ] Triaxial CU_100kPa: Behaviour=Undrained, Consolidation=Isotropic, Direction=Compression, CellPressure=100.0, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CU_100kPa -> 'OK'
+   q_max simulado = 193.548 kPa; dilatacao volumetrica maxima = 1.500 %
+SoilTest fechado.
+
+======================================================================
+Argila (Modified Cam-Clay / Drained; origem: projeto) - 1 ensaio(s)
+======================================================================
+   lambda = 0, kappa = 0, M = 0, nuur = 0, eInit = 0, PhiInter = 0
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 8).
+
+#### linha 3: Argila - Triaxial (CU | 100 kPa | K0 auto | σ'p 150)
+   Consolidacao K0 com K0 = 1.0 (1 - sen(phi_cs), com phi_cs obtido de M).
+
+================ Triaxial ================
+
+-- Triaxial CU_100kPa --
+[OK ] Triaxial CU_100kPa: Behaviour=Undrained, Consolidation=K0, Direction=Compression, CellPressure=100.0, MaximumStrain=15, Steps=100
+[OK ] K0: K0=1.0
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] PreconsolidationPressure = 150.000 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CU_100kPa -> 'OK'
+   q_max simulado = 193.548 kPa; dilatacao volumetrica maxima = 1.500 %
+[OK ] restaurar Triaxial.PreconsolidationPressure = 0 -> 'OK'
+SoilTest fechado.
+
+Material 'Errada' (Soft Soil / Undrained B) nao suportado.
+
+Material 'Nao_existe' nao encontrado (no projeto: Argila, Aterro-01, Errada).
+
+Campanha: 7 linha(s), 5 curva(s) com resultado, 5 linha(s) nao executada(s).
+Relatorio: <DIR>/em/soiltest_saida/campanha_<DATA>/relatorio.html
+Resumo CSV: <DIR>/em/soiltest_saida/campanha_<DATA>/campanha_resumo.csv
+Saida: <DIR>/em/soiltest_saida/campanha_<DATA>
+﻿linha;material;modelo;drenagem;ensaio;configuracao;curva;grandeza;simulado;teorico;extra;obs
+1;Aterro-01;Mohr-Coulomb;D;Triaxial;CD+CU | 50/100 kPa;CD_50kPa;q máx (kPa);98,3607;;;
+1;Aterro-01;Mohr-Coulomb;D;Triaxial;CD+CU | 50/100 kPa;CD_100kPa;q máx (kPa);193,5484;;;
+1;Aterro-01;Mohr-Coulomb;D;Triaxial;CD+CU | 50/100 kPa;CU_50kPa;q máx (kPa);98,3607;;;
+1;Aterro-01;Mohr-Coulomb;D;Triaxial;CD+CU | 50/100 kPa;CU_100kPa;q máx (kPa);193,5484;;;
+3;Argila;Modified Cam-Clay;D;Triaxial;CU | 100 kPa | K0 auto | σ'p 150;CU_100kPa;q máx (kPa);193,5484;;;
+./Argila/03_triaxial/graficos/triaxial_du_x_eps_a.png
+./Argila/03_triaxial/graficos/triaxial_ev_x_eps_a.png
+./Argila/03_triaxial/graficos/triaxial_q_x_eps_a.png
+./Argila/03_triaxial/graficos/triaxial_trajetoria_p_q.png
+./Argila/03_triaxial/relatorio.html
+./Argila/03_triaxial/resumo.json
+./Argila/03_triaxial/triaxial_CU_100kPa.csv
+./Aterro_01/01_triaxial/graficos/triaxial_du_x_eps_a.png
+./Aterro_01/01_triaxial/graficos/triaxial_ev_x_eps_a.png
+./Aterro_01/01_triaxial/graficos/triaxial_q_x_eps_a.png
+./Aterro_01/01_triaxial/graficos/triaxial_trajetoria_p_q.png
+./Aterro_01/01_triaxial/relatorio.html
+./Aterro_01/01_triaxial/resumo.json
+./Aterro_01/01_triaxial/triaxial_CD_100kPa.csv
+./Aterro_01/01_triaxial/triaxial_CD_50kPa.csv
+./Aterro_01/01_triaxial/triaxial_CU_100kPa.csv
+./Aterro_01/01_triaxial/triaxial_CU_50kPa.csv
+./campanha_resumo.csv
+./glossario.md
+./log.txt
+./relatorio.html

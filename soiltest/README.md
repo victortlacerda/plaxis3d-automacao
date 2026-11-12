@@ -143,4 +143,5 @@ Quando um item em desenvolvimento for validado no PLAXIS real, ele passa para o 
 - [x] Ferramentas: auditoria, biblioteca de materiais, estudo paramétrico, curvas G/G0
 - [ ] Interpretação de triaxiais (UU, CIU/CAU, CID/CAD) como em laudo: em desenvolvimento, testada offline com ensaios sintéticos
 - [ ] Calibração automática contra ensaio de laboratório: em desenvolvimento, 1ª rodada real em 10/11/2026 (4 CIU)
+- [ ] Campanha de ensaios por planilha e uso de material do projeto: em desenvolvimento, testado offline
 - [ ] MCP: por último, se for feito

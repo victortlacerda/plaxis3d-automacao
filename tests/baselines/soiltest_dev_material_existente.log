@@ -1,0 +1,29 @@
+PLAXIS SoilTest auto - Mohr-Coulomb / Drained (<DATA>)
+Material do projeto: Aterro-01 (Mohr-Coulomb / Drained)
+   ERef = 20000, nu = 0.3, cRef = 5, phi = 28, psi = 0
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+================ Triaxial ================
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100, MaximumStrain=15, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 187.572 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 193.625 kPa
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+Relatorio: <DIR>/soiltest_saida/auto_Aterro_01_<DATA>/relatorio.html
+
+3 grafico(s) em <DIR>/soiltest_saida/auto_Aterro_01_<DATA>/graficos
+   triaxial_q_x_eps_a.png
+   triaxial_ev_x_eps_a.png
+   triaxial_trajetoria_p_q.png
+
+Saida: <DIR>/soiltest_saida/auto_Aterro_01_<DATA>
+RC 0

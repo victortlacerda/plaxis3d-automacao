@@ -151,9 +151,12 @@ src = open(script, encoding="utf-8").read()
 p = os.path.join(os.getcwd(), os.path.basename(script))   # saidas vao para a pasta atual
 ns = {"__name__": "auto", "__file__": p, "s_i": object(), "g_i": Gi()}
 exec(compile(src, p, "exec"), ns, ns)
+for ex in patch.get("_existentes", []):     # materiais que ja estao no "projeto": {"m":3,"d":0,"nome":"Areia","v":{...}}
+    mt = ns["g_i"].soilmat(); mt.setproperties("SoilModel", ex["m"], "DrainageType", ex["d"])
+    mt.v.update(ex.get("v", {})); mt.v["Identification"] = ex["nome"]
 C = ns["CONFIG"]; C["interativo"] = False; C["modelo"] = modelo; C["drenagem"] = dren
 for k, v in patch.items():
-    if k == '_inter': continue
+    if k in ('_inter', '_existentes'): continue
     if isinstance(v, dict) and isinstance(C.get(k), dict): C[k].update(v)
     else: C[k] = v
 if patch.get("_inter"): C["interativo"]=True

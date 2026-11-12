@@ -1,0 +1,295 @@
+Campanha SoilTest: 8 linha(s) em <DIR>/em/campanha_modelo.csv
+
+Material Areia_media criado a partir da planilha de materiais
+[OK ] g_i.soilmat() -> <__main__.Mat object at 0x<END>>
+[OK ] Identification -> 'OK'
+[OK ] SoilModel = 3 -> Hardening Soil (3)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] E50ref (E50Ref) = 35000.0 -> 'OK'
+[OK ] Eoedref (EOedRef) = 35000.0 -> 'OK'
+[OK ] Eurref (EURRef) = 105000.0 -> 'OK'
+[OK ] m (PowerM) = 0.5 -> 'OK'
+[OK ] nuur (nuUR) = 0.2 -> 'OK'
+[OK ] pref (pRef) = 100.0 -> 'OK'
+[OK ] cref (cRef) = 1.0 -> 'OK'
+[OK ] phi (phi) = 33.0 -> 'OK'
+[OK ] psi (psi) = 3.0 -> 'OK'
+[ERR] Areia_media: atributo 'gammaUnsat' nao existe neste material
+[ERR] Areia_media: atributo 'gammaSat' nao existe neste material
+
+Material Argila_mole criado a partir da planilha de materiais
+[OK ] g_i.soilmat() -> <__main__.Mat object at 0x<END>>
+[OK ] Identification -> 'OK'
+[OK ] SoilModel = 5 -> Soft Soil (5)
+[OK ] DrainageType = 'Undrained A' -> Undrained A (1)
+[OK ] lambdaModified (lambdaModified) = 0.12 -> 'OK'
+[OK ] kappaModified (kappaModified) = 0.024 -> 'OK'
+[OK ] cRef (cRef) = 3.0 -> 'OK'
+[OK ] phi (phi) = 23.0 -> 'OK'
+[OK ] psi (psi) = 0.0 -> 'OK'
+[OK ] nuur (nuUR) = 0.15 -> 'OK'
+[ERR] Argila_mole: atributo 'gammaUnsat' nao existe neste material
+[ERR] Argila_mole: atributo 'gammaSat' nao existe neste material
+
+Material Aterro criado a partir da planilha de materiais
+[OK ] g_i.soilmat() -> <__main__.Mat object at 0x<END>>
+[OK ] Identification -> 'OK'
+[OK ] SoilModel = 2 -> Mohr-Coulomb (2)
+[OK ] DrainageType = 'Drained' -> Drained (0)
+[OK ] ERef (ERef) = 15000.0 -> 'OK'
+[OK ] nu (nu) = 0.3 -> 'OK'
+[OK ] cRef (cRef) = 5.0 -> 'OK'
+[OK ] phi (phi) = 28.0 -> 'OK'
+[OK ] psi (psi) = 0.0 -> 'OK'
+[ERR] Aterro: atributo 'gammaUnsat' nao existe neste material
+[ERR] Aterro: atributo 'gammaSat' nao existe neste material
+
+======================================================================
+Areia_media (Hardening Soil / Drained; origem: planilha de materiais) - 3 ensaio(s)
+======================================================================
+   E50ref = 35000, Eoedref = 35000, Eurref = 105000, m = 0.5, nuur = 0.2, pref = 100, cref = 1, phi = 33, psi = 3
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 3).
+
+#### linha 1: Areia_media - Triaxial (CD | 50/100/200 kPa)
+
+================ Triaxial ================
+
+-- Triaxial CD_50kPa --
+[OK ] Triaxial CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=50.0, MaximumStrain=15.0, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_50kPa -> 'OK'
+   q_max simulado = 120.807 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 123.290 kPa
+   E50 (secante a 50% de q_f): simulado 19878 kPa | formula 24936 kPa
+
+-- Triaxial CD_100kPa --
+[OK ] Triaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=100.0, MaximumStrain=15.0, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_100kPa -> 'OK'
+   q_max simulado = 233.445 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 242.896 kPa
+   E50 (secante a 50% de q_f): simulado 19972 kPa | formula 35000 kPa
+
+-- Triaxial CD_200kPa --
+[OK ] Triaxial CD_200kPa: Behaviour=Drained, Consolidation=Isotropic, Direction=Compression, CellPressure=200.0, MaximumStrain=15.0, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 200.00 kPa, sigma_x = 200.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CD_200kPa -> 'OK'
+   q_max simulado = 446.251 kPa; dilatacao volumetrica maxima = 1.500 %
+   Esperado (q_f Mohr-Coulomb): 482.108 kPa
+   E50 (secante a 50% de q_f): simulado 19995 kPa | formula 49309 kPa
+   (sem excesso de poropressao: grafico triaxial_du_x_eps_a.png omitido)
+
+#### linha 2: Areia_media - Triaxial (CU | 100 kPa | K0 auto | OCR 2)
+   Consolidacao K0 com K0 = 0.4554 (Jaky: 1 - sen(phi')).
+
+================ Triaxial ================
+
+-- Triaxial CU_100kPa --
+[OK ] Triaxial CU_100kPa: Behaviour=Undrained, Consolidation=K0, Direction=Compression, CellPressure=100.0, MaximumStrain=10.0, Steps=100
+[OK ] K0: K0=0.4554
+   Tensoes iniciais efetivas: sigma_y = 219.59 kPa, sigma_x = 100.00 kPa (K = 0.455)
+[OK ] PreconsolidationPressure = 439.174 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CU_100kPa -> 'OK'
+   q_max simulado = 239.208 kPa; dilatacao volumetrica maxima = 1.000 %
+[OK ] restaurar Triaxial.PreconsolidationPressure = 0 -> 'OK'
+
+#### linha 3: Areia_media - Edometro (até 800 kPa)
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+[OK ] PreconsolidationPressure = 100.000 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 240.00 kPa; eps_v max = 0.5943 %
+[OK ] restaurar Oedometer.PreconsolidationPressure = 0 -> 'OK'
+SoilTest fechado.
+
+======================================================================
+Argila_mole (Soft Soil / Undrained A (parametros efetivos); origem: planilha de materiais) - 2 ensaio(s)
+======================================================================
+   lambdaModified = 0.12, kappaModified = 0.024, cRef = 3, phi = 23, psi = 0, nuur = 0.15
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 5).
+
+#### linha 4: Argila_mole - Triaxial (CU | 50/100 kPa | K0 0,6)
+   Consolidacao K0 com K0 = 0.6 (informado).
+
+================ Triaxial ================
+
+-- Triaxial CU_50kPa --
+[OK ] Triaxial CU_50kPa: Behaviour=Undrained, Consolidation=K0, Direction=Compression, CellPressure=50.0, MaximumStrain=15.0, Steps=100
+[OK ] K0: K0=0.6
+   Tensoes iniciais efetivas: sigma_y = 83.33 kPa, sigma_x = 50.00 kPa (K = 0.600)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CU_50kPa -> 'OK'
+   q_max simulado = 72.933 kPa; dilatacao volumetrica maxima = 1.500 %
+
+-- Triaxial CU_100kPa --
+[OK ] Triaxial CU_100kPa: Behaviour=Undrained, Consolidation=K0, Direction=Compression, CellPressure=100.0, MaximumStrain=15.0, Steps=100
+[OK ] K0: K0=0.6
+   Tensoes iniciais efetivas: sigma_y = 166.67 kPa, sigma_x = 100.00 kPa (K = 0.600)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Triaxial CU_100kPa -> 'OK'
+   q_max simulado = 136.505 kPa; dilatacao volumetrica maxima = 1.500 %
+
+#### linha 5: Argila_mole - Edometro (até 400 kPa)
+
+================ Edometro ================
+-- Edometro --
+[OK ] Oedometer fases -> None
+[OK ] PreconsolidationPressure = 50.000 kPa -> 'OK'
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate Oedometer -> 'OK'
+   61 pontos; sigma_v max = 240.00 kPa; eps_v max = 0.5943 %
+[OK ] restaurar Oedometer.PreconsolidationPressure = 0 -> 'OK'
+SoilTest fechado.
+
+======================================================================
+Aterro (Mohr-Coulomb / Drained; origem: planilha de materiais) - 3 ensaio(s)
+======================================================================
+   ERef = 15000, nu = 0.3, cRef = 5, phi = 28, psi = 0
+
+== Abrindo o SoilTest ==
+[OK ] g_i.soiltest(material) -> 10001
+SoilTest na porta 10001.
+[OK ] SoilModel no SoilTest -> 0
+ATENCAO: o SoilTest abriu o modelo 0 (esperado 2).
+
+#### linha 6: Aterro - DSS (CD | 50/100 kPa)
+
+================ DSS ================
+
+-- DSS CD_50kPa --
+[OK ] DSS CD_50kPa: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=50.0, MaximumShearStrain=10.0, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 50.00 kPa, sigma_x = 50.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate DSS CD_50kPa -> 'OK'
+   tau_max simulado = 27.888 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (tau_max = c cos(phi) + sigma_v0 sen(phi) (MC, isotropico)): 27.888 kPa
+
+-- DSS CD_100kPa --
+[OK ] DSS CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, AbsSigyyinit=100.0, MaximumShearStrain=10.0, Steps=100
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate DSS CD_100kPa -> 'OK'
+   tau_max simulado = 51.362 kPa; dilatacao volumetrica maxima = 0.000 %
+   Esperado (tau_max = c cos(phi) + sigma_v0 sen(phi) (MC, isotropico)): 51.362 kPa
+   (sem excesso de poropressao: grafico dss_du_x_gamma.png omitido)
+
+#### linha 7: Aterro - CDSS (cisalhamento simples ciclico) (CU | 100 kPa | ± 0,2 % | 5 ciclos)
+
+================ CDSS (cisalhamento simples ciclico) ================
+
+-- CDSS (cisalhamento simples ciclico) CU_100kPa --
+[OK ] CDSS CU_100kPa: Behaviour=Undrained, Consolidation=Isotropic, AbsSigyyinit=100.0, InitialStaticShear=0, TestControlType=Strain, ShearStrainAmplitude=0.2, NumberOfCycles=5, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CDSS CU_100kPa -> 'OK'
+   Fim de cada ciclo: du = [4.00, 20.00, 36.00, 52.00, 68.00, 84.00] kPa; sigma'v = [100.00, 100.00, 100.00, 100.00, 100.00, 100.00] kPa
+   Ultimo ciclo: G_sec = 5769.2 kPa; amplitude = 0.2000 % / 11.54 kPa; amortecimento = 0.50 %
+   du max = 84.00 kPa; du min = 0.00 kPa
+
+#### linha 8: Aterro - Triaxial ciclico (CD | 100 kPa | ± 30 kPa | 3 ciclos)
+
+================ Triaxial ciclico ================
+
+-- Triaxial ciclico CD_100kPa --
+[OK ] CycTriaxial CD_100kPa: Behaviour=Drained, Consolidation=Isotropic, CellPressure=100.0, InitialAxialStressinc=0, TestControlType=Stress, AxialStressAmplitude=30.0, NumberOfCycles=3, NumberOfStepsPerQuarterCycle=20, DurationPerCycle=1
+   Tensoes iniciais efetivas: sigma_y = 100.00 kPa, sigma_x = 100.00 kPa (K = 1.000)
+[OK ] validate -> 'The material definition is valid.'
+[OK ] calculate CycTriaxial CD_100kPa -> 'OK'
+   Fim de cada ciclo: du = [-0.00, -0.00, -0.00, -0.00] kPa; p' = [125.00, 125.00, 125.00, 125.00] kPa
+   Ultimo ciclo: E_sec = 15000.0 kPa; amplitude = 0.5000 % / 75.00 kPa; amortecimento = 0.00 %
+   (sem excesso de poropressao: grafico cyctriaxial_du_x_tempo.png omitido)
+SoilTest fechado.
+
+Campanha: 8 linha(s), 12 curva(s) com resultado, 0 linha(s) nao executada(s).
+Relatorio: <DIR>/em/soiltest_saida/campanha_<DATA>/relatorio.html
+Resumo CSV: <DIR>/em/soiltest_saida/campanha_<DATA>/campanha_resumo.csv
+Saida: <DIR>/em/soiltest_saida/campanha_<DATA>
+﻿linha;material;modelo;drenagem;ensaio;configuracao;curva;grandeza;simulado;teorico;extra;obs
+1;Areia_media;Hardening Soil;D;Triaxial;CD | 50/100/200 kPa;CD_50kPa;q máx (kPa);120,8072;123,2895;E50 19878 kPa;CD padrao
+1;Areia_media;Hardening Soil;D;Triaxial;CD | 50/100/200 kPa;CD_100kPa;q máx (kPa);233,4451;242,8955;E50 19972 kPa;CD padrao
+1;Areia_media;Hardening Soil;D;Triaxial;CD | 50/100/200 kPa;CD_200kPa;q máx (kPa);446,2507;482,1075;E50 19995 kPa;CD padrao
+2;Areia_media;Hardening Soil;D;Triaxial;CU | 100 kPa | K0 auto | OCR 2;CU_100kPa;q máx (kPa);239,2080;;;CU com K0 automatico (Jaky) e OCR 2
+3;Areia_media;Hardening Soil;D;Edometro;até 800 kPa;-;ε_v máx (%);0,5943;;σ'v máx 240,0 kPa;carga ate 800 e descarga ate 200
+4;Argila_mole;Soft Soil;UA;Triaxial;CU | 50/100 kPa | K0 0,6;CU_50kPa;q máx (kPa);72,9331;;;CU com K0 informado
+4;Argila_mole;Soft Soil;UA;Triaxial;CU | 50/100 kPa | K0 0,6;CU_100kPa;q máx (kPa);136,5048;;;CU com K0 informado
+5;Argila_mole;Soft Soil;UA;Edometro;até 400 kPa;-;ε_v máx (%);0,5943;;σ'v máx 240,0 kPa;
+6;Aterro;Mohr-Coulomb;D;DSS;CD | 50/100 kPa;CD_50kPa;τ máx (kPa);27,8883;27,8883;;
+6;Aterro;Mohr-Coulomb;D;DSS;CD | 50/100 kPa;CD_100kPa;τ máx (kPa);51,3619;51,3619;;
+7;Aterro;Mohr-Coulomb;D;CDSS (cisalhamento simples ciclico);CU | 100 kPa | ± 0,2 % | 5 ciclos;CU_100kPa;G_sec último ciclo (kPa);5769,2308;;amortecimento 0,50 %;CDSS nao drenado
+8;Aterro;Mohr-Coulomb;D;Triaxial ciclico;CD | 100 kPa | ± 30 kPa | 3 ciclos;CD_100kPa;E_sec último ciclo (kPa);15000,0000;;amortecimento 0,00 %;controle por tensao
+./Areia_media/01_triaxial/graficos/triaxial_ev_x_eps_a.png
+./Areia_media/01_triaxial/graficos/triaxial_q_x_eps_a.png
+./Areia_media/01_triaxial/graficos/triaxial_trajetoria_p_q.png
+./Areia_media/01_triaxial/relatorio.html
+./Areia_media/01_triaxial/resumo.json
+./Areia_media/01_triaxial/triaxial_CD_100kPa.csv
+./Areia_media/01_triaxial/triaxial_CD_200kPa.csv
+./Areia_media/01_triaxial/triaxial_CD_50kPa.csv
+./Areia_media/02_triaxial/graficos/triaxial_du_x_eps_a.png
+./Areia_media/02_triaxial/graficos/triaxial_ev_x_eps_a.png
+./Areia_media/02_triaxial/graficos/triaxial_q_x_eps_a.png
+./Areia_media/02_triaxial/graficos/triaxial_trajetoria_p_q.png
+./Areia_media/02_triaxial/relatorio.html
+./Areia_media/02_triaxial/resumo.json
+./Areia_media/02_triaxial/triaxial_CU_100kPa.csv
+./Areia_media/03_oedometer/graficos/oedometer_epsv_x_logsigv.png
+./Areia_media/03_oedometer/graficos/oedometer_sigv_x_epsv.png
+./Areia_media/03_oedometer/oedometer.csv
+./Areia_media/03_oedometer/relatorio.html
+./Areia_media/03_oedometer/resumo.json
+./Argila_mole/04_triaxial/graficos/triaxial_du_x_eps_a.png
+./Argila_mole/04_triaxial/graficos/triaxial_ev_x_eps_a.png
+./Argila_mole/04_triaxial/graficos/triaxial_q_x_eps_a.png
+./Argila_mole/04_triaxial/graficos/triaxial_trajetoria_p_q.png
+./Argila_mole/04_triaxial/relatorio.html
+./Argila_mole/04_triaxial/resumo.json
+./Argila_mole/04_triaxial/triaxial_CU_100kPa.csv
+./Argila_mole/04_triaxial/triaxial_CU_50kPa.csv
+./Argila_mole/05_oedometer/graficos/oedometer_epsv_x_logsigv.png
+./Argila_mole/05_oedometer/graficos/oedometer_sigv_x_epsv.png
+./Argila_mole/05_oedometer/oedometer.csv
+./Argila_mole/05_oedometer/relatorio.html
+./Argila_mole/05_oedometer/resumo.json
+./Aterro/06_dss/dss_CD_100kPa.csv
+./Aterro/06_dss/dss_CD_50kPa.csv
+./Aterro/06_dss/graficos/dss_ev_x_gamma.png
+./Aterro/06_dss/graficos/dss_tau_x_gamma.png
+./Aterro/06_dss/graficos/dss_trajetoria_sigv_tau.png
+./Aterro/06_dss/relatorio.html
+./Aterro/06_dss/resumo.json
+./Aterro/07_cdss/cdss_CU_100kPa.csv
+./Aterro/07_cdss/graficos/cdss_du_x_tempo.png
+./Aterro/07_cdss/graficos/cdss_gamma_x_tempo.png
+./Aterro/07_cdss/graficos/cdss_tau_x_gamma.png
+./Aterro/07_cdss/graficos/cdss_tau_x_tempo.png
+./Aterro/07_cdss/graficos/cdss_trajetoria_sigv_tau.png
+./Aterro/07_cdss/relatorio.html
+./Aterro/07_cdss/resumo.json
+./Aterro/08_cyctriaxial/cyctriaxial_CD_100kPa.csv
+./Aterro/08_cyctriaxial/graficos/cyctriaxial_eps_a_x_tempo.png
+./Aterro/08_cyctriaxial/graficos/cyctriaxial_q_x_eps_a.png
+./Aterro/08_cyctriaxial/graficos/cyctriaxial_q_x_tempo.png
+./Aterro/08_cyctriaxial/graficos/cyctriaxial_trajetoria_p_q.png
+./Aterro/08_cyctriaxial/relatorio.html
+./Aterro/08_cyctriaxial/resumo.json
+./campanha_resumo.csv
+./glossario.md
+./log.txt
+./relatorio.html

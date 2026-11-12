@@ -1,0 +1,9 @@
+material;ensaio;comportamento;pressoes_kPa;consolidacao;preadensamento;valor_pre;tensao_max_kPa
+# linha de comentario (ignorada)
+Aterro01;triaxial;DU;50/100;;;;
+Aterro-01;edometro;;;;OCR;2;
+Argila;triaxial;U;100;K0;sigma_p;150;
+Errada;triaxial;D;100;;;;
+Nao_existe;dss;D;100;;;;
+Aterro-01;vane;D;100;;;;
+Aterro-01;triaxial;X;100;;;;

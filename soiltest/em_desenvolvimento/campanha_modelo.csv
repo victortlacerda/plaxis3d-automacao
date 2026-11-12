@@ -1,0 +1,9 @@
+material;ensaio;comportamento;pressoes_kPa;deformacao_max_pct;passos;consolidacao;K0;preadensamento;valor_pre;controle;amplitude;ciclos;tensao_max_kPa;descarga_kPa;obs
+Areia_media;triaxial;D;50/100/200;15;100;iso;;nenhum;;;;;;;CD padrao
+Areia_media;triaxial;U;100;10;100;K0;;OCR;2;;;;;;CU com K0 automatico (Jaky) e OCR 2
+Areia_media;edometro;;;;;;;sigma_p;100;;;;800;200;carga ate 800 e descarga ate 200
+Argila_mole;triaxial;U;50/100;15;100;K0;0,6;;;;;;;;CU com K0 informado
+Argila_mole;edometro;;;;;;;sigma_p;50;;;;400;;
+Aterro;dss;D;50/100;10;100;;;;;;;;;;
+Aterro;cdss;U;100;;20;;;;;deformacao;0,2;5;;;CDSS nao drenado
+Aterro;triaxial_ciclico;D;100;;20;;;;;tensao;30;3;;;controle por tensao

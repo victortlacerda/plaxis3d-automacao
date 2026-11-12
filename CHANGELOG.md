@@ -1,6 +1,10 @@
 # Histórico de versões
 
 ## Não lançado
+- `soiltest/em_desenvolvimento/soiltest_campanha.py`: campanha de ensaios virtuais definida numa planilha CSV
+  (material × ensaio × tensões × drenagem × K0 × pré-adensamento × ciclos), com materiais do projeto aberto ou
+  criados pela planilha de materiais; relatório e `campanha_resumo.csv` com uma linha por curva.
+- `plaxis_soiltest_auto_dev.py`: opção de usar um material que já está no projeto (menu ou `material_existente`).
 - `soiltest/em_desenvolvimento/interpretacao/`: ferramenta própria para extrair e interpretar triaxiais reais e
   simulados, separada do calibrador. `soiltest_extrair.py` puxa os ensaios do PLAXIS SoilTest (material do projeto ou
   janela aberta, inclusive só lendo a curva já calculada) e faz o relatório; `soiltest_interpretacao.py` interpreta
